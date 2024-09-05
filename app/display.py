@@ -20,5 +20,11 @@ class start_screen(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
         custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'Drzem Game!', text_color='Green')
+        button.Button(self, 'settings', self.game.width/2 - 100, self.game.height * 0.75, 200, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
+
+class settings_screen(basic_display):
+    def __init__(self, game):
+        basic_display.__init__(self, game)
+        button.Button(self, 'start_screen', 25, self.game.height - 100, 200, 75, (0, 0, 0), outline_color='white', text=' Save & exit', text_color='white')
 
 

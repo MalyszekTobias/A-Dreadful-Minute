@@ -26,7 +26,7 @@ class Game:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(f"{self.title} (v {self.version})")
 
-        self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self)}
+        self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'settings_screen': display.settings_screen(self)}
         self.current_display = self.displays['start_screen']
 
         self.debug = False
@@ -34,7 +34,8 @@ class Game:
                             custom_text.Custom_text(self, 12, 45, self.font, 30, f'Resolution: {self.width}x{self.height}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 75, self.font, 30, f'FPS cap: {self.fps}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 105, self.font, 30, f'FPS: {self.clock.get_fps()}', text_color='white', center=False),
-                            custom_text.Custom_text(self, 12, 135, self.font, 30, f'Objects in memory: {len(self.current_display.objects)}', text_color='white', center=False)]
+                            custom_text.Custom_text(self, 12, 135, self.font, 30, f'Objects in memory: {len(self.current_display.objects)}', text_color='white', center=False),
+                            custom_text.Custom_text(self, 12, 165, self.font, 30, f'Current display: {type(self.current_display)}', text_color='white', center=False)]
 
 
         for debug_item in self.debug_items:
@@ -71,5 +72,6 @@ class Game:
         if self.debug:
             self.debug_items[3].update_text(f'FPS: {self.clock.get_fps()}')
             self.debug_items[4].update_text(f'Objects in memory: {len(self.current_display.objects)}')
+            self.debug_items[5].update_text(f'Current display: {type(self.current_display)}')
         pygame.display.update()
         pygame.display.flip()
