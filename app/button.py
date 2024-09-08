@@ -37,19 +37,23 @@ class Button:  # A button class
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(event.pos):  # Checks if the button has been pressed
             if self.action == 'settings':
                 self.display.game.current_display = self.display.game.displays['settings_screen']
+            elif self.action == 'settings_v2':
+                self.display.game.current_display = self.display.game.displays['settings_screen_v2']
             elif self.action == 'start_screen':
                 self.display.game.current_display = self.display.game.displays['start_screen']
             elif self.action == 'game_display':
                 self.display.game.current_display = self.display.game.displays['game_display']
+            elif self.action == 'pause_display':
+                self.display.game.current_display = self.display.game.displays['pause_display']
             else:
-                print('clicked')
+                print('No action assigned to this button')
 
     def delete(self):
-        self.display.objects.remove(self)
-        del self
-
         self.display.objects.remove(self.text)
         del self.text
+
+        self.display.objects.remove(self)
+        del self
 
     def get_hover_color(self):
         biggest = max(self.color)
