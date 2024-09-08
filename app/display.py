@@ -31,4 +31,4 @@ class settings_screen(basic_display):
 class game_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
-        self.player = player.player(self)
+        self.player = player.Player(self)

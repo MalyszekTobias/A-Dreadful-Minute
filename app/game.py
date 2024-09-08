@@ -1,5 +1,5 @@
 import pygame
-from app import config, display, custom_text
+from app import config, display, custom_text, player
 
 class Game:
     def __init__(self):
@@ -63,6 +63,7 @@ class Game:
                     di.hidden = not di.hidden
             else:
                 self.current_display.events(event)
+        player.Player.tickSignal()
 
     def render(self):
         self.screen.fill('black')
