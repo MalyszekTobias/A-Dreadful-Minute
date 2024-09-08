@@ -77,7 +77,6 @@ class Game:
                 self.displays['game_display'].thunder()
             else:
                 self.current_display.events(event)
-        player.Player.tickSignal()
 
     def render(self):
         self.screen.fill('black')

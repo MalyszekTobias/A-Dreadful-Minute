@@ -40,7 +40,7 @@ class game_display(basic_display):
         # game.started = True
         if game.started:
             game.trigger()
-        self.player = player.player(self)
+        self.player = player.Player(self)
     def flashbang(self):
         self.screen.fill('white')
         self.screen.fill('black')
