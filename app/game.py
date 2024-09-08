@@ -30,7 +30,7 @@ class Game:
         pygame.display.set_caption(f"{self.title} (v {self.version})")
 
         self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'settings_screen': display.settings_screen(self), 'game_display': display.game_display(self)}
-        self.current_display = self.displays['game_display']
+        self.current_display = self.displays['start_screen']
 
         self.pointing_at = []
 
@@ -69,12 +69,6 @@ class Game:
                 self.debug = not self.debug
                 for di in self.debug_items:
                     di.hidden = not di.hidden
-            elif event.type == self.FLASHBANG:
-                self.displays['game_display'].flashbang()
-                time = random.randint(4000, 10000)
-                pygame.time.set_timer(self.THUNDER, time)
-            elif event.type == self.THUNDER:
-                self.displays['game_display'].thunder()
             else:
                 self.current_display.events(event)
 
@@ -92,10 +86,9 @@ class Game:
                 if obj.rect.collidepoint(pygame.mouse.get_pos()):
                     if obj not in self.pointing_at:
                         self.pointing_at.append(obj)
-
             i = []
             for obj in self.pointing_at:
-                if obj.rect.collidepoint(pygame.mouse.get_pos()) == False:
+                if obj.rect.collidepoint(pygame.mouse.get_pos()) == False or obj.display != self.current_display:
                     i.append(obj)
             for obj in i:
                 self.pointing_at.remove(obj)
