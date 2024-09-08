@@ -3,7 +3,7 @@ import random
 import pygame.draw
 from app import config, game
 
-phase = 1
+phase = 0
 direction = 0
 class Player:
     def __init__(self, display):
@@ -201,6 +201,7 @@ class Player:
 
 def getPhase(fase):
     global direction
+    global phase
     phase = fase
     if phase == 5:
         direction = random.randint(1, 4)

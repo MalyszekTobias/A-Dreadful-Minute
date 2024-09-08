@@ -1,3 +1,6 @@
+import random
+import time
+
 import pygame
 from app import config, display, custom_text, player
 
@@ -33,6 +36,9 @@ class Game:
         self.current_display = self.displays['start_screen']
 
         self.pointing_at = []
+        self.phase = 0
+        self.phases = [1, 2, 3, 4, 5]
+        self.startTime = round(time.time())
 
         self.debug = False
         self.debug_items = [custom_text.Custom_text(self, 12, 15, self.font, 30, f'Current version: {self.version}', text_color='white', center=False),
@@ -46,15 +52,31 @@ class Game:
 
         for debug_item in self.debug_items:
             debug_item.hidden = True
-
         self.mainloop()
 
     def mainloop(self):
         while self.run:
+            self.phaseCheck(round(time.time()))
             self.events()
             self.render()
             self.update()
             self.clock.tick(self.fps)
+
+    def phaseCheck(self, currentTime):
+        if self.phase == 0 and currentTime - self.startTime >= 5:
+            try:
+                self.phase = random.choice(self.phases)
+                self.phases.remove(self.phase)
+                player.getPhase(self.phase)
+                self.startTime = currentTime
+            except:
+                self.phases = [1, 2, 3, 4, 5]
+        elif self.phase != 0 and currentTime - self.startTime >= 5:
+            self.phase = 0
+            player.getPhase(self.phase)
+            self.startTime = currentTime
+
+
 
     def trigger(self):
         print('triggered')
