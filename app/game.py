@@ -9,13 +9,16 @@ class Game:
 
         self.cfg = config.read_config()
 
+        self.FLASHBANG = pygame.USEREVENT + 1
+        self.THUNDER = pygame.USEREVENT + 2
+
         self.version = self.cfg['version']
         self.width = int(self.cfg['width'])
         self.height = int(self.cfg['height'])
         self.fps = float(self.cfg['fps'])
         self.title = self.cfg['title']
         self.enable_debug = int(self.cfg['enable_debug'])
-
+        self.started = False
         self.clock = pygame.time.Clock()
         self.font = None
 
@@ -53,6 +56,11 @@ class Game:
             self.update()
             self.clock.tick(self.fps)
 
+    def trigger(self):
+        print('triggered')
+        time = random.randint(15000, 30000)
+        pygame.time.set_timer(self.FLASHBANG, time)
+
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -61,6 +69,12 @@ class Game:
                 self.debug = not self.debug
                 for di in self.debug_items:
                     di.hidden = not di.hidden
+            elif event.type == self.FLASHBANG:
+                self.displays['game_display'].flashbang()
+                time = random.randint(4000, 10000)
+                pygame.time.set_timer(self.THUNDER, time)
+            elif event.type == self.THUNDER:
+                self.displays['game_display'].thunder()
             else:
                 self.current_display.events(event)
         player.Player.tickSignal()

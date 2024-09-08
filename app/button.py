@@ -5,9 +5,7 @@ class Button:  # A button class
     def __init__(self, display, action, x, y, width, height, color, text=None, text_color='black', outline_color=None, outline_width=5):  # Getting all the parameters of the button
 
         self.action = action
-
         self.display = display
-
         self.x = x
         self.y = y
         self.width = width
@@ -41,6 +39,8 @@ class Button:  # A button class
                 self.display.game.current_display = self.display.game.displays['settings_screen']
             elif self.action == 'start_screen':
                 self.display.game.current_display = self.display.game.displays['start_screen']
+            elif self.action == 'game_display':
+                self.display.game.current_display = self.display.game.displays['game_display']
             else:
                 print('clicked')
 
@@ -57,4 +57,3 @@ class Button:  # A button class
             return tuple(color + 30 for color in self.color)
         else:
             return tuple(color - 30 if color >= 30 else 0 for color in self.color)
-
