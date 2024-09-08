@@ -24,14 +24,23 @@ class start_screen(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
         custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'A Dreadful Minute', text_color='Green')
-        button.Button(self, 'settings', self.game.width/2 - 100, self.game.height * 0.75, 200, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
-        button.Button(self, 'game_display', self.game.width/2 - 100, self.game.height * 0.75 - 100, 200, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
+        button.Button(self, 'settings', self.game.width / 2 - 150, self.game.height * 0.75, 300, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
+        button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.75 - 100, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
 
 
 class settings_screen(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
+        custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Settings',
+                                text_color='White')
         self.save_and_exit = button.Button(self, 'start_screen', 25, self.game.height - 100, 200, 75, (0, 0, 0), outline_color='white', text=' Save & exit', text_color='white')
+
+    def events(self, event):
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            self.game.current_display = self.game.displays['start_screen']
+        else:
+            for obj in self.objects:
+                obj.events(event)
 
 class settings_screen_v2(settings_screen):
     def __init__(self, game):
@@ -40,6 +49,12 @@ class settings_screen_v2(settings_screen):
         self.save_and_exit = button.Button(self, 'pause_display', 25, self.game.height - 100, 200, 75, (0, 0, 0),
                                       outline_color='white', text=' Save & exit', text_color='white')
 
+    def events(self, event):
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            self.game.current_display = self.game.displays['pause_display']
+        else:
+            for obj in self.objects:
+                obj.events(event)
 
 class game_display(basic_display):
     def __init__(self, game):
