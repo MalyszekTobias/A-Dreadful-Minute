@@ -18,8 +18,12 @@ class Player:
         self.velUp = 0
         self.velRight = 0
         self.maxSpeed = 6
-        self.control = 0.9
+        self.control = 0.90
+        if True:
+            self.control = 0.15
         self.wind = 0
+        self.confusion = False
+
 
         self.rect = pygame.Rect(self.x, self.y, self.radius, self.radius)
 
@@ -53,6 +57,11 @@ class Player:
 
 
     def movement(self):
+
+        if self.confusion:
+            self.confuse()
+
+
         if self.up and self.velUp < self.maxSpeed:
             self.velUp += self.control
         if self.velUp > 0 and not self.up:
@@ -116,10 +125,34 @@ class Player:
                     self.x += self.velRight
                 else:
                     self.x = self.gameWidth - self.radius
-        print(self.y)
+
+        if self.confusion:
+            self.confuse()
 
         self.update_rect()
 
+    def confuse(self):
+        right, left, up, down = False, False, False, False
+        if self.left:
+            right = True
+        else:
+           right == False
+        if self.right:
+            left = True
+        else:
+           left == False
+        if self.up:
+            down = True
+        else:
+           down == False
+        if self.down:
+            up = True
+        else:
+           up == False
+        self.left = left
+        self.right = right
+        self.up = up
+        self.down = down
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, 2 * self.radius, 2 * self.radius)
