@@ -17,8 +17,8 @@ class Player:
         self.right = False
         self.velUp = 0
         self.velRight = 0
-        self.maxSpeed = 5
-        self.control = 1
+        self.maxSpeed = 6
+        self.control = 0.9
         self.wind = 0
 
         self.rect = pygame.Rect(self.x, self.y, self.radius, self.radius)
@@ -104,18 +104,18 @@ class Player:
                     self.y = self.radius
 
         if self.velRight < 0:
+            if self.x > self.radius:
+                if self.x > self.radius - self.velRight:
+                    self.x += self.velRight
+                else:
+                    self.x = self.radius
+
+        else:
             if self.x < self.gameWidth - self.radius:
                 if self.x < self.gameWidth - self.radius - self.velRight:
                     self.x += self.velRight
                 else:
                     self.x = self.gameWidth - self.radius
-
-        else:
-            if self.x > self.radius:
-                if self.x > self.radius + self.velRight:
-                    self.x += self.velRight
-                else:
-                    self.x =self.radius
         print(self.y)
 
         self.update_rect()
