@@ -1,6 +1,10 @@
+import random
+
 import pygame.draw
 from app import config, game
 
+phase = 5
+direction = 4
 class Player:
     def __init__(self, display):
         self.gameWidth = int(config.read_config()['width'])
@@ -10,7 +14,6 @@ class Player:
 
         self.x = (self.gameWidth - self.radius) / 2
         self.y = (self.gameHeight - self.radius) / 2
-        print(self.x, self.y)
         self.up = False
         self.down = False
         self.left = False
@@ -19,9 +22,10 @@ class Player:
         self.velRight = 0
         self.maxSpeed = 6
         self.control = 0.90
-        if True:
+        if phase == 1:
             self.control = 0.15
         self.wind = 0
+        self.windStrength = 1
         self.confusion = False
 
 
@@ -62,6 +66,8 @@ class Player:
             self.confuse()
 
 
+
+
         if self.up and self.velUp < self.maxSpeed:
             self.velUp += self.control
         if self.velUp > 0 and not self.up:
@@ -98,6 +104,31 @@ class Player:
                 self.velRight = 0
 
 
+        if self.wind == 1:
+            if self.velUp < self.maxSpeed + self.windStrength * 10:
+                self.velUp += self.windStrength / 1.5
+            else:
+                self.velUp = self.windStrength * 10
+
+        if self.wind == 2:
+            if self.velRight < self.maxSpeed + self.windStrength * 10:
+                self.velRight += self.windStrength / 1.5
+            else:
+                self.velRight = self.windStrength * 10
+
+        if self.wind == 3:
+            if self.velUp > -self.maxSpeed - self.windStrength * 10:
+                self.velUp -= self.windStrength / 1.5
+            else:
+                self.velUp = -self.windStrength * 10
+
+        if self.wind == 4:
+            if self.velRight > -self.maxSpeed - self.windStrength * 10:
+                self.velRight -= self.windStrength / 1.5
+            else:
+                self.velRight = -self.windStrength * 10
+
+
         if self.velUp < 0:
             if self.y < self.gameHeight - self.radius:
                 if self.y < self.gameHeight - self.radius + self.velUp:
@@ -130,6 +161,17 @@ class Player:
             self.confuse()
 
         self.update_rect()
+        if phase == 0:
+            self.control = 1
+            self.confusion = False
+            self.wind = 0
+        elif phase == 1:
+            self.control = 15
+        elif phase == 4:
+            self.confusion = True
+        elif phase == 5:
+            self.wind = direction
+
 
     def confuse(self):
         right, left, up, down = False, False, False, False
@@ -157,4 +199,9 @@ class Player:
     def update_rect(self):
         self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, 2 * self.radius, 2 * self.radius)
 
+def getPhase(fase):
+    global direction
+    phase = fase
+    if phase == 5:
+        direction = random.randint(1, 4)
 
