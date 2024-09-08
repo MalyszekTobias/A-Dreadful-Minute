@@ -3,8 +3,8 @@ import random
 import pygame.draw
 from app import config, game
 
-phase = 5
-direction = 4
+phase = 1
+direction = 0
 class Player:
     def __init__(self, display):
         self.gameWidth = int(config.read_config()['width'])
@@ -166,7 +166,7 @@ class Player:
             self.confusion = False
             self.wind = 0
         elif phase == 1:
-            self.control = 15
+            self.control = 0.15
         elif phase == 4:
             self.confusion = True
         elif phase == 5:
