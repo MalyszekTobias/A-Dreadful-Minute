@@ -5,7 +5,7 @@ import os
 def set_config():  # Function that will create the config file or update it if it's out of date
     config = ConfigParser()
     config_file = 'config.ini'  # Path to config file
-    version = '0.3.1'  # Current version
+    version = '0.3.3'  # Current version
 
     if not os.path.exists(config_file):  # Checks if configuration file exists
 
@@ -16,13 +16,17 @@ def set_config():  # Function that will create the config file or update it if i
         config.read(config_file)  # Reads the config
         config_data = config['CONFIG']
 
-        if version != config_data['version']:  # Checks if the application version and the config versions aren't the same
+        if version != config_data[
+            'version']:  # Checks if the application version and the config versions aren't the same
             configurations = generate_default_config_data(version)  # Generate default config
+            title = configurations['title']
+            debug = configurations['enable_debug']
             configurations.update(config_data)  # Updates the default config with current configs so that previous settings stay the same
             configurations['version'] = version  # Updates the version since when updating the configs the version also got upated to the previous version
+            configurations['title'] = title
+            configurations['enable_debug'] = debug
             config['CONFIG'] = configurations  # Sets the updated configs as the config
             write_config_to_file(config, config_file)  # Writes the updated config to file
-
 
 
 def generate_default_config_data(version):
@@ -31,9 +35,10 @@ def generate_default_config_data(version):
         'width': 1000,
         'height': 1000,
         'fps': 60,
-        'title': 'Drzem',
+        'title': 'A Dreadful Minute',
         'enable_debug': 1
     }
+
 
 def write_config_to_file(config, config_file):
     with open(config_file, 'w') as f:
@@ -52,4 +57,3 @@ def read_config():
     for key, value in config['CONFIG'].items():
         cfg[key] = value  # Adds configuration to the dict
     return cfg  # Returns the dict
-

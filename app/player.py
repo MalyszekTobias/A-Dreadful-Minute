@@ -54,8 +54,8 @@ class Player:
 
         self.update_rect()
 
-    def tickSignal():
-        Player.calculateMovement(Player)
+    def tickSignal(self):
+        self.calculateMovement()
 
     def calculateMovement(self):
         print(self.x)
