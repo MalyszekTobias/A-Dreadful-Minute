@@ -59,23 +59,27 @@ class settings_screen_v2(settings_screen):
 class game_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
-        # game.started = True
-        if game.started:
-            game.trigger()
+        # if self.game.current_display == self.game.displays['game_display']:
+        #     print("triggered")
+        print("triggered")
+        time = random.randint(10000, 30000)
+        pygame.time.set_timer(self.game.FLASHBANG, time)
         self.player = player.Player(self)
-    def flashbang(self):
-        self.screen.fill('white')
-        self.screen.fill('black')
     def thunder(self):
         pass
 
     def events(self, event):
         if event.type == self.game.FLASHBANG:
-            self.flashbang()
+            # self.flashbang()
+            print("flash")
+            self.screen.fill('white')
+            pygame.display.update()
+
             time = random.randint(4000, 10000)
             pygame.time.set_timer(self.game.THUNDER, time)
 
         elif event.type == self.game.THUNDER:
+            print("thunder")
             self.thunder()
 
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:

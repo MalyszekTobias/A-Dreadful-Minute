@@ -78,10 +78,10 @@ class Game:
 
 
 
-    def trigger(self):
-        print('triggered')
-        time = random.randint(15000, 30000)
-        pygame.time.set_timer(self.FLASHBANG, time)
+    # def trigger(self):
+    #     print('triggered')
+    #     time = random.randint(15000, 30000)
+    #     pygame.time.set_timer(self.FLASHBANG, time)
 
     def events(self):
         for event in pygame.event.get():
