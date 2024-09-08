@@ -1,4 +1,4 @@
-from app import custom_text, custom_images, button
+from app import custom_text, custom_images, button, player
 
 class basic_display():
     def __init__(self, game):
@@ -28,3 +28,7 @@ class settings_screen(basic_display):
         button.Button(self, 'start_screen', 25, self.game.height - 100, 200, 75, (0, 0, 0), outline_color='white', text=' Save & exit', text_color='white')
 
 
+class game_display(basic_display):
+    def __init__(self, game):
+        basic_display.__init__(self, game)
+        self.player = player.player(self)
