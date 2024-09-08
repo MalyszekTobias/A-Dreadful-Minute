@@ -1,13 +1,23 @@
 import pygame.draw
-
+from app import config
 
 class player:
     def __init__(self, display):
+        self.gameWidth = int(config.read_config()['width'])
+        self.gameHeight = int(config.read_config()['height'])
         self.display = display
-        self.x = 100
-        self.y = 100
+        self.width = 100
+        self.height = 100
 
-        self.rect = pygame.Rect(self.x, self.y, 100, 100)
+        self.x = (self.gameWidth - self.width) / 2
+        self.y = (self.gameHeight - self.height) / 2
+        print(self.x, self.y)
+        self.up = False
+        self.down = False
+        self.left = False
+        self.right = False
+
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
         self.display.objects.append(self)
 
