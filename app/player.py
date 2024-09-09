@@ -12,7 +12,7 @@ class Player:
         self.gameWidth = int(config.read_config()['width'])
         self.gameHeight = int(config.read_config()['height'])
         self.display = display
-        self.radius = 25
+        self.radius = 40
 
         self.x = (self.gameWidth - self.radius) / 2
         self.y = (self.gameHeight - self.radius) / 2

@@ -14,12 +14,13 @@ class Enemy:
 
         self.y = random.randint(50, 950)
         self.radius = 25
-        self.w = 50
-        self.h = 50
+        # self.w = 50
+        # self.h = 50
         self.update_rect()
         self.speed = 2
         self.killCount = 0
         self.damage = 10
+        self.countdown = 0
 
         self.hp = 20
         self.display.objects.append(self)
@@ -27,9 +28,10 @@ class Enemy:
     def render(self):
         self.update_rect()
         pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
+        self.countdown -= 1
 
     def update_rect(self):
-        self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+        self.rect = pygame.Rect(self.x, self.y, self.radius * 2, self.radius * 2)
 
     def move(self):
         if self.hp <= 0:
@@ -49,7 +51,9 @@ class Enemy:
                 self.x += self.get_x()
                 self.y += self.get_y()
             else:
-                self.display.player.hp -= self.damage
+                if self.countdown <= 0:
+                    self.display.player.hp -= self.damage
+                    self.countdown = 45
 
             self.update_rect()
 
@@ -65,6 +69,7 @@ class Enemy:
     def count_a(self):
         return (self.display.player.y - self.y) / (self.display.player.x - self.x)
     def count_angle(self):
+        print(ma.atan(self.count_a()))
         return ma.atan(self.count_a())
     def get_x(self):
         return ma.cos(self.count_angle())

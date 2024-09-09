@@ -76,7 +76,7 @@ class game_display(basic_display):
     def mainloop(self):
         if time.time() - self.time >= 3:
             for x in range(random.randint(1, 5)):
-                self.enemies.append(enemy.Enemy(self))                                 # musiałem to skomentować bo wywala błąd
+                self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
         for ene in self.enemies:
             ene.move()
