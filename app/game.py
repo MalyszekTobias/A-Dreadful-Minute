@@ -47,7 +47,8 @@ class Game:
                             custom_text.Custom_text(self, 12, 105, self.font, 30, f'FPS: {self.clock.get_fps()}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 135, self.font, 30, f'Objects in memory: {len(self.current_display.objects)}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 165, self.font, 30, f'Current display: {type(self.current_display)}', text_color='white', center=False),
-                            custom_text.Custom_text(self, 12, 195, self.font, 30, f'Pointing at: {self.pointing_at}', text_color='white', center=False)]
+                            custom_text.Custom_text(self, 12, 195, self.font, 30, f'Pointing at: {self.pointing_at}', text_color='white', center=False),
+                            custom_text.Custom_text(self, 12, 225, self.font, 30, f'Phase: {self.phase}', text_color='white', center=False)]
 
 
         for debug_item in self.debug_items:
@@ -67,6 +68,8 @@ class Game:
 
     def phaseCheck(self, currentTime):
         if self.phase == 0 and currentTime - self.startTime >= 5:
+            print("start")
+            self.started = True
             try:
                 self.phase = random.choice(self.phases)
                 self.phases.remove(self.phase)
@@ -125,6 +128,7 @@ class Game:
             self.debug_items[4].update_text(f'Objects in memory: {len(self.current_display.objects)}')
             self.debug_items[5].update_text(f'Current display: {type(self.current_display)}')
             self.debug_items[6].update_text(f'Pointing at: {self.pointing_at}')
+            self.debug_items[7].update_text(f'Phase: {self.phase}')
 
 
         pygame.display.update()

@@ -1,7 +1,7 @@
 from random import random
 import random
 import pygame.time
-
+import time
 from app import custom_text, custom_images, button, player, enemy
 
 class basic_display():
@@ -62,11 +62,16 @@ class game_display(basic_display):
         # if self.game.current_display == self.game.displays['game_display']:
         #     print("triggered")
         print("triggered")
-        time = random.randint(10000, 30000)
-        pygame.time.set_timer(self.game.FLASHBANG, time)
+        time_ = random.randint(10000, 30000)
+        pygame.time.set_timer(self.game.FLASHBANG, time_)
         self.player = player.Player(self)
-        self.enemies = [enemy.Enemy(self)]
+        self.enemies = []
+        self.time = time.time()
     def mainloop(self):
+        if time.time() - self.time >= 3:
+            for x in range(random.randint(1, 5)):
+                self.enemies.append(enemy.Enemy(self))
+            self.time = time.time()
         for ene in self.enemies:
             ene.move()
     def thunder(self):
@@ -78,6 +83,7 @@ class game_display(basic_display):
             print("flash")
             self.screen.fill('white')
             pygame.display.update()
+            pygame.time.wait(80)
 
             time = random.randint(4000, 10000)
             pygame.time.set_timer(self.game.THUNDER, time)
@@ -93,6 +99,11 @@ class game_display(basic_display):
             for obj in self.objects:
                 obj.events(event)
 
+        if self.game.started:
+            self.game.started = False
+            print("triggered")
+            time = random.randint(1000, 1001)
+            pygame.time.set_timer(self.game.FLASHBANG, time)
 
 class pause_display(basic_display):
     def __init__(self, game):
