@@ -78,6 +78,7 @@ class Game:
 
     def mainloop(self):
         while self.run:
+            print(isPaused)
             self.phaseCheck(round(time.time()))
             if self.current_display == self.displays['game_display']:
                 self.current_display.mainloop()
@@ -93,6 +94,7 @@ class Game:
 
 
     def thunderstorm(self):
+        # print(isPaused)
         if not self.paused:
             if self.started:
                 self.started = False

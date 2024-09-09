@@ -1,5 +1,7 @@
 from random import random
 import random
+
+import app.game
 import pygame.time
 import time
 from app import custom_text, custom_images, button, player, enemy
@@ -38,6 +40,8 @@ class settings_screen(basic_display):
 
     def events(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            app.game.isPaused = True
+            print(112334)
             self.game.current_display = self.game.displays['start_screen']
         else:
             for obj in self.objects:
@@ -104,6 +108,7 @@ class game_display(basic_display):
         #     self.thunder()
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            app.game.isPaused = True
             self.game.current_display = self.game.displays['pause_display']
 
         else:
@@ -126,6 +131,7 @@ class pause_display(basic_display):
     def events(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.game.current_display = self.game.displays['game_display']
+            app.game.isPaused = False
         else:
             for obj in self.objects:
                 obj.events(event)
