@@ -7,6 +7,8 @@ phase = 0
 direction = 0
 class Player:
     def __init__(self, display):
+        self.hpHeight = 30
+
         self.gameWidth = int(config.read_config()['width'])
         self.gameHeight = int(config.read_config()['height'])
         self.display = display
@@ -39,7 +41,7 @@ class Player:
     def render(self):
         self.movement()
         pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
-        pygame.draw.rect(self.display.screen, self.green, (0, 0, (self.gameWidth * self.hp / self.maxHp), 30))
+        pygame.draw.rect(self.display.screen, self.green, (0, 0, (self.gameWidth * self.hp / self.maxHp), self.hpHeight))
 
     def events(self, event):
         #player movement capture
@@ -141,11 +143,11 @@ class Player:
                     self.y = self.gameHeight - self.radius
 
         else:
-            if self.y > self.radius:
-                if self.y > self.radius + self.velUp:
+            if self.y > self.radius + self.hpHeight:
+                if self.y > self.radius + self.velUp + self.hpHeight:
                     self.y -= self.velUp
                 else:
-                    self.y = self.radius
+                    self.y = self.radius + self.hpHeight
 
         if self.velRight < 0:
             if self.x > self.radius:
