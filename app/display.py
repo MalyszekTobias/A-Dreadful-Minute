@@ -65,6 +65,9 @@ class game_display(basic_display):
         time = random.randint(10000, 30000)
         pygame.time.set_timer(self.game.FLASHBANG, time)
         self.player = player.Player(self)
+
+    def mainloop(self):
+        pass
     def thunder(self):
         pass
 
