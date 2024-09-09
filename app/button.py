@@ -1,3 +1,4 @@
+import app.game
 import pygame
 from app import custom_text
 
@@ -36,14 +37,19 @@ class Button:  # A button class
     def events(self, event):  # Checks events
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(event.pos):  # Checks if the button has been pressed
             if self.action == 'settings':
+                app.game.isPaused = True
                 self.display.game.current_display = self.display.game.displays['settings_screen']
             elif self.action == 'settings_v2':
+                app.game.isPaused = True
                 self.display.game.current_display = self.display.game.displays['settings_screen_v2']
             elif self.action == 'start_screen':
+                app.game.isPaused = True
                 self.display.game.current_display = self.display.game.displays['start_screen']
             elif self.action == 'game_display':
+                app.game.isPaused = False
                 self.display.game.current_display = self.display.game.displays['game_display']
             elif self.action == 'pause_display':
+                app.game.isPaused = True
                 self.display.game.current_display = self.display.game.displays['pause_display']
             else:
                 print('No action assigned to this button')

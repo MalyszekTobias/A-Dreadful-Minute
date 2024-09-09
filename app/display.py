@@ -52,6 +52,7 @@ class settings_screen_v2(settings_screen):
 
     def events(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            app.game.isPaused = True
             self.game.current_display = self.game.displays['pause_display']
         else:
             for obj in self.objects:

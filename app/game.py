@@ -4,6 +4,8 @@ import time
 import pygame
 from app import config, display, custom_text, player
 
+isPaused = True
+
 class Game:
     def __init__(self):
         pygame.init()
