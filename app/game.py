@@ -12,9 +12,9 @@ class Game:
 
         self.cfg = config.read_config()
 
-        self.FLASHBANG = pygame.USEREVENT + 1
-        self.THUNDER = pygame.USEREVENT + 2
-
+        # self.FLASHBANG = pygame.USEREVENT + 1
+        # self.THUNDER = pygame.USEREVENT + 2
+        self.make_thunder = False
         self.version = self.cfg['version']
         self.width = int(self.cfg['width'])
         self.height = int(self.cfg['height'])
@@ -24,6 +24,8 @@ class Game:
         self.started = False
         self.clock = pygame.time.Clock()
         self.font = None
+        self.start_time = 0
+        self.start_time_thunder = 0
 
         self.run = True
 
@@ -65,6 +67,40 @@ class Game:
             self.render()
             self.update()
             self.clock.tick(self.fps)
+
+            # Flashbangs
+            if self.started:
+                self.started = False
+                self.start_time = pygame.time.get_ticks()
+                time_temp = random.randint(10000, 25000)  # You can edit time
+                print("start time: ", self.start_time)
+                print("time temp: ", time_temp)
+                check = True
+            try:
+                if pygame.time.get_ticks() - self.start_time >= time_temp and check == True:
+                    check = False
+                    print("triggered")
+                    self.current_display.flashbang()
+            except:
+                pass
+
+            # Thunders
+            if self.make_thunder:
+                self.make_thunder = False
+                self.start_time_thunder = pygame.time.get_ticks()
+                time_thunder = random.randint(1000, 4000)  # You can edit time
+                print("start time: ", self.start_time_thunder)
+                print("time thunder: ", time_thunder)
+                check_thunder = True
+            try:
+                if pygame.time.get_ticks() - self.start_time_thunder >= time_thunder and check_thunder == True:
+                    check_thunder = False
+                    print("triggered")
+                    self.current_display.thunder()
+            except:
+                pass
+
+
 
     def phaseCheck(self, currentTime):
         if self.phase == 0 and currentTime - self.startTime >= 5:

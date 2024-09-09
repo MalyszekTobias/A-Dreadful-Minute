@@ -9,6 +9,7 @@ class basic_display():
         self.game = game
         self.screen = self.game.screen
 
+
         self.objects = []
 
     def render(self):
@@ -59,58 +60,42 @@ class settings_screen_v2(settings_screen):
 class game_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
-        # if self.game.current_display == self.game.displays['game_display']:
-        #     print("triggered")
-        print("triggered")
-        time_ = random.randint(10000, 30000)
-        pygame.time.set_timer(self.game.FLASHBANG, time_)
         self.player = player.Player(self)
         self.enemies = []
         self.time = time.time()
     def mainloop(self):
-        if self.game.started:
-            self.game.started = False
-            self.start_time = pygame.time.get_ticks()
-        time = random.randint(10000, 30000)
-        if pygame.time.get_ticks() - self.start_time == time:
-            print("triggered")
-        print(self.start_time)
-        if time.time() - self.time >= 3:
-            for x in range(random.randint(1, 5)):
-                self.enemies.append(enemy.Enemy(self))
-            self.time = time.time()
+
         for ene in self.enemies:
             ene.move()
     def thunder(self):
-        pass
+        print("thunder")
 
+
+    def flashbang(self):
+        print("flash")
+        self.screen.fill('white')
+        pygame.display.update()
+        pygame.time.wait(80)
+        self.game.make_thunder = True
     def events(self, event):
-        if event.type == self.game.FLASHBANG:
-            # self.flashbang()
-            print("flash")
-            self.screen.fill('white')
-            pygame.display.update()
-            pygame.time.wait(80)
+        # if event.type == self.game.FLASHBANG:
+        #     # self.flashbang()
+        #
+        #
+        #     time_temp = random.randint(4000, 10000)
+        #     pygame.time.set_timer(self.game.THUNDER, time_temp)
 
-            time = random.randint(4000, 10000)
-            pygame.time.set_timer(self.game.THUNDER, time)
+        # elif event.type == self.game.THUNDER:
+        #     print("thunder")
+        #     self.thunder()
 
-        elif event.type == self.game.THUNDER:
-            print("thunder")
-            self.thunder()
-
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.game.current_display = self.game.displays['pause_display']
 
         else:
             for obj in self.objects:
                 obj.events(event)
 
-        if self.game.started:
-            self.game.started = False
-            print("triggered")
-            time = random.randint(1000, 1001)
-            pygame.time.set_timer(self.game.FLASHBANG, time)
 
 class pause_display(basic_display):
     def __init__(self, game):
