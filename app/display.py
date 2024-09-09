@@ -64,10 +64,15 @@ class game_display(basic_display):
         # self.game.paused = False
         # self.game.unpause()
         # print("unpaused")
+
+        #=========================================================================================================
         # if time.time() - self.time >= 3:
         #     for x in range(random.randint(1, 5)):
-        #         self.enemies.append(enemy.Enemy(self))   # musiałem to skomentować bo wywala błąd
+        #         self.enemies.append(enemy.Enemy(self))                                 # musiałem to skomentować bo wywala błąd
         #     self.time = time.time()
+        #=========================================================================================================
+
+
         self.player = player.Player(self)
         self.enemies = []
         self.time = time.time()

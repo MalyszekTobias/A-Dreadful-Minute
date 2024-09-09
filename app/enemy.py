@@ -1,5 +1,8 @@
 import random
+from itertools import count
+
 import pygame
+import math as ma
 class Enemy:
     def __init__(self, display):
         self.display = display
@@ -10,7 +13,7 @@ class Enemy:
             self.x = 1000
 
         self.y = random.randint(50, 950)
-
+        self.radius = 25
         self.w = 50
         self.h = 50
         self.update_rect()
@@ -31,15 +34,19 @@ class Enemy:
         if self.hp <= 0:
             self.delete()
         else:
-            if self.x < self.display.player.x - self.display.player.radius:
-                self.x += self.speed
-            elif self.x > self.display.player.x - self.display.player.radius:
-                self.x -= self.speed
+            # if self.x < self.display.player.x - self.display.player.radius:
+            #     self.x += self.speed
+            # elif self.x > self.display.player.x - self.display.player.radius:
+            #     self.x -= self.speed
+            #
+            # if self.y < self.display.player.y - self.display.player.radius:           # Stary kod
+            #     self.y += self.speed
+            # elif self.y > self.display.player.y - self.display.player.radius:
+            #     self.y -= self.speed
 
-            if self.y < self.display.player.y - self.display.player.radius:
-                self.y += self.speed
-            elif self.y > self.display.player.y - self.display.player.radius:
-                self.y -= self.speed
+            if ma.sqrt((self.x - self.display.player.x)**2 + (self.y - self.display.player.y)**2) < self.radius + self.display.player.radius:
+                self.x += self.get_x()
+                self.y += self.get_y()
 
             self.update_rect()
 
@@ -51,3 +58,12 @@ class Enemy:
         self.display.enemies.remove(self)
         self.killCount += 1
         del self
+
+    def count_a(self):
+        return (self.display.player.y - self.y) / (self.display.player.x - self.x)
+    def count_angle(self):
+        return ma.atan(self.count_a())
+    def get_x(self):
+        return ma.cos(self.count_angle())
+    def get_y(self):
+        return ma.sin(self.count_angle())
