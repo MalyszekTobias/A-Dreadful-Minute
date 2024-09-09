@@ -47,10 +47,13 @@ class Enemy:
             # elif self.y > self.display.player.y - self.display.player.radius:
             #     self.y -= self.speed
 
-            if ma.sqrt((self.x - self.display.player.x)**2 + (self.y - self.display.player.y)**2) > self.radius + self.display.player.radius:
+            if self.display.player.x > self.x:
                 self.x += self.get_x()
                 self.y += self.get_y()
-            else:
+            elif self.display.player.x <= self.x:
+                self.x -= self.get_x()
+                self.y -= self.get_y()
+            if ma.sqrt((self.x - self.display.player.x) ** 2 + (self.y - self.display.player.y) ** 2) < self.radius + self.display.player.radius:
                 if self.countdown <= 0:
                     self.display.player.hp -= self.damage
                     self.countdown = 45
@@ -69,9 +72,13 @@ class Enemy:
     def count_a(self):
         return (self.display.player.y - self.y) / (self.display.player.x - self.x)
     def count_angle(self):
-        # print(ma.atan(self.count_a()))
+        # print(ma.degrees(ma.atan(self.count_a())))
         return ma.atan(self.count_a())
     def get_x(self):
+        # print("cos: (x) ", ma.cos(self.count_angle()))
         return ma.cos(self.count_angle())
     def get_y(self):
+        # print("sin: (y) ", ma.sin(self.count_angle()))
         return ma.sin(self.count_angle())
+
+

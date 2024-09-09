@@ -78,11 +78,13 @@ class game_display(basic_display):
         self.player = player.Player(self)
         self.enemies = []
         self.time = time.time()
+        # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         if time.time() - self.time >= 3:
             for x in range(random.randint(1, 5)):
                 self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
+
         for ene in self.enemies:
             ene.move()
     def thunder(self):
