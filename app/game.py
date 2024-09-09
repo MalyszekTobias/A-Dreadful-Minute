@@ -212,10 +212,12 @@ class Game:
 
     def findPhase(self):
         trueTime = round(time.time()) - self.startTime - self.currentPauseTime - self.pauseTotal
-        for timestamp in self.timestamps:
-            if timestamp == trueTime:
-                return
         trueTimeArchive = trueTime
+        for timestamp in self.timestamps:
+            if timestamp == trueTimeArchive:
+                return
+        if trueTimeArchive % 5 != 0:
+            return
         nextDecrease = self.calmTime
         while trueTime > nextDecrease:
             trueTime -= nextDecrease
@@ -223,14 +225,12 @@ class Game:
                 nextDecrease = self.stormTime
             else:
                 nextDecrease = self.calmTime
-        if trueTime == nextDecrease:
-            if nextDecrease == self.calmTime:
-                self.timestamps.append(trueTimeArchive)
+        if self.phase == 0:
+            if trueTime == self.calmTime:
                 return 'storm start'
-            elif nextDecrease == self.stormTime:
-                self.timestamps.append(trueTimeArchive)
+        else:
+            if trueTime == self.stormTime:
                 return 'storm end'
-
 
 
 
