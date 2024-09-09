@@ -32,6 +32,12 @@ class Player:
         self.maxHp = 100
         self.hp = self.maxHp
         self.green = (30, 200, 30)
+        self.money = 0
+        self.shootingSpeed = 0.3
+        self.reloadSpeed = 3
+        self.maxBullets = 10
+        self.bullets = self.maxBullets
+
 
 
         self.rect = pygame.Rect(self.x, self.y, self.radius, self.radius)
@@ -54,6 +60,15 @@ class Player:
                 self.up = True
             elif event.key == pygame.K_s:
                 self.down = True
+
+            elif event.key == pygame.K_1 and self.money >= 30 and self.hp < self.maxHp:
+                self.money -= 30
+                self.hp = self.maxHp
+
+            elif event.key == pygame.K_2 and self.money >= 100:
+                self.maxHp *= 1.1
+
+
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
                 self.left = False
@@ -64,7 +79,16 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = False
 
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if self.bullets > 0:
+                self.shoot()
+            else:
+                self.reload()
+    def shoot(self):
+        self.bullets -= 1
 
+    def reload(self):
+        self.bullets = self.maxBullets
 
     def movement(self):
 

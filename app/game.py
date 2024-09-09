@@ -72,6 +72,7 @@ class Game:
                 self.phases.remove(self.phase)
                 player.getPhase(self.phase)
                 self.startTime = currentTime
+                print(self.phase)
             except:
                 self.phases = [1, 2, 3, 4, 5]
         elif self.phase != 0 and currentTime - self.startTime >= 5:

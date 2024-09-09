@@ -9,7 +9,8 @@ class Enemy:
         self.w = 50
         self.h = 50
         self.update_rect()
-        self.speed = 0.5
+        self.speed = 2
+        self.killCount = 0
 
         self.hp = 20
         self.display.objects.append(self)
@@ -43,4 +44,5 @@ class Enemy:
     def delete(self):
         self.display.objects.remove(self)
         self.display.enemies.remove(self)
+        self.killCount += 1
         del self
