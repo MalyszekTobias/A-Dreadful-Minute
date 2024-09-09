@@ -25,7 +25,13 @@ class Game:
         self.clock = pygame.time.Clock()
         self.font = None
         self.start_time = 0
+        self.start_time_flash = 0
         self.start_time_thunder = 0
+        self.time_flash = 0
+        self.time_thunder = 0
+        self.paused = False
+        self.paused_flash = 0
+        self.paused_thunder = 0
 
         self.run = True
 
@@ -57,6 +63,17 @@ class Game:
             debug_item.hidden = True
         self.mainloop()
 
+    def pause(self):
+        self.paused_flash = pygame.time.get_ticks() - self.start_time_flash
+        self.paused_thunder = pygame.time.get_ticks() - self.start_time_thunder
+
+    def unpause(self):
+        self.start_time_flash = pygame.time.get_ticks()
+        self.start_time_thunder = pygame.time.get_ticks()
+        self.time_flash -= self.paused_flash
+        self.time_thunder -= self.paused_thunder
+        self.paused = False
+
     def mainloop(self):
         while self.run:
             self.phaseCheck(round(time.time()))
@@ -69,36 +86,38 @@ class Game:
             self.clock.tick(self.fps)
 
             # Flashbangs
-            if self.started:
-                self.started = False
-                self.start_time = pygame.time.get_ticks()
-                self.time_flash = random.randint(10000, 25000)  # You can edit time
-                print("start time: ", self.start_time)
-                print("time temp: ", self.time_flash)
-                check = True
-            try:
-                if pygame.time.get_ticks() - self.start_time >= self.time_flash and check == True and self.current_display == self.displays['game_display']:
-                    check = False
-                    print("triggered")
-                    self.current_display.flashbang()
-            except:
-                pass
+            if not self.paused:
+                if self.started:
+                    self.started = False
+                    self.start_time_flash = pygame.time.get_ticks()
+                    self.time_flash = random.randint(1500, 2000)  # You can edit time
+                    print("start time: ", self.start_time_flash)
+                    print("time temp: ", self.time_flash)
+                    check = True
+                try:
+                    if pygame.time.get_ticks() - self.start_time_flash >= self.time_flash and check == True and self.current_display == self.displays['game_display']:
+                        check = False
+                        print("triggered")
+                        self.current_display.flashbang()
+                except:
+                    pass
 
-            # Thunders
-            if self.make_thunder:
-                self.make_thunder = False
-                self.start_time_thunder = pygame.time.get_ticks()
-                self.time_thunder = random.randint(1000, 4000)  # You can edit time
-                print("start time: ", self.start_time_thunder)
-                print("time thunder: ", self.time_thunder)
-                check_thunder = True
-            try:
-                if pygame.time.get_ticks() - self.start_time_thunder >= self.time_thunder and check_thunder == True and self.current_display == self.displays['game_display']:
-                    check_thunder = False
-                    print("triggered")
-                    self.current_display.thunder()
-            except:
-                pass
+                # Thunders
+                if self.make_thunder:
+                    self.make_thunder = False
+                    self.start_time_thunder = pygame.time.get_ticks()
+                    self.time_thunder = random.randint(1500, 2000)  # You can edit time
+                    print("start time: ", self.start_time_thunder)
+                    print("time thunder: ", self.time_thunder)
+                    check_thunder = True
+                try:
+                    if pygame.time.get_ticks() - self.start_time_thunder >= self.time_thunder and check_thunder == True and self.current_display == self.displays['game_display']:
+                        check_thunder = False
+                        print("triggered")
+                        self.current_display.thunder()
+                except:
+                    pass
+
 
 
 

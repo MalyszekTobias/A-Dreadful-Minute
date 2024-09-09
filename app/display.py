@@ -60,6 +60,11 @@ class settings_screen_v2(settings_screen):
 class game_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
+
+        # self.game.paused = False
+        # self.game.unpause()
+        # print("unpaused")
+
         self.player = player.Player(self)
         self.enemies = []
         self.time = time.time()
@@ -100,6 +105,10 @@ class game_display(basic_display):
 class pause_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
+        # self.game.paused = True
+        # self.game.pause()
+        # print("pause")
+
         custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Paused', text_color='White')
         button.Button(self, 'settings_v2', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
         button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.45, 300, 75, (0, 0, 0), outline_color='white', text='Resume', text_color='white')
