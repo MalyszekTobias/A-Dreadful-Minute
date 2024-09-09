@@ -90,7 +90,7 @@ class Game:
                 if self.started:
                     self.started = False
                     self.start_time_flash = pygame.time.get_ticks()
-                    self.time_flash = random.randint(1500, 2000)  # You can edit time
+                    self.time_flash = random.randint(10000, 25000)  # You can edit time
                     print("start time: ", self.start_time_flash)
                     print("time temp: ", self.time_flash)
                     check = True
@@ -106,7 +106,7 @@ class Game:
                 if self.make_thunder:
                     self.make_thunder = False
                     self.start_time_thunder = pygame.time.get_ticks()
-                    self.time_thunder = random.randint(1500, 2000)  # You can edit time
+                    self.time_thunder = random.randint(1000, 5000)  # You can edit time
                     print("start time: ", self.start_time_thunder)
                     print("time thunder: ", self.time_thunder)
                     check_thunder = True
