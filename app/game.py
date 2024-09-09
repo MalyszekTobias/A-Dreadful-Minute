@@ -68,6 +68,8 @@ class Game:
 
     def phaseCheck(self, currentTime):
         if self.phase == 0 and currentTime - self.startTime >= 5:
+            print("start")
+            self.started = True
             try:
                 self.phase = random.choice(self.phases)
                 self.phases.remove(self.phase)
