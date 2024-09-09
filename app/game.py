@@ -57,6 +57,9 @@ class Game:
     def mainloop(self):
         while self.run:
             self.phaseCheck(round(time.time()))
+            if self.current_display == self.displays['game_display']:
+                self.current_display.mainloop()
+
             self.events()
             self.render()
             self.update()
