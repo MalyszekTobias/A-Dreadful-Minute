@@ -19,6 +19,7 @@ class Enemy:
         self.update_rect()
         self.speed = 2
         self.killCount = 0
+        self.damage = 10
 
         self.hp = 20
         self.display.objects.append(self)
@@ -44,9 +45,11 @@ class Enemy:
             # elif self.y > self.display.player.y - self.display.player.radius:
             #     self.y -= self.speed
 
-            if ma.sqrt((self.x - self.display.player.x)**2 + (self.y - self.display.player.y)**2) < self.radius + self.display.player.radius:
+            if ma.sqrt((self.x - self.display.player.x)**2 + (self.y - self.display.player.y)**2) > self.radius + self.display.player.radius:
                 self.x += self.get_x()
                 self.y += self.get_y()
+            else:
+                self.display.player.hp -= self.damage
 
             self.update_rect()
 
