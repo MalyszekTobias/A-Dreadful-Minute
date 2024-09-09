@@ -72,12 +72,12 @@ class Game:
             if self.started:
                 self.started = False
                 self.start_time = pygame.time.get_ticks()
-                time_temp = random.randint(10000, 25000)  # You can edit time
+                self.time_flash = random.randint(10000, 25000)  # You can edit time
                 print("start time: ", self.start_time)
-                print("time temp: ", time_temp)
+                print("time temp: ", self.time_flash)
                 check = True
             try:
-                if pygame.time.get_ticks() - self.start_time >= time_temp and check == True:
+                if pygame.time.get_ticks() - self.start_time >= self.time_flash and check == True and self.current_display == self.displays['game_display']:
                     check = False
                     print("triggered")
                     self.current_display.flashbang()
@@ -88,12 +88,12 @@ class Game:
             if self.make_thunder:
                 self.make_thunder = False
                 self.start_time_thunder = pygame.time.get_ticks()
-                time_thunder = random.randint(1000, 4000)  # You can edit time
+                self.time_thunder = random.randint(1000, 4000)  # You can edit time
                 print("start time: ", self.start_time_thunder)
-                print("time thunder: ", time_thunder)
+                print("time thunder: ", self.time_thunder)
                 check_thunder = True
             try:
-                if pygame.time.get_ticks() - self.start_time_thunder >= time_thunder and check_thunder == True:
+                if pygame.time.get_ticks() - self.start_time_thunder >= self.time_thunder and check_thunder == True and self.current_display == self.displays['game_display']:
                     check_thunder = False
                     print("triggered")
                     self.current_display.thunder()
