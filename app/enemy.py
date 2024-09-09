@@ -4,12 +4,17 @@ class Enemy:
     def __init__(self, display):
         self.display = display
         self.screen = self.display.game.screen
-        self.x = random.randint(0, 1000)
-        self.y = random.randint(0, 600)
+        if random.randint(0, 1):
+            self.x = -50
+        else:
+            self.x = 1000
+
+        self.y = random.randint(50, 950)
+
         self.w = 50
         self.h = 50
         self.update_rect()
-        self.speed = 0.5
+        self.speed = 1
 
         self.hp = 20
         self.display.objects.append(self)
@@ -25,14 +30,14 @@ class Enemy:
         if self.hp <= 0:
             self.delete()
         else:
-            if self.x < self.display.player.x:
+            if self.x < self.display.player.x - self.display.player.radius:
                 self.x += self.speed
-            elif self.x > self.display.player.x:
+            elif self.x > self.display.player.x - self.display.player.radius:
                 self.x -= self.speed
 
-            if self.y < self.display.player.y:
+            if self.y < self.display.player.y - self.display.player.radius:
                 self.y += self.speed
-            elif self.y > self.display.player.y:
+            elif self.y > self.display.player.y - self.display.player.radius:
                 self.y -= self.speed
 
             self.update_rect()
