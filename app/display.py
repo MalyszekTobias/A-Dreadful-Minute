@@ -68,6 +68,13 @@ class game_display(basic_display):
         self.enemies = []
         self.time = time.time()
     def mainloop(self):
+        if self.game.started:
+            self.game.started = False
+            self.start_time = pygame.time.get_ticks()
+        time = random.randint(10000, 30000)
+        if pygame.time.get_ticks() - self.start_time == time:
+            print("triggered")
+        print(self.start_time)
         if time.time() - self.time >= 3:
             for x in range(random.randint(1, 5)):
                 self.enemies.append(enemy.Enemy(self))
