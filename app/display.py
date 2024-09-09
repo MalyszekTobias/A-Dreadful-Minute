@@ -2,7 +2,7 @@ from random import random
 import random
 import pygame.time
 
-from app import custom_text, custom_images, button, player
+from app import custom_text, custom_images, button, player, enemy
 
 class basic_display():
     def __init__(self, game):
@@ -65,9 +65,10 @@ class game_display(basic_display):
         time = random.randint(10000, 30000)
         pygame.time.set_timer(self.game.FLASHBANG, time)
         self.player = player.Player(self)
-
+        self.enemies = [enemy.Enemy(self)]
     def mainloop(self):
-        pass
+        for ene in self.enemies:
+            ene.move()
     def thunder(self):
         pass
 

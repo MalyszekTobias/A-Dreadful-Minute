@@ -9,7 +9,7 @@ class Enemy:
         self.w = 50
         self.h = 50
         self.update_rect()
-        self.speed = 1
+        self.speed = 0.5
         self.display.objects.append(self)
 
     def render(self):
@@ -18,3 +18,19 @@ class Enemy:
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+
+    def move(self):
+        if self.x < self.display.player.x:
+            self.x += self.speed
+        elif self.x > self.display.player.x:
+            self.x -= self.speed
+
+        if self.y < self.display.player.y:
+            self.y += self.speed
+        elif self.y > self.display.player.y:
+            self.y -= self.speed
+
+        self.update_rect()
+
+    def events(self, event):
+        pass
