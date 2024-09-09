@@ -109,6 +109,7 @@ class game_display(basic_display):
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             app.game.isPaused = True
+            self.game.ready = True
             self.game.current_display = self.game.displays['pause_display']
 
         else:
@@ -132,6 +133,7 @@ class pause_display(basic_display):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.game.current_display = self.game.displays['game_display']
             app.game.isPaused = False
+            self.game.ready_u = True
         else:
             for obj in self.objects:
                 obj.events(event)

@@ -5,6 +5,7 @@ import pygame
 from app import config, display, custom_text, player
 
 isPaused = True
+ended = False
 
 class Game:
     def __init__(self):
@@ -34,6 +35,8 @@ class Game:
         self.paused = False
         self.paused_flash = 0
         self.paused_thunder = 0
+        self.ready = True
+        self.ready_u = False
 
         self.run = True
 
@@ -65,20 +68,40 @@ class Game:
             debug_item.hidden = True
         self.mainloop()
 
+    def check_pause(self):
+        if isPaused and self.ready:
+            self.ready = False
+            self.ready_u = True
+            self.pause()
+
+    def check_unpause(self):
+        if not isPaused and self.ready_u:
+            self.ready_u = False
+            self.ready = True
+            self.unpause()
+
+    # def end(self):
+    #     if ended:
+
     def pause(self):
+        print("paused")
         self.paused_flash = pygame.time.get_ticks() - self.start_time_flash
         self.paused_thunder = pygame.time.get_ticks() - self.start_time_thunder
 
     def unpause(self):
+        print("unpaused")
         self.start_time_flash = pygame.time.get_ticks()
         self.start_time_thunder = pygame.time.get_ticks()
-        self.time_flash -= self.paused_flash
+        if self.time_flash == 0:
+            self.time_flash = 0
+        else:
+            self.time_flash -= self.paused_flash
         self.time_thunder -= self.paused_thunder
         self.paused = False
 
     def mainloop(self):
         while self.run:
-            print(isPaused)
+            # print(isPaused)
             self.phaseCheck(round(time.time()))
             if self.current_display == self.displays['game_display']:
                 self.current_display.mainloop()
@@ -87,47 +110,98 @@ class Game:
             self.render()
             self.update()
             self.clock.tick(self.fps)
-            self.thunderstorm()
-            # Flashbangs
+            # self.thunderstorm()
+            self.check_pause()
+            self.check_unpause()
+            # self.end()
 
 
 
 
-    def thunderstorm(self):
-        # print(isPaused)
-        if not self.paused:
-            if self.started:
-                self.started = False
-                self.start_time_flash = pygame.time.get_ticks()
-                self.time_flash = random.randint(10000, 25000)  # You can edit time
-                print("start time: ", self.start_time_flash)
-                print("time temp: ", self.time_flash)
-                check = True
-            try:
-                if pygame.time.get_ticks() - self.start_time_flash >= self.time_flash and check == True and self.current_display == \
-                        self.displays['game_display']:
-                    check = False
-                    print("triggered")
-                    self.current_display.flashbang()
-            except:
-                pass
 
-            # Thunders
-            if self.make_thunder:
-                self.make_thunder = False
-                self.start_time_thunder = pygame.time.get_ticks()
-                self.time_thunder = random.randint(1000, 5000)  # You can edit time
-                print("start time: ", self.start_time_thunder)
-                print("time thunder: ", self.time_thunder)
-                check_thunder = True
-            try:
-                if pygame.time.get_ticks() - self.start_time_thunder >= self.time_thunder and check_thunder == True and self.current_display == \
-                        self.displays['game_display']:
-                    check_thunder = False
-                    print("triggered")
-                    self.current_display.thunder()
-            except:
-                pass
+
+
+
+
+
+
+            #===========================================================================================================================
+            if not isPaused:
+                if self.started:
+                    self.started = False
+                    self.start_time_flash = pygame.time.get_ticks()
+                    self.time_flash = random.randint(1500, 2000)  # You can edit time
+                    print("start time: ", self.start_time_flash)
+                    print("time temp: ", self.time_flash)
+                    check = True
+                try:
+                    if pygame.time.get_ticks() - self.start_time_flash >= self.time_flash and check == True and self.current_display == \
+                            self.displays['game_display']:
+                        check = False
+                        print("triggered")
+                        self.current_display.flashbang()
+                except:
+                    pass
+
+                # Thunders
+                if self.make_thunder:
+                    self.make_thunder = False
+                    self.start_time_thunder = pygame.time.get_ticks()
+                    self.time_thunder = random.randint(1500, 2000)  # You can edit time
+                    print("start time: ", self.start_time_thunder)
+                    print("time thunder: ", self.time_thunder)
+                    check_thunder = True
+                try:
+                    if pygame.time.get_ticks() - self.start_time_thunder >= self.time_thunder and check_thunder == True and self.current_display == \
+                            self.displays['game_display']:
+                        check_thunder = False
+                        print("triggered")
+                        self.current_display.thunder()
+                except:
+                    pass
+            #===========================================================================================================================
+
+
+
+    #
+    # def thunderstorm(self):
+    #     # print(isPaused)
+    #     if not isPaused:
+    #         if self.started:
+    #             self.started = False
+    #             self.start_time_flash = pygame.time.get_ticks()
+    #             self.time_flash = random.randint(1500, 2000)  # You can edit time
+    #             print("start time: ", self.start_time_flash)
+    #             print("time temp: ", self.time_flash)
+    #             check = True
+    #         try:
+    #             # print("ticks: ", pygame.time.get_ticks() - self.start_time_flash)
+    #             # print(self.time_flash)
+    #             print(check)
+    #             if pygame.time.get_ticks() - self.start_time_flash >= self.time_flash and check is True:
+    #                 check = False
+    #                 print("triggered")
+    #                 self.current_display.flashbang()
+    #             print("...")
+    #         except:
+    #             pass
+    #
+    #         # Thunders
+    #         if self.make_thunder:
+    #             self.make_thunder = False
+    #             self.start_time_thunder = pygame.time.get_ticks()
+    #             self.time_thunder = random.randint(1500, 2000)  # You can edit time
+    #             print("start time: ", self.start_time_thunder)
+    #             print("time thunder: ", self.time_thunder)
+    #             check_thunder = True
+    #         try:
+    #             if pygame.time.get_ticks() - self.start_time_thunder >= self.time_thunder and check_thunder == True and self.current_display == \
+    #                     self.displays['game_display']:
+    #                 check_thunder = False
+    #                 print("triggered")
+    #                 self.current_display.thunder()
+    #         except:
+    #             pass
 
     def phaseCheck(self, currentTime):
         if self.phase == 0 and currentTime - self.startTime >= 5:

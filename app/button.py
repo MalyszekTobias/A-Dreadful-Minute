@@ -47,9 +47,11 @@ class Button:  # A button class
                 self.display.game.current_display = self.display.game.displays['start_screen']
             elif self.action == 'game_display':
                 app.game.isPaused = False
+                print("unpause")
                 self.display.game.current_display = self.display.game.displays['game_display']
             elif self.action == 'pause_display':
                 app.game.isPaused = True
+                print("pause")
                 self.display.game.current_display = self.display.game.displays['pause_display']
             else:
                 print('No action assigned to this button')

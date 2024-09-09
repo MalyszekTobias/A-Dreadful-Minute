@@ -69,7 +69,7 @@ class Enemy:
     def count_a(self):
         return (self.display.player.y - self.y) / (self.display.player.x - self.x)
     def count_angle(self):
-        print(ma.atan(self.count_a()))
+        # print(ma.atan(self.count_a()))
         return ma.atan(self.count_a())
     def get_x(self):
         return ma.cos(self.count_angle())
