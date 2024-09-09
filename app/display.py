@@ -65,19 +65,19 @@ class game_display(basic_display):
         # self.game.unpause()
         # print("unpaused")
 
-        #=========================================================================================================
-        # if time.time() - self.time >= 3:
-        #     for x in range(random.randint(1, 5)):
-        #         self.enemies.append(enemy.Enemy(self))                                 # musiałem to skomentować bo wywala błąd
-        #     self.time = time.time()
-        #=========================================================================================================
+        # =========================================================================================================
+        self.time = time.time()
+        # =========================================================================================================
 
 
         self.player = player.Player(self)
         self.enemies = []
         self.time = time.time()
     def mainloop(self):
-
+        if time.time() - self.time >= 3:
+            for x in range(random.randint(1, 5)):
+                self.enemies.append(enemy.Enemy(self))                                 # musiałem to skomentować bo wywala błąd
+            self.time = time.time()
         for ene in self.enemies:
             ene.move()
     def thunder(self):
