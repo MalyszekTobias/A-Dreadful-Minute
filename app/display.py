@@ -68,8 +68,9 @@ class game_display(basic_display):
         self.enemies = []
         self.time = time.time()
     def mainloop(self):
-        if time.time() - self.time >= 2:
-            self.enemies.append(enemy.Enemy(self))
+        if time.time() - self.time >= 3:
+            for x in range(random.randint(1, 5)):
+                self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
         for ene in self.enemies:
             ene.move()
