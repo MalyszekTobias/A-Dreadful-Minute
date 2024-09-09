@@ -27,6 +27,9 @@ class Player:
         self.wind = 0
         self.windStrength = 1
         self.confusion = False
+        self.maxHp = 100
+        self.hp = self.maxHp
+        self.green = (30, 200, 30)
 
 
         self.rect = pygame.Rect(self.x, self.y, self.radius, self.radius)
@@ -36,6 +39,7 @@ class Player:
     def render(self):
         self.movement()
         pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
+        pygame.draw.rect(self.display.screen, self.green, (0, 0, (self.gameWidth * self.hp / self.maxHp), 30))
 
     def events(self, event):
         #player movement capture

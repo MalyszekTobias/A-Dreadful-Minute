@@ -4,6 +4,7 @@ import pygame.time
 
 from app import custom_text, custom_images, button, player
 
+
 class basic_display():
     def __init__(self, game):
         self.game = game
@@ -56,6 +57,8 @@ class settings_screen_v2(settings_screen):
             for obj in self.objects:
                 obj.events(event)
 
+
+
 class game_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
@@ -65,6 +68,8 @@ class game_display(basic_display):
         time = random.randint(10000, 30000)
         pygame.time.set_timer(self.game.FLASHBANG, time)
         self.player = player.Player(self)
+
+
     def thunder(self):
         pass
 
