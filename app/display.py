@@ -83,6 +83,7 @@ class game_display(basic_display):
             print("flash")
             self.screen.fill('white')
             pygame.display.update()
+            pygame.time.wait(80)
 
             time = random.randint(4000, 10000)
             pygame.time.set_timer(self.game.THUNDER, time)
@@ -98,6 +99,11 @@ class game_display(basic_display):
             for obj in self.objects:
                 obj.events(event)
 
+        if self.game.started:
+            self.game.started = False
+            print("triggered")
+            time = random.randint(1000, 1001)
+            pygame.time.set_timer(self.game.FLASHBANG, time)
 
 class pause_display(basic_display):
     def __init__(self, game):
