@@ -90,9 +90,9 @@ class game_display(basic_display):
         self.fog = False
         # self.rect = pygame.Rect(0, 750, 150, 150)
         self.handgun = Custom_image(self, "img/handgun.png", 100, 925, 150, 150, append=False)
-        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 35, 100, 75, 75, append=False)
-        self.bullets_left_text = custom_text.Custom_text(self, 100, 100, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
-        self.reloading_text = custom_text.Custom_text(self, 75, 200, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
+        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', self.game.width - 110, self.game.height - 70, 75, 75, append=False)
+        self.bullets_left_text = custom_text.Custom_text(self,  self.game.width - 50, self.game.height - 70, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
+        self.reloading_text = custom_text.Custom_text(self, 120, self.game.height - 170, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
         self.phase_info = custom_text.Custom_text(self, 840, 50, self.game.font, 35,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
