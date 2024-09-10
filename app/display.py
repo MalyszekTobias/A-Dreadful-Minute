@@ -84,8 +84,9 @@ class game_display(basic_display):
         self.time = time.time()
         self.makeCoins = 0
         self.fog = False
-        self.bullets_left_text = custom_text.Custom_text(self, 75, 50, self.game.font, 25, f'Bullets left: {self.player.bullets}', text_color=(255, 255, 255), append=False)
-        self.reloading_text = custom_text.Custom_text(self, 75, 100, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
+        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 35, 100, 75, 75, append=False)
+        self.bullets_left_text = custom_text.Custom_text(self, 100, 100, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
+        self.reloading_text = custom_text.Custom_text(self, 75, 200, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
         self.phase_info = custom_text.Custom_text(self, 880, 50, self.game.font, 25,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
@@ -114,7 +115,7 @@ class game_display(basic_display):
         for bullet in self.bullets:
             bullet.move()
 
-        self.bullets_left_text.update_text(f'Bullets left: {self.player.bullets}')
+        self.bullets_left_text.update_text(f'X {self.player.bullets}')
         self.phase_info.update_text(f'{self.game.get_event()}')
         self.time_left.update_text(f'{self.game.timeLeft}')
     def thunder(self):
@@ -162,6 +163,7 @@ class game_display(basic_display):
             self.fog_of_storm.update_rect()
             self.fog_of_storm.render()
         self.bullets_left_text.render()
+        self.bullets_left_image.render()
         if self.player.start_reloading:
             self.reloading_text.render()
         pygame.draw.rect(self.screen, (0, 255, 0),
