@@ -13,9 +13,6 @@ class Coin:
         self.yellow2 = (245, 190, 60)
         self.display.objects.append(self)
 
-    def delete(self):
-        self.display.objects.remove(self)
-        del self
 
     def render(self):
         pygame.draw.circle(self.display.screen, self.yellow2, (self.x, self.y), self.radius)
@@ -27,3 +24,7 @@ class Coin:
 
     def events(self, event):
         pass
+
+    def delete(self):
+        self.display.objects.remove(self)
+        del self
