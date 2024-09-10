@@ -108,15 +108,19 @@ class game_display(basic_display):
         self.fog = False
         # self.rect = pygame.Rect(0, 750, 150, 150)
         self.handgun = Custom_image(self, "img/handgun.png", 100, 915, 150, 150, append=False)
-        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 220, self.game.height - 55, 75, 75, append=False)
-        self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 55, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
-        self.reloading_text = custom_text.Custom_text(self, 110, self.game.height - 190, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
-        self.phase_info = custom_text.Custom_text(self, 840, 50, self.game.font, 35,
+        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 220, self.game.height - 55, 50, 50, append=False)
+        self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 50, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
+        self.reloading_text = custom_text.Custom_text(self, 115, self.game.height - 190, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
+        self.phase_info = custom_text.Custom_text(self, 800, self.game.height - 115, self.game.font, 35,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
-        self.time_left = custom_text.Custom_text(self, 840, 100,"Comic Sans", 50,
+        self.time_left = custom_text.Custom_text(self, 800, self.game.height - 65,"Comic Sans", 50,
                                                          f'{self.game.timeLeft}',
                                                          text_color=(255, 255, 255), append=False, system=True)
+        self.money = custom_text.Custom_text(self, 285, self.game.height - 115, self.game.font,
+                                             50, f"X {self.player.money}",
+                                             text_color=(255, 255, 0), append=False, system=True)
+        self.money_image = custom_images.Custom_image(self, 'img/zlotowka.png', 220, self.game.height - 115, 50, 50, append=False)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
@@ -148,6 +152,7 @@ class game_display(basic_display):
         self.bullets_left_text.update_text(f'X {self.player.bullets}')
         self.phase_info.update_text(f'{self.game.get_event()}')
         self.time_left.update_text(f'{self.game.timeLeft}')
+        self.money.update_text(f"X {self.player.money}")
     def thunder(self):
         pygame.mixer.Sound.play(self.game.thunder_sound)
         # pygame.mixer.music.stop()
@@ -191,12 +196,15 @@ class game_display(basic_display):
         if self.fog:
             self.fog_of_storm.update_rect()
             self.fog_of_storm.render()
+        pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
+        pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
         self.phase_info.render()
         self.time_left.render()
         self.bullets_left_text.render()
         self.bullets_left_image.render()
-        pygame.draw.rect(self.game.screen, (16, 16, 16), (10, 830, 180, 160), border_radius=5)
-        pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, 160, 140), border_radius=5)
+        self.money.render()
+        self.money_image.render()
+
         self.handgun.render()
         if self.player.start_reloading:
             self.reloading_text.render()
