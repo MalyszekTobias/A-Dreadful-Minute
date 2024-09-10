@@ -210,9 +210,10 @@ class Game:
         elif self.findPhase() == 'storm end':
             self.phase = 0
             self.totalKills += killCount
-            makeCoins = killCount + 10
+            makeCoins = 10
             print('storm ends')
             player.getPhase(self.phase)
+
 
     def findPhase(self):
         trueTime = round(time.time()) - self.startTime - self.currentPauseTime - self.pauseTotal

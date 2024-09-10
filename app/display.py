@@ -83,6 +83,8 @@ class game_display(basic_display):
         self.time = time.time()
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
+        # print(self.enemies, 'enemies')
+        # print(self.coins, 'coins')
         if time.time() - self.time >= 3:
             for x in range(random.randint(1, 5)):
                 self.enemies.append(enemy.Enemy(self))
@@ -90,11 +92,14 @@ class game_display(basic_display):
 
         for ene in self.enemies:
             ene.move()
-        if game.makeCoins > 0:
+        if game.makeCoins == 0:
+            game.makeCoins = 1
             for i in range(game.makeCoins):
-                self.coins.append(coin.Coin(self))
-            print(self.coins)
+                self.coins.append(self.coin)
+            for c in self.coins:
+                print(c.x)
             game.makeCoins = 0
+        else:print(game.makeCoins)
 
     def thunder(self):
         print("thunder")
