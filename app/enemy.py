@@ -11,9 +11,9 @@ class Enemy:
         self.display = display
         self.screen = self.display.game.screen
         if random.randint(0, 1):
-            self.x = -50
+            self.x = -30
         else:
-            self.x = 1000
+            self.x = 130
 
         self.y = random.randint(50, 950)
         self.radius = 25
