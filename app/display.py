@@ -5,8 +5,6 @@ import app.game
 import pygame.time
 import time
 from app import custom_text, custom_images, button, player, enemy, coin, game
-
-game.makeCoins = 0
 class basic_display():
     def __init__(self, game):
         self.game = game
@@ -82,6 +80,7 @@ class game_display(basic_display):
         self.coin = coin.Coin(self)
         self.bullets = []
         self.time = time.time()
+        self.makeCoins = 0
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         if time.time() - self.time >= 3:
@@ -91,14 +90,12 @@ class game_display(basic_display):
 
         for ene in self.enemies:
             ene.move()
-        if game.makeCoins == 0:
-            game.makeCoins = 1
-            for i in range(game.makeCoins):
+        print(self.makeCoins)
+        if self.makeCoins > 0:
+            print(123456789)
+            for i in range(self.makeCoins):
                 self.coins.append(coin.Coin(self))
-            for c in self.coins:
-                print(c.x)
-            game.makeCoins = 0
-        else:print(game.makeCoins)
+            self.makeCoins = 0
 
 
         for bullet in self.bullets:

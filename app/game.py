@@ -8,7 +8,7 @@ from app import config, display, custom_text, player
 orderPause = True
 orderUnpause = False
 killCount = 0
-makeCoins = 0
+
 
 class Game:
     def __init__(self):
@@ -210,7 +210,9 @@ class Game:
         elif self.findPhase() == 'storm end':
             self.phase = 0
             self.totalKills += killCount
-            makeCoins = 10
+            if self.current_display == self.displays['game_display']:
+                print('game')
+                self.current_display.makeCoins = 10
             print('storm ends')
             player.getPhase(self.phase)
 

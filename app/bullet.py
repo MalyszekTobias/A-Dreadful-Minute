@@ -39,7 +39,7 @@ class Bullet:
 
     def render(self):
         # pygame.draw.line(self.display.game.screen, (255, 255, 255), (self.x_1, self.y_1), (self.x_2, self.y_2))
-        pygame.draw.circle(self.display.game.screen, (255, 255, 255), (self.x, self.y), self.radius)
+        pygame.draw.circle(self.display.game.screen, (245, 245, 51), (self.x, self.y), self.radius)
 
     def move(self):
         if self.out_of_bounds():
