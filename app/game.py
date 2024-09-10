@@ -127,7 +127,6 @@ class Game:
 
             self.events()
             self.render()
-            app.coin.clearOrder = False
             self.update()
             self.clock.tick(self.fps)
             # self.thunderstorm()
@@ -215,6 +214,7 @@ class Game:
             except:
                 self.phases = [1, 2, 3, 4, 5]
         elif self.findPhase() == 'storm end':
+            app.coin.clearOrder = False
             self.phase = 0
             global killCount
             self.totalKills += killCount
