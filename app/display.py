@@ -6,14 +6,14 @@ import pygame.time
 import time
 from app import custom_text, custom_images, button, player, enemy, coin, game
 from app.custom_images import Custom_image
+import img
+
 
 
 class basic_display():
     def __init__(self, game):
         self.game = game
         self.screen = self.game.screen
-
-
         self.objects = []
 
     def render(self):
@@ -101,7 +101,6 @@ class game_display(basic_display):
                                                          text_color=(255, 255, 255), append=False, system=True)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
-
         self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
         self.player.reload_upadate_checker()
         if time.time() - self.time >= 3:
@@ -176,6 +175,7 @@ class game_display(basic_display):
             self.reloading_text.render()
         pygame.draw.rect(self.screen, (0, 255, 0),
                          (0, 0, (self.game.width * self.player.hp / self.player.maxHp), self.player.hpHeight))
+
 
 
 

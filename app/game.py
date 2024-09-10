@@ -5,6 +5,7 @@ import app.coin
 import pygame
 from app import config, display, custom_text, player
 from sounds import *
+from app import custom_images
 
 
 orderPause = True
@@ -33,7 +34,6 @@ class Game:
         self.bang = pygame.mixer.Sound("sounds/bang.ogg")
         # pygame.mixer.Channel(0).load('sounds/light-rain-109591.wav')
         pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.wav'))
-        # pygame.mixer.music.set_volume(0.5)
         self.enable_debug = int(self.cfg['enable_debug'])
         self.started = False
         self.clock = pygame.time.Clock()
@@ -62,6 +62,8 @@ class Game:
 
         self.run = True
         killCount = 0
+        pygame.mouse.set_visible(False)
+
 
         self.objects = []
         self.background = pygame.image.load('img/background.png')
@@ -87,6 +89,7 @@ class Game:
                             custom_text.Custom_text(self, 12, 165, self.font, 30, f'Current display: {type(self.current_display)}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 195, self.font, 30, f'Pointing at: {self.pointing_at}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 225, self.font, 30, f'Phase: {self.phase}', text_color='white', center=False)]
+        self.crosshair = custom_images.Custom_image(self.current_display, 'img/crosshair.png', pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], 17, 17, append=False)
 
 
         for debug_item in self.debug_items:
@@ -127,6 +130,7 @@ class Game:
     def mainloop(self):
         killCount = 0
         while self.run:
+
             self.phaseCheck()
             if self.current_display == self.displays['game_display']:
                 self.current_display.mainloop()
@@ -300,6 +304,7 @@ class Game:
 
         for object in self.objects:
             object.render()
+        self.crosshair.render()
 
     def update(self):
         if self.debug:
