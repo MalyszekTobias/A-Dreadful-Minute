@@ -42,13 +42,16 @@ class Bullet:
         pygame.draw.circle(self.display.game.screen, (255, 255, 255), (self.x, self.y), self.radius)
 
     def move(self):
-        self.x = ((self.ratio_x * self.speed)/self.denominator) + self.x_1
-        self.y = ((self.ratio_y * self.speed)/self.denominator) + self.y_1
+        if self.out_of_bounds():
+            self.delete()
+        else:
+            self.x = ((self.ratio_x * self.speed)/self.denominator) + self.x_1
+            self.y = ((self.ratio_y * self.speed)/self.denominator) + self.y_1
 
-        self.x_1 = self.x
-        self.y_1 = self.y
+            self.x_1 = self.x
+            self.y_1 = self.y
 
-        self.update_rect()
+            self.update_rect()
 
     def events(self, event):
         pass
@@ -73,3 +76,14 @@ class Bullet:
 
     def update_rect(self):
         self.rect = pygame.rect.Rect(self.x, self.y, self.radius* 2, self.radius * 2)
+
+    def out_of_bounds(self):
+        if self.x + self.radius < 0:
+            return True
+        elif self.x - self.radius > self.display.game.width:
+            return True
+        elif self.y + self.radius < 0:
+            return True
+        elif self.y - self.radius > self.display.game.width:
+            return True
+        return False
