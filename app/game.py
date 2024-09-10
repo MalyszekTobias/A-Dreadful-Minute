@@ -52,7 +52,7 @@ class Game:
         self.run = True
 
         self.objects = []
-
+        self.background = pygame.image.load('img/background.png')
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(f"{self.title} (v {self.version})")
 
@@ -255,7 +255,11 @@ class Game:
                 self.current_display.events(event)
 
     def render(self):
-        self.screen.fill('black')
+        if self.current_display == self.displays['game_display']:
+            self.screen.blit(self.background, (0, 0))
+        else:
+            self.screen.fill('black')
+        # self.screen.blit(self.background, (0, 0))
         self.current_display.render()
 
         for object in self.objects:
