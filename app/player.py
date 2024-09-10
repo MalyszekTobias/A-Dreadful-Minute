@@ -47,6 +47,7 @@ class Player:
 
         self.display.objects.append(self)
 
+
     def render(self):
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
@@ -72,7 +73,7 @@ class Player:
             elif event.key == pygame.K_2 and self.money >= 100:
                 self.maxHp *= 1.1
 
-            elif event.key == pygame.K_r:
+            elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
                 self.reload_start = time.time()
 
