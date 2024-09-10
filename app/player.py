@@ -1,4 +1,5 @@
 import random
+import time
 
 import pygame.draw
 from app import config, game, bullet, custom_images
@@ -35,6 +36,8 @@ class Player:
         self.money = 0
         self.shootingSpeed = 0.3
         self.reloadSpeed = 3
+        self.reload_start = 0
+        self.start_reloading = False
         self.maxBullets = 10
         self.bullets = self.maxBullets
         self.windCap = self.windStrength * 6
@@ -72,6 +75,10 @@ class Player:
             elif event.key == pygame.K_2 and self.money >= 100:
                 self.maxHp *= 1.1
 
+            elif event.key == pygame.K_r:
+                self.start_reloading = True
+                self.reload_start = time.time()
+
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
@@ -86,13 +93,16 @@ class Player:
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0:
                 self.shoot()
-            else:
-                self.reload()
+
     def shoot(self):
         if self.bullets > 0:
             self.bullets -= 1
             bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos())
 
+    def reload_upadate_checker(self):
+        if self.start_reloading:
+            if time.time() - self.reload_start > self.reloadSpeed:
+                self.reload()
     def reload(self):
         self.bullets = self.maxBullets
 

@@ -89,7 +89,7 @@ class game_display(basic_display):
     def mainloop(self):
 
         self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
-
+        self.player.reload_upadate_checker()
         if time.time() - self.time >= 3:
             for x in range(random.randint(1,1)):
                 self.enemies.append(enemy.Enemy(self))
