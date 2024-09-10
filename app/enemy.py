@@ -1,8 +1,10 @@
 import random
 from itertools import count
 
+import app.game
 import pygame
 import math as ma
+from app import game
 class Enemy:
     def __init__(self, display):
         self.display = display
@@ -29,6 +31,7 @@ class Enemy:
         self.update_rect()
         pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
         self.countdown -= 1
+
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x, self.y, self.radius * 2, self.radius * 2)
@@ -66,7 +69,7 @@ class Enemy:
     def delete(self):
         self.display.objects.remove(self)
         self.display.enemies.remove(self)
-        self.killCount += 1
+        app.game.killCount += 1
         del self
 
     def count_a(self):

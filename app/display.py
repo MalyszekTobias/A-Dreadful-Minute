@@ -84,13 +84,12 @@ class game_display(basic_display):
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         if time.time() - self.time >= 3:
-            for x in range(random.randint(1, 5)):
+            for x in range(random.randint(1,1)):
                 self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
 
         for ene in self.enemies:
             ene.move()
-        print(self.makeCoins)
         if self.makeCoins > 0:
             print(123456789)
             for i in range(self.makeCoins):
