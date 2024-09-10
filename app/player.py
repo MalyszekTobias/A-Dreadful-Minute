@@ -53,7 +53,6 @@ class Player:
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
-        print(self.money)
 
 
     def events(self, event):
