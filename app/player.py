@@ -85,11 +85,13 @@ class Player:
             else:
                 self.reload()
     def shoot(self):
-        self.bullets -= 1
-        bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos())
+        if self.bullets > 0:
+            self.bullets -= 1
+            bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos())
 
     def reload(self):
         self.bullets = self.maxBullets
+
 
     def movement(self):
 
