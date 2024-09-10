@@ -4,8 +4,9 @@ import random
 import app.game
 import pygame.time
 import time
-from app import custom_text, custom_images, button, player, enemy
+from app import custom_text, custom_images, button, player, enemy, coin, game
 
+game.makeCoins = 0
 class basic_display():
     def __init__(self, game):
         self.game = game
@@ -77,6 +78,8 @@ class game_display(basic_display):
 
         self.player = player.Player(self)
         self.enemies = []
+        self.coins = []
+        self.coin = coin.Coin(self)
         self.time = time.time()
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
@@ -87,6 +90,12 @@ class game_display(basic_display):
 
         for ene in self.enemies:
             ene.move()
+        if game.makeCoins > 0:
+            for i in range(game.makeCoins):
+                self.coins.append(coin.Coin(self))
+            print(self.coins)
+            game.makeCoins = 0
+
     def thunder(self):
         print("thunder")
 

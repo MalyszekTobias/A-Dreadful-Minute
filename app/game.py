@@ -7,7 +7,8 @@ from app import config, display, custom_text, player
 
 orderPause = True
 orderUnpause = False
-
+killCount = 0
+makeCoins = 0
 
 class Game:
     def __init__(self):
@@ -26,7 +27,7 @@ class Game:
         self.fps = float(self.cfg['fps'])
         self.title = self.cfg['title']
         self.enable_debug = int(self.cfg['enable_debug'])
-        self.started = True
+        self.started = False
         self.clock = pygame.time.Clock()
         self.font = None
         self.start_time = 0
@@ -46,6 +47,7 @@ class Game:
         self.timestamps = []
         self.calmTime = 5
         self.stormTime = 10
+        self.totalKills = 0
 
         self.run = True
 
@@ -207,6 +209,8 @@ class Game:
                 self.phases = [1, 2, 3, 4, 5]
         elif self.findPhase() == 'storm end':
             self.phase = 0
+            self.totalKills += killCount
+            makeCoins = killCount + 10
             print('storm ends')
             player.getPhase(self.phase)
 
