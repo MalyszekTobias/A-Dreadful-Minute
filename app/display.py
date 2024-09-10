@@ -75,6 +75,8 @@ class game_display(basic_display):
 
 
         self.player = player.Player(self)
+        self.fog_of_storm = custom_images.Custom_image(self, 'img/fog_of_storm.png', self.player.x, self.player.y, 2000,
+                                                       2000, append=False)
         self.enemies = []
         self.coins = []
         self.coin = coin.Coin(self)
@@ -130,6 +132,13 @@ class game_display(basic_display):
         else:
             for obj in self.objects:
                 obj.events(event)
+
+    def render(self):
+        for obj in self.objects:
+            obj.render()
+
+        # self.fog_of_storm.render()
+
 
 
 class pause_display(basic_display):

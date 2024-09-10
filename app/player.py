@@ -1,7 +1,7 @@
 import random
 
 import pygame.draw
-from app import config, game, bullet
+from app import config, game, bullet, custom_images
 
 phase = 0
 direction = 0
@@ -38,6 +38,7 @@ class Player:
         self.maxBullets = 10
         self.bullets = self.maxBullets
 
+        self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
 
 
         self.rect = pygame.Rect(self.x, self.y, self.radius, self.radius)
@@ -46,7 +47,8 @@ class Player:
 
     def render(self):
         self.movement()
-        pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
+        # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
+        self.img.render()
         pygame.draw.rect(self.display.screen, self.green, (0, 0, (self.gameWidth * self.hp / self.maxHp), self.hpHeight))
 
     def events(self, event):
@@ -205,6 +207,9 @@ class Player:
         elif phase == 5:
             self.wind = direction
 
+        self.img.x = self.x
+        self.img.y = self.y
+
 
     def confuse(self):
         right, left, up, down = False, False, False, False
@@ -231,6 +236,8 @@ class Player:
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, 2 * self.radius, 2 * self.radius)
+        self.display.fog_of_storm.x = self.x
+        self.display.fog_of_storm.y = self.y
 
 def getPhase(fase):
     global direction
