@@ -12,7 +12,7 @@ class Custom_image:  # A class to easier render images
 
         self.path = path  # path to the images
 
-        self.original_image = pygame.image.load(self.path)  # loading the original image
+        self.original_image = pygame.image.load(self.path).convert_alpha()  # loading the original image
         self.original_image = pygame.transform.scale(self.original_image,
                                                      (self.w, self.h))  # rescaling the original image
         self.image = self.original_image  # the current image, which will be rotated

@@ -29,8 +29,10 @@ class start_screen(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
         custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'A Dreadful Minute', text_color='Green')
-        button.Button(self, 'settings', self.game.width / 2 - 150, self.game.height * 0.75, 300, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
-        button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.75 - 100, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
+        button.Button(self, 'settings', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
+        button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.45, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
+        button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75,
+                      (0, 0, 0), outline_color='white', text='Quit', text_color='white')
 
 
 class settings_screen(basic_display):
