@@ -87,12 +87,12 @@ class game_display(basic_display):
         self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 35, 100, 75, 75, append=False)
         self.bullets_left_text = custom_text.Custom_text(self, 100, 100, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
         self.reloading_text = custom_text.Custom_text(self, 75, 200, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
-        self.phase_info = custom_text.Custom_text(self, 880, 50, self.game.font, 25,
+        self.phase_info = custom_text.Custom_text(self, 840, 50, self.game.font, 35,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
-        self.time_left = custom_text.Custom_text(self, 880, 100, self.game.font, 25,
+        self.time_left = custom_text.Custom_text(self, 840, 100,"Comic Sans", 50,
                                                          f'{self.game.timeLeft}',
-                                                         text_color=(255, 255, 255), append=False)
+                                                         text_color=(255, 255, 255), append=False, system=True)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
 
