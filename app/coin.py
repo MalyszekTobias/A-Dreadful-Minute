@@ -14,6 +14,8 @@ class Coin:
         self.yellow2 = (245, 190, 60)
         self.display.objects.append(self)
 
+        self.rect = pygame.Rect(self.x, self.y, self.radius*2, self.radius*2)
+
 
     def render(self):
         pygame.draw.circle(self.display.screen, self.yellow2, (self.x, self.y), self.radius)

@@ -83,7 +83,7 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = False
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0:
                 self.shoot()
             else:

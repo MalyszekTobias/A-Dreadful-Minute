@@ -83,6 +83,7 @@ class game_display(basic_display):
         self.bullets = []
         self.time = time.time()
         self.makeCoins = 0
+        self.bullets_left_text = custom_text.Custom_text(self, 75, 50, self.game.font, 25, f'Bullets left: {self.player.bullets}')
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
 
@@ -104,6 +105,8 @@ class game_display(basic_display):
 
         for bullet in self.bullets:
             bullet.move()
+
+        self.bullets_left_text.update_text(f'Bullets left: {self.player.bullets}')
     def thunder(self):
         pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.music.stop()
