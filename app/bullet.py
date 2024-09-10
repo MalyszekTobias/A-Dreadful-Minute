@@ -20,7 +20,7 @@ class Bullet:
         self.damage = 12
         self.speed = 20
 
-        self.radius = 10
+        self.radius = 5
 
         self.update_rect()
 
@@ -38,7 +38,7 @@ class Bullet:
         del self
 
     def render(self):
-        pygame.draw.line(self.display.game.screen, (255, 255, 255), (self.x_1, self.y_1), (self.x_2, self.y_2))
+        # pygame.draw.line(self.display.game.screen, (255, 255, 255), (self.x_1, self.y_1), (self.x_2, self.y_2))
         pygame.draw.circle(self.display.game.screen, (255, 255, 255), (self.x, self.y), self.radius)
 
     def move(self):
