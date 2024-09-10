@@ -85,6 +85,7 @@ class game_display(basic_display):
         self.makeCoins = 0
         self.fog = False
         self.bullets_left_text = custom_text.Custom_text(self, 75, 50, self.game.font, 25, f'Bullets left: {self.player.bullets}', text_color=(255, 255, 255), append=False)
+        self.reloading_text = custom_text.Custom_text(self, 75, 100, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
 
@@ -152,6 +153,8 @@ class game_display(basic_display):
             self.fog_of_storm.update_rect()
             self.fog_of_storm.render()
         self.bullets_left_text.render()
+        if self.player.start_reloading:
+            self.reloading_text.render()
         pygame.draw.rect(self.screen, (0, 255, 0),
                          (0, 0, (self.game.width * self.player.hp / self.player.maxHp), self.player.hpHeight))
 

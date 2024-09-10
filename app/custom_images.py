@@ -28,7 +28,10 @@ class Custom_image:  # A class to easier render images
         pass
 
     def delete(self):
-        self.display.objects.remove(self)
+        try:
+            self.display.objects.remove(self)
+        except:
+            pass
         del self
 
     def rotate_toward_mouse(self, mouse_pos):
