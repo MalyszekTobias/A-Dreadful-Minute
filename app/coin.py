@@ -1,7 +1,7 @@
 import random
 import math as Kutt
 import pygame.draw
-from app import config, game
+from app import config, game, custom_images
 clearOrder = False
 
 class Coin:
@@ -14,12 +14,16 @@ class Coin:
         self.yellow2 = (245, 190, 60)
         self.display.objects.append(self)
 
+        self.img = custom_images.Custom_image(self.display, 'img/zlotowka.png', self.x, self.y, self.radius*2, self.radius*2)
+
         self.rect = pygame.Rect(self.x, self.y, self.radius*2, self.radius*2)
 
 
     def render(self):
-        pygame.draw.circle(self.display.screen, self.yellow2, (self.x, self.y), self.radius)
-        pygame.draw.circle(self.display.screen, self.yellow1, (self.x, self.y), self.radius - 4)
+        # pygame.draw.circle(self.display.screen, self.yellow2, (self.x, self.y), self.radius)
+        # pygame.draw.circle(self.display.screen, self.yellow1, (self.x, self.y), self.radius - 4)
+        self.img.update_rect()
+        self.img.render()
         if Kutt.sqrt((self.x - self.display.player.x) ** 2 + (self.y - self.display.player.y) ** 2) < self.radius + self.display.player.radius:
             self.display.player.money += 1
             self.delete()
@@ -33,6 +37,7 @@ class Coin:
         pass
 
     def delete(self):
+        self.img.delete()
         self.display.objects.remove(self)
         del self
 
