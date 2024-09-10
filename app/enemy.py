@@ -68,6 +68,7 @@ class Enemy:
             # self.update_rect()
             self.img.x = self.x
             self.img.y = self.y
+            self.img.update_rect()
 
     def events(self, event):
         pass

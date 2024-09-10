@@ -83,10 +83,15 @@ class game_display(basic_display):
         self.bullets = []
         self.time = time.time()
         self.makeCoins = 0
+        self.fog = False
+        self.bullets_left_text = custom_text.Custom_text(self, 75, 50, self.game.font, 25, f'Bullets left: {self.player.bullets}', text_color=(255, 255, 255), append=False)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
+
+        self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
+
         if time.time() - self.time >= 3:
-            for x in range(random.randint(3,4)):
+            for x in range(random.randint(1,1)):
                 self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
 
@@ -101,6 +106,8 @@ class game_display(basic_display):
 
         for bullet in self.bullets:
             bullet.move()
+
+        self.bullets_left_text.update_text(f'Bullets left: {self.player.bullets}')
     def thunder(self):
         pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.music.stop()
@@ -130,6 +137,9 @@ class game_display(basic_display):
             self.game.ready = True
             self.game.current_display = self.game.displays['pause_display']
 
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
+            self.fog = not self.fog
+
         else:
             for obj in self.objects:
                 obj.events(event)
@@ -138,7 +148,13 @@ class game_display(basic_display):
         for obj in self.objects:
             obj.render()
 
-        # self.fog_of_storm.render()
+        if self.fog:
+            self.fog_of_storm.update_rect()
+            self.fog_of_storm.render()
+        self.bullets_left_text.render()
+        pygame.draw.rect(self.screen, (0, 255, 0),
+                         (0, 0, (self.game.width * self.player.hp / self.player.maxHp), self.player.hpHeight))
+
 
 
 

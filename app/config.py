@@ -5,7 +5,7 @@ import os
 def set_config():  # Function that will create the config file or update it if it's out of date
     config = ConfigParser()
     config_file = 'config.ini'  # Path to config file
-    version = '0.11.2'  # Current version
+    version = '0.11.5'  # Current version
 
     if not os.path.exists(config_file):  # Checks if configuration file exists
 
@@ -36,6 +36,7 @@ def generate_default_config_data(version):
         'height': 1000,
         'fps': 60,
         'title': 'A Dreadful Minute',
+        'full-screen': 0,
         'enable_debug': 1
     }
 

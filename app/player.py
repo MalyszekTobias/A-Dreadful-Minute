@@ -51,7 +51,7 @@ class Player:
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
         print(self.money)
-        pygame.draw.rect(self.display.screen, self.green, (0, 0, (self.gameWidth * self.hp / self.maxHp), self.hpHeight))
+
 
     def events(self, event):
         #player movement capture
@@ -83,7 +83,7 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = False
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0:
                 self.shoot()
             else:
