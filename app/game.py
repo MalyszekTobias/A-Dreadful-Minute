@@ -4,6 +4,7 @@ import time
 import app.coin
 import pygame
 from app import config, display, custom_text, player
+from sounds import *
 
 
 orderPause = True
@@ -29,6 +30,8 @@ class Game:
         self.title = self.cfg['title']
         self.fullscreen = int(self.cfg['full-screen'])
         self.thunder_sound = pygame.mixer.Sound("sounds/thunder.ogg")
+        # pygame.mixer.Channel(0).load('sounds/light-rain-109591.wav')
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.wav'))
         # pygame.mixer.music.set_volume(0.5)
         self.enable_debug = int(self.cfg['enable_debug'])
         self.started = False
@@ -104,12 +107,12 @@ class Game:
     #     if ended:
 
     def pause(self):
-        pygame.mixer.music.pause()
+        # pygame.mixer.music.pause()
         self.paused_flash = pygame.time.get_ticks() - self.start_time_flash
         self.paused_thunder = pygame.time.get_ticks() - self.start_time_thunder
 
     def unpause(self):
-        pygame.mixer.music.unpause()
+        # pygame.mixer.music.unpause()
         self.start_time_flash = pygame.time.get_ticks()
         self.start_time_thunder = pygame.time.get_ticks()
         if self.time_flash == 0:
