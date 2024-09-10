@@ -109,6 +109,7 @@ class Game:
         self.paused = False
 
     def mainloop(self):
+        killCount = 0
         while self.run:
             self.phaseCheck()
             if self.current_display == self.displays['game_display']:
@@ -211,8 +212,8 @@ class Game:
             self.phase = 0
             self.totalKills += killCount
             if self.current_display == self.displays['game_display']:
-                print('game')
-                self.current_display.makeCoins = 10
+                self.current_display.makeCoins = killCount
+
             print('storm ends')
             player.getPhase(self.phase)
 
