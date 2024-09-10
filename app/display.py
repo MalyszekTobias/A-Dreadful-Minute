@@ -89,10 +89,10 @@ class game_display(basic_display):
         self.makeCoins = 0
         self.fog = False
         # self.rect = pygame.Rect(0, 750, 150, 150)
-        self.handgun = Custom_image(self, "img/handgun.png", 100, 925, 150, 150, append=False)
-        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', self.game.width - 110, self.game.height - 70, 75, 75, append=False)
-        self.bullets_left_text = custom_text.Custom_text(self,  self.game.width - 50, self.game.height - 70, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
-        self.reloading_text = custom_text.Custom_text(self, 120, self.game.height - 170, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
+        self.handgun = Custom_image(self, "img/handgun.png", 100, 915, 150, 150, append=False)
+        self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 220, self.game.height - 55, 75, 75, append=False)
+        self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 55, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
+        self.reloading_text = custom_text.Custom_text(self, 110, self.game.height - 190, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
         self.phase_info = custom_text.Custom_text(self, 840, 50, self.game.font, 35,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
@@ -170,6 +170,8 @@ class game_display(basic_display):
         self.time_left.render()
         self.bullets_left_text.render()
         self.bullets_left_image.render()
+        pygame.draw.rect(self.game.screen, (16, 16, 16), (10, 830, 180, 160), border_radius=5)
+        pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, 160, 140), border_radius=5)
         self.handgun.render()
         if self.player.start_reloading:
             self.reloading_text.render()
