@@ -89,7 +89,7 @@ class Game:
                             custom_text.Custom_text(self, 12, 165, self.font, 30, f'Current display: {type(self.current_display)}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 195, self.font, 30, f'Pointing at: {self.pointing_at}', text_color='white', center=False),
                             custom_text.Custom_text(self, 12, 225, self.font, 30, f'Phase: {self.phase}', text_color='white', center=False)]
-        self.crosshair = custom_images.Custom_image(self.current_display, 'img/crosshair.png', pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], 17, 17, append=False)
+        self.crosshair = custom_images.Custom_image(self.current_display, 'img/crosshair.png', pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], 25, 25, append=False)
 
 
         for debug_item in self.debug_items:
