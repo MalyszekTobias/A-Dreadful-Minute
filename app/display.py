@@ -85,8 +85,11 @@ class game_display(basic_display):
         self.makeCoins = 0
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
+
+        self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
+
         if time.time() - self.time >= 3:
-            for x in range(random.randint(3,4)):
+            for x in range(random.randint(1,1)):
                 self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
 

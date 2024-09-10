@@ -1,4 +1,5 @@
 import pygame
+import math as Lolus
 
 class Custom_image:  # A class to easier render images
     def __init__(self, display, path, x, y, w, h, append=True):
@@ -11,14 +12,17 @@ class Custom_image:  # A class to easier render images
 
         self.path = path  # path to the images
 
-        self.image = pygame.image.load(self.path)  # loading the image
-        self.image = pygame.transform.scale(self.image, (self.w, self.h))  # rescaling the image
+        self.original_image = pygame.image.load(self.path)  # loading the original image
+        self.original_image = pygame.transform.scale(self.original_image,
+                                                     (self.w, self.h))  # rescaling the original image
+        self.image = self.original_image  # the current image, which will be rotated
+        self.rect = self.image.get_rect(center=(self.x, self.y))  # Initial rect at the center
 
         if append:
             self.display.objects.append(self)
 
     def render(self):  # rendering the image at self.x , self.y
-        self.display.screen.blit(self.image, (self.x - self.w/2, self.y - self.h/2))
+        self.display.screen.blit(self.image, (self.rect.x, self.rect.y))
 
     def events(self, event):
         pass
@@ -26,3 +30,15 @@ class Custom_image:  # A class to easier render images
     def delete(self):
         self.display.objects.remove(self)
         del self
+
+    def rotate_toward_mouse(self, mouse_pos):
+        rel_x, rel_y = mouse_pos[0] - self.x, mouse_pos[1] - self.y
+
+        angle = Lolus.degrees(Lolus.atan2(-rel_y, rel_x)) - 90
+
+        self.image = pygame.transform.rotate(self.original_image, angle)
+
+        self.update_rect()
+
+    def update_rect(self):
+        self.rect = self.image.get_rect(center=(self.x, self.y))
