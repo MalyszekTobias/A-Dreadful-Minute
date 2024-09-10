@@ -28,7 +28,7 @@ class Game:
         self.fps = float(self.cfg['fps'])
         self.title = self.cfg['title']
         self.fullscreen = int(self.cfg['full-screen'])
-        self.thunder_sound = pygame.mixer.Sound("sounds/thunder.mp3")
+        self.thunder_sound = pygame.mixer.Sound("sounds/thunder.ogg")
         # pygame.mixer.music.set_volume(0.5)
         self.enable_debug = int(self.cfg['enable_debug'])
         self.started = False
