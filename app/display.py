@@ -86,6 +86,12 @@ class game_display(basic_display):
         self.fog = False
         self.bullets_left_text = custom_text.Custom_text(self, 75, 50, self.game.font, 25, f'Bullets left: {self.player.bullets}', text_color=(255, 255, 255), append=False)
         self.reloading_text = custom_text.Custom_text(self, 75, 100, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
+        self.phase_info = custom_text.Custom_text(self, 880, 50, self.game.font, 25,
+                                                         f'{self.game.get_event()}',
+                                                         text_color=(255, 255, 255), append=False)
+        self.time_left = custom_text.Custom_text(self, 880, 100, self.game.font, 25,
+                                                         f'{self.game.timeLeft}',
+                                                         text_color=(255, 255, 255), append=False)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
 
@@ -109,6 +115,8 @@ class game_display(basic_display):
             bullet.move()
 
         self.bullets_left_text.update_text(f'Bullets left: {self.player.bullets}')
+        self.phase_info.update_text(f'{self.game.get_event()}')
+        self.time_left.update_text(f'{self.game.timeLeft}')
     def thunder(self):
         pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.music.stop()
@@ -148,7 +156,8 @@ class game_display(basic_display):
     def render(self):
         for obj in self.objects:
             obj.render()
-
+        self.phase_info.render()
+        self.time_left.render()
         if self.fog:
             self.fog_of_storm.update_rect()
             self.fog_of_storm.render()

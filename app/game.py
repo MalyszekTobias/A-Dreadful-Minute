@@ -54,6 +54,7 @@ class Game:
         self.totalKills = 0
         self.trueTime = 0
         self.timeLeft = 5
+        self.phase = 0
 
         self.run = True
         killCount = 0
@@ -258,7 +259,11 @@ class Game:
             if trueTime == self.stormTime:
                 return 'storm end'
 
-
+    def get_event(self):
+        if self.phase == 0:
+            return "Time left before the storm:"
+        else:
+            return "Storm time left:"
 
     # def trigger(self):
     #     print('triggered')

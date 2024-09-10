@@ -38,7 +38,10 @@ class Coin:
 
     def delete(self):
         self.img.delete()
-        self.display.objects.remove(self)
+        try:
+            self.display.objects.remove(self)
+        except:
+            print("already removed")
         del self
 
 
