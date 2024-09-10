@@ -27,6 +27,7 @@ class Game:
         self.height = int(self.cfg['height'])
         self.fps = float(self.cfg['fps'])
         self.title = self.cfg['title']
+        self.fullscreen = int(self.cfg['full-screen'])
         self.thunder_sound = pygame.mixer.Sound("sounds/thunder.mp3")
         # pygame.mixer.music.set_volume(0.5)
         self.enable_debug = int(self.cfg['enable_debug'])
@@ -58,6 +59,8 @@ class Game:
         self.objects = []
         self.background = pygame.image.load('img/background.png')
         self.screen = pygame.display.set_mode((self.width, self.height))
+        if self.fullscreen:
+            pygame.display.toggle_fullscreen()
         pygame.display.set_caption(f"{self.title} (v {self.version})")
 
         self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'settings_screen': display.settings_screen(self), 'game_display': display.game_display(self), 'pause_display': display.pause_display(self), 'settings_screen_v2': display.settings_screen_v2(self)}

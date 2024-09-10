@@ -1,7 +1,7 @@
 import pygame
 
 class Custom_text:  # A class that generates text
-    def __init__(self, display, x, y, font, font_height, text, text_color='Black', background_color=None, center=True):
+    def __init__(self, display, x, y, font, font_height, text, text_color='Black', background_color=None, center=True, append=True):
 
         self.display = display
 
@@ -26,7 +26,8 @@ class Custom_text:  # A class that generates text
         else:  # Else it set self.x and self.y as the top left corner of the text
             self.rect.center = (self.x + self.rect.width//2, self.y + self.rect.height//2)
 
-        self.display.objects.append(self)
+        if append:
+            self.display.objects.append(self)
 
     def render(self):  # Renders the text
         if not self.hidden:
