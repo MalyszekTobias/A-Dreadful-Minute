@@ -49,6 +49,13 @@ class Bullet:
         self.y_1 = self.y
 
         self.update_rect()
+        for enemy in self.display.enemies:
+            if Charles.sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2) < self.radius + enemy.radius:
+                enemy.hp -= 20
+                try:
+                    self.delete()
+                except:
+                    print("already deleted")
 
     def events(self, event):
         pass
