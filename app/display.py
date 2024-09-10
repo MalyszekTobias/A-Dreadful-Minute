@@ -120,9 +120,9 @@ class game_display(basic_display):
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
-        if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
-            self.player.start_reloading = True
-            self.player.reload_start = time.time()
+        # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
+        #     self.player.start_reloading = True
+        #     self.player.reload_start = time.time()
         self.player.reload_upadate_checker()
         if time.time() - self.time >= 3:
             if self.game.phase == 0:
