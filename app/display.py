@@ -163,12 +163,12 @@ class game_display(basic_display):
     def render(self):
         for obj in self.objects:
             obj.render()
-        # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
-        self.phase_info.render()
-        self.time_left.render()
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)\
         if self.fog:
             self.fog_of_storm.update_rect()
             self.fog_of_storm.render()
+        self.phase_info.render()
+        self.time_left.render()
         self.bullets_left_text.render()
         self.bullets_left_image.render()
         self.handgun.render()
