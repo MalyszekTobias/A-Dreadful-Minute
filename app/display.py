@@ -7,8 +7,19 @@ import time
 from app import custom_text, custom_images, button, player, enemy, coin, game
 from app.custom_images import Custom_image
 import img
+import math, itertools
 
 
+def color_cycle():
+    period = 500
+    t = 0
+    while True:
+        red = int((math.sin(t * 2 * math.pi / period) + 1) * 127.5)
+        green = int((math.sin(t * 2 * math.pi / period) + 1) * 127.5)
+        blue = int((math.sin((t * 2 * math.pi / period) + math.pi) + 1) * 127.5)
+
+        yield (red, green, blue)
+        t += 1
 
 class basic_display():
     def __init__(self, game):
@@ -28,11 +39,16 @@ class basic_display():
 class start_screen(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
-        custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'A Dreadful Minute', text_color='Green')
+        self.colors_for_title_text = itertools.cycle(color_cycle())
+        self.title_text = custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'A Dreadful Minute', text_color='Green')
         button.Button(self, 'settings', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Settings', text_color='white')
         button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.45, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
         button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75,
                       (0, 0, 0), outline_color='white', text='Quit', text_color='white')
+
+    def mainloop(self):
+        color = next(self.colors_for_title_text)
+        self.title_text.update_color(color, None)
 
 
 class settings_screen(basic_display):
@@ -126,7 +142,8 @@ class game_display(basic_display):
         self.phase_info.update_text(f'{self.game.get_event()}')
         self.time_left.update_text(f'{self.game.timeLeft}')
     def thunder(self):
-        pygame.mixer.Channel(4).play(self.game.thunder_sound)
+        pygame.mixer.Sound.play(self.game.thunder_sound)
+        # pygame.mixer.music.stop()
 
 
     def flashbang(self):

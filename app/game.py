@@ -132,7 +132,7 @@ class Game:
         while self.run:
 
             self.phaseCheck()
-            if self.current_display == self.displays['game_display']:
+            if self.current_display == self.displays['game_display'] or self.current_display == self.displays['start_screen']:
                 self.current_display.mainloop()
             if orderPause:
                 self.pausePhase()
