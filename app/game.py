@@ -1,6 +1,7 @@
 import random
 import time
 
+import app.coin
 import pygame
 from app import config, display, custom_text, player
 
@@ -122,8 +123,11 @@ class Game:
             if self.isPaused:
                 self.currentPauseTime = round(time.time()) - self.pauseStart
 
+
+
             self.events()
             self.render()
+            app.coin.clearOrder = False
             self.update()
             self.clock.tick(self.fps)
             # self.thunderstorm()
@@ -202,6 +206,7 @@ class Game:
     def phaseCheck(self):
         if self.findPhase() == 'storm start':
             self.started = True
+            app.coin.clearOrder = True
             try:
                 self.phase = random.choice(self.phases)
                 self.phases.remove(self.phase)

@@ -86,7 +86,7 @@ class game_display(basic_display):
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         if time.time() - self.time >= 3:
-            for x in range(random.randint(1,1)):
+            for x in range(random.randint(3,4)):
                 self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
 

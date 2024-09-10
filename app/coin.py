@@ -2,6 +2,7 @@ import random
 import math as Kutt
 import pygame.draw
 from app import config, game
+clearOrder = False
 
 class Coin:
     def __init__(self, display):
@@ -20,6 +21,10 @@ class Coin:
         if Kutt.sqrt((self.x - self.display.player.x) ** 2 + (self.y - self.display.player.y) ** 2) < self.radius + self.display.player.radius:
             self.display.player.money += 1
             self.delete()
+        if clearOrder:
+            self.display.player.money += random.randint(0, 1)
+            self.delete()
+
 
 
     def events(self, event):
@@ -28,3 +33,5 @@ class Coin:
     def delete(self):
         self.display.objects.remove(self)
         del self
+
+

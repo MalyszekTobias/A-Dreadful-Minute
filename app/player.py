@@ -50,6 +50,7 @@ class Player:
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
+        print(self.money)
         pygame.draw.rect(self.display.screen, self.green, (0, 0, (self.gameWidth * self.hp / self.maxHp), self.hpHeight))
 
     def events(self, event):
