@@ -27,7 +27,7 @@ class Player:
         if phase == 1:
             self.control = 0.15
         self.wind = 0
-        self.windStrength = 1
+        self.windStrength = 1.3
         self.confusion = False
         self.maxHp = 100
         self.hp = self.maxHp
@@ -37,6 +37,7 @@ class Player:
         self.reloadSpeed = 3
         self.maxBullets = 10
         self.bullets = self.maxBullets
+        self.windCap = self.windStrength * 6
 
 
 
@@ -138,28 +139,28 @@ class Player:
 
 
         if self.wind == 1:
-            if self.velUp < self.maxSpeed + self.windStrength * 10:
+            if self.velUp < self.maxSpeed + self.windCap:
                 self.velUp += self.windStrength / 1.5
             else:
-                self.velUp = self.windStrength * 10
+                self.velUp = self.windCap
 
         if self.wind == 2:
-            if self.velRight < self.maxSpeed + self.windStrength * 10:
+            if self.velRight < self.maxSpeed + self.windCap:
                 self.velRight += self.windStrength / 1.5
             else:
-                self.velRight = self.windStrength * 10
+                self.velRight = self.windCap
 
         if self.wind == 3:
-            if self.velUp > -self.maxSpeed - self.windStrength * 10:
+            if self.velUp > -self.maxSpeed - self.windCap:
                 self.velUp -= self.windStrength / 1.5
             else:
-                self.velUp = -self.windStrength * 10
+                self.velUp = -self.windCap
 
         if self.wind == 4:
-            if self.velRight > -self.maxSpeed - self.windStrength * 10:
+            if self.velRight > -self.maxSpeed - self.windCap:
                 self.velRight -= self.windStrength / 1.5
             else:
-                self.velRight = -self.windStrength * 10
+                self.velRight = -self.windCap
 
 
         if self.velUp < 0:
