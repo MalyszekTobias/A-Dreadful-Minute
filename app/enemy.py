@@ -58,7 +58,7 @@ class Enemy:
                     self.display.player.hp -= self.damage
                     self.countdown = 45
 
-            self.update_rect()
+            # self.update_rect()
 
     def events(self, event):
         pass
