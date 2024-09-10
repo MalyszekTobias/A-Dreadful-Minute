@@ -304,6 +304,9 @@ class Game:
 
         for object in self.objects:
             object.render()
+
+        self.crosshair.x, self.crosshair.y = pygame.mouse.get_pos()
+        self.crosshair.update_rect()
         self.crosshair.render()
 
     def update(self):
