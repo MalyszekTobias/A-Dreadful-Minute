@@ -102,7 +102,8 @@ class game_display(basic_display):
         for bullet in self.bullets:
             bullet.move()
     def thunder(self):
-        print("thunder")
+        pygame.mixer.Sound.play(self.game.thunder_sound)
+        pygame.mixer.music.stop()
 
 
     def flashbang(self):

@@ -27,6 +27,8 @@ class Game:
         self.height = int(self.cfg['height'])
         self.fps = float(self.cfg['fps'])
         self.title = self.cfg['title']
+        self.thunder_sound = pygame.mixer.Sound("sounds/thunder.mp3")
+        # pygame.mixer.music.set_volume(0.5)
         self.enable_debug = int(self.cfg['enable_debug'])
         self.started = False
         self.clock = pygame.time.Clock()
@@ -97,10 +99,12 @@ class Game:
     #     if ended:
 
     def pause(self):
+        pygame.mixer.music.pause()
         self.paused_flash = pygame.time.get_ticks() - self.start_time_flash
         self.paused_thunder = pygame.time.get_ticks() - self.start_time_thunder
 
     def unpause(self):
+        pygame.mixer.music.unpause()
         self.start_time_flash = pygame.time.get_ticks()
         self.start_time_thunder = pygame.time.get_ticks()
         if self.time_flash == 0:
