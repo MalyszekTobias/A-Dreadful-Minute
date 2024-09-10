@@ -1,7 +1,7 @@
 import random
 
 import pygame.draw
-from app import config, game
+from app import config, game, bullet
 
 phase = 0
 direction = 0
@@ -86,6 +86,7 @@ class Player:
                 self.reload()
     def shoot(self):
         self.bullets -= 1
+        bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos())
 
     def reload(self):
         self.bullets = self.maxBullets

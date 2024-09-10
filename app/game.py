@@ -270,9 +270,12 @@ class Game:
         if self.debug:
 
             for obj in self.current_display.objects:
-                if obj.rect.collidepoint(pygame.mouse.get_pos()):
-                    if obj not in self.pointing_at:
-                        self.pointing_at.append(obj)
+                try:
+                    if obj.rect.collidepoint(pygame.mouse.get_pos()):
+                        if obj not in self.pointing_at:
+                            self.pointing_at.append(obj)
+                except:
+                    pass
             i = []
             for obj in self.pointing_at:
                 if obj.rect.collidepoint(pygame.mouse.get_pos()) == False or obj.display != self.current_display:
