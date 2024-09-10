@@ -1,5 +1,6 @@
 import random
 from itertools import count
+from app import custom_images
 
 import app.game
 import pygame
@@ -24,12 +25,15 @@ class Enemy:
         self.damage = 10
         self.countdown = 0
 
+        self.img  = custom_images.Custom_image(self.display, 'img/enemy/enemy_default.png', self.x, self.y, self.radius*2, self.radius*2, append=False)
+
         self.hp = 20
         self.display.objects.append(self)
 
     def render(self):
         self.update_rect()
-        pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
+        # pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
+        self.img.render()
         self.countdown -= 1
 
 
@@ -62,6 +66,8 @@ class Enemy:
                     self.countdown = 45
 
             # self.update_rect()
+            self.img.x = self.x
+            self.img.y = self.y
 
     def events(self, event):
         pass
