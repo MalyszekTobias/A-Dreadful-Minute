@@ -88,7 +88,7 @@ class Player:
                 self.down = False
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            if self.bullets > 0 and self.start_reloading != True:
+            if self.bullets > 0 and self.start_reloading == False:
                 self.shoot()
             else:
                 if time.time() - self.reload_start > self.reloadSpeed:
