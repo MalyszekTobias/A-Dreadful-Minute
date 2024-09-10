@@ -5,6 +5,9 @@ import app.game
 import pygame.time
 import time
 from app import custom_text, custom_images, button, player, enemy, coin, game
+from app.custom_images import Custom_image
+
+
 class basic_display():
     def __init__(self, game):
         self.game = game
@@ -84,6 +87,8 @@ class game_display(basic_display):
         self.time = time.time()
         self.makeCoins = 0
         self.fog = False
+        # self.rect = pygame.Rect(0, 750, 150, 150)
+        self.handgun = Custom_image(self, "img/handgun.png", 100, 925, 150, 150, append=False)
         self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 35, 100, 75, 75, append=False)
         self.bullets_left_text = custom_text.Custom_text(self, 100, 100, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
         self.reloading_text = custom_text.Custom_text(self, 75, 200, self.game.font, 25, f'Reloading...', text_color=(255, 255, 255), append=False)
@@ -157,6 +162,7 @@ class game_display(basic_display):
     def render(self):
         for obj in self.objects:
             obj.render()
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
         self.phase_info.render()
         self.time_left.render()
         if self.fog:
@@ -164,6 +170,7 @@ class game_display(basic_display):
             self.fog_of_storm.render()
         self.bullets_left_text.render()
         self.bullets_left_image.render()
+        self.handgun.render()
         if self.player.start_reloading:
             self.reloading_text.render()
         pygame.draw.rect(self.screen, (0, 255, 0),
