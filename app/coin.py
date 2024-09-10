@@ -6,16 +6,13 @@ from app import config, game
 class Coin:
     def __init__(self, display):
         self.x = random.randint(30, 970)
-        self.y = random.randint(30, 970)
+        self.y = random.randint(50, 970)
         self.radius = 12
         self.display = display
         self.yellow1 = (245, 245, 51)
         self.yellow2 = (245, 190, 60)
         self.display.objects.append(self)
 
-    def delete(self):
-        self.display.objects.remove(self)
-        del self
 
     def render(self):
         pygame.draw.circle(self.display.screen, self.yellow2, (self.x, self.y), self.radius)
@@ -27,3 +24,7 @@ class Coin:
 
     def events(self, event):
         pass
+
+    def delete(self):
+        self.display.objects.remove(self)
+        del self
