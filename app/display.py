@@ -126,8 +126,7 @@ class game_display(basic_display):
         self.phase_info.update_text(f'{self.game.get_event()}')
         self.time_left.update_text(f'{self.game.timeLeft}')
     def thunder(self):
-        pygame.mixer.Sound.play(self.game.thunder_sound)
-        # pygame.mixer.music.stop()
+        pygame.mixer.Channel(4).play(self.game.thunder_sound)
 
 
     def flashbang(self):
