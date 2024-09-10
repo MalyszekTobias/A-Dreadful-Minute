@@ -53,6 +53,8 @@ class Button:  # A button class
                 app.game.orderPause = True
                 print("pause")
                 self.display.game.current_display = self.display.game.displays['pause_display']
+            elif self.action == 'kill':
+                self.display.game.run = False
             else:
                 print('No action assigned to this button')
 
