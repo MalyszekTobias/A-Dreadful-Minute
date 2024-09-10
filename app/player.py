@@ -9,12 +9,10 @@ direction = 0
 class Player:
     def __init__(self, display):
         self.hpHeight = 30
-
         self.gameWidth = int(config.read_config()['width'])
         self.gameHeight = int(config.read_config()['height'])
         self.display = display
         self.radius = 40
-
         self.x = (self.gameWidth - self.radius) / 2
         self.y = (self.gameHeight - self.radius) / 2
         self.up = False

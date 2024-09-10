@@ -30,6 +30,7 @@ class Game:
         self.title = self.cfg['title']
         self.fullscreen = int(self.cfg['full-screen'])
         self.thunder_sound = pygame.mixer.Sound("sounds/thunder.ogg")
+        self.bang = pygame.mixer.Sound("sounds/bang.ogg")
         # pygame.mixer.Channel(0).load('sounds/light-rain-109591.wav')
         pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.wav'))
         # pygame.mixer.music.set_volume(0.5)
@@ -46,6 +47,7 @@ class Game:
         self.paused_flash = 0
         self.paused_thunder = 0
         self.pauseTotal = 0
+        self.LastShot = 1
         self.pauseStart = None
         self.currentPauseTime = 0
         self.isPaused = True

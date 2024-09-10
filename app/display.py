@@ -68,6 +68,7 @@ class game_display(basic_display):
     def __init__(self, game):
         basic_display.__init__(self, game)
 
+
         # self.game.paused = False
         # self.game.unpause()
         # print("unpaused")
@@ -125,7 +126,7 @@ class game_display(basic_display):
         self.time_left.update_text(f'{self.game.timeLeft}')
     def thunder(self):
         pygame.mixer.Sound.play(self.game.thunder_sound)
-        pygame.mixer.music.stop()
+        # pygame.mixer.music.stop()
 
 
     def flashbang(self):

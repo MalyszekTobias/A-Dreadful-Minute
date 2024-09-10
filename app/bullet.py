@@ -8,7 +8,10 @@ class Bullet:
         self.shooter = shooter
         self.x_1 = pos[0]
         self.y_1 = pos[1]
-
+        self.display.game.LastShot += 1
+        if self.display.game.LastShot >= 4:
+            self.display.game.LastShot = 1
+        pygame.mixer.Channel(self.display.game.LastShot).play(self.display.game.bang)
         self.x_2 = mousepos[0]
         self.y_2 = mousepos[1]
 
