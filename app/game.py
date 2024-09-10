@@ -48,7 +48,6 @@ class Game:
         self.isPaused = True
         self.ready = True
         self.ready_u = False
-        self.timestamps = []
         self.calmTime = 5
         self.stormTime = 10
         self.totalKills = 0
@@ -240,9 +239,6 @@ class Game:
         trueTime = round(time.time()) - self.startTime - self.currentPauseTime - self.pauseTotal
         self.trueTime = trueTime
         trueTimeArchive = trueTime
-        for timestamp in self.timestamps:
-            if timestamp == trueTimeArchive:
-                return
         nextDecrease = self.calmTime
         while trueTime > nextDecrease:
             trueTime -= nextDecrease
@@ -252,10 +248,18 @@ class Game:
                 nextDecrease = self.calmTime
         if self.phase == 0:
             self.timeLeft = self.calmTime - trueTime
+
+            if trueTimeArchive % (self.calmTime + self.stormTime) == 0:
+                self.timeLeft = self.calmTime
             if trueTime == self.calmTime:
                 return 'storm start'
         else:
             self.timeLeft = self.stormTime - trueTime
+            if trueTime == self.calmTime:
+                self.timeLeft = self.stormTime
+                if (trueTimeArchive - 5) % (self.stormTime + self.calmTime) != 0:
+                    print(trueTimeArchive)
+                    self.timeLeft = self.stormTime - trueTime
             if trueTime == self.stormTime:
                 return 'storm end'
 
