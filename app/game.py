@@ -52,6 +52,7 @@ class Game:
         self.calmTime = 5
         self.stormTime = 10
         self.totalKills = 0
+        self.trueTime = 0
 
         self.run = True
         killCount = 0
@@ -235,6 +236,7 @@ class Game:
 
     def findPhase(self):
         trueTime = round(time.time()) - self.startTime - self.currentPauseTime - self.pauseTotal
+        self.trueTime = trueTime
         trueTimeArchive = trueTime
         for timestamp in self.timestamps:
             if timestamp == trueTimeArchive:
