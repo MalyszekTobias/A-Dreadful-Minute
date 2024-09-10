@@ -50,6 +50,7 @@ class Game:
         self.totalKills = 0
 
         self.run = True
+        killCount = 0
 
         self.objects = []
         self.background = pygame.image.load('img/background.png')
@@ -210,9 +211,11 @@ class Game:
                 self.phases = [1, 2, 3, 4, 5]
         elif self.findPhase() == 'storm end':
             self.phase = 0
+            global killCount
             self.totalKills += killCount
             if self.current_display == self.displays['game_display']:
                 self.current_display.makeCoins = killCount
+            killCount = 0
 
             print('storm ends')
             player.getPhase(self.phase)

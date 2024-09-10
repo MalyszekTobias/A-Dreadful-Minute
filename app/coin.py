@@ -5,7 +5,7 @@ from app import config, game
 
 class Coin:
     def __init__(self, display):
-        self.x = random.randint(30, 970)
+        self.x = random.randint(50, 970)
         self.y = random.randint(30, 970)
         self.radius = 12
         self.display = display
