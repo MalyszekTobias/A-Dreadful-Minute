@@ -53,6 +53,7 @@ class Game:
         self.stormTime = 10
         self.totalKills = 0
         self.trueTime = 0
+        self.timeLeft = 5
 
         self.run = True
         killCount = 0
@@ -241,8 +242,6 @@ class Game:
         for timestamp in self.timestamps:
             if timestamp == trueTimeArchive:
                 return
-        if trueTimeArchive % 5 != 0:
-            return
         nextDecrease = self.calmTime
         while trueTime > nextDecrease:
             trueTime -= nextDecrease
@@ -251,9 +250,11 @@ class Game:
             else:
                 nextDecrease = self.calmTime
         if self.phase == 0:
+            self.timeLeft = self.calmTime - trueTime
             if trueTime == self.calmTime:
                 return 'storm start'
         else:
+            self.timeLeft = self.stormTime - trueTime
             if trueTime == self.stormTime:
                 return 'storm end'
 
