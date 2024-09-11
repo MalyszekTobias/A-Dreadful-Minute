@@ -9,6 +9,8 @@ from app.custom_images import Custom_image
 import img
 import math, itertools
 
+minEnemies, maxEnemies = 3, 4
+
 
 def color_cycle():
     period = 500
@@ -134,6 +136,8 @@ class game_display(basic_display):
                                                       append=False)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
+        global minEnemies
+        global maxEnemies
         self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
         # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
         #     self.player.start_reloading = True
@@ -146,14 +150,14 @@ class game_display(basic_display):
                 for x in range(random.randint(1, 1)):
                     self.enemies.append(enemy.Enemy(self))
             else:
-                for x in range(random.randint(3, 4)):
+                for x in range(random.randint(minEnemies, maxEnemies)):
                     self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
+        print(minEnemies, maxEnemies)
 
         for ene in self.enemies:
             ene.move()
         if self.makeCoins > 0:
-            print(123456789)
             for i in range(self.makeCoins):
                 self.coins.append(coin.Coin(self))
             self.makeCoins = 0

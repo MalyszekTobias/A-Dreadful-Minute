@@ -241,6 +241,11 @@ class Game:
                 self.current_display.makeCoins = killCount
             killCount = 0
             self.roundCounter += 1
+            if self.roundCounter % 2 == 0:
+                display.minEnemies += 1
+            else:
+                display.maxEnemies += 1
+
 
             print('storm ends')
             player.getPhase(self.phase)
