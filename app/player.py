@@ -28,19 +28,36 @@ class Player:
         self.wind = 0
         self.windStrength = 1.3
         self.confusion = False
-        self.maxHp = 100
-        self.hp = self.maxHp
         self.green = (30, 200, 30)
         self.money = 0
-        self.shootingSpeed = 0.3
-        self.reloadSpeed = 3
-        self.reload_start = 0
-        self.start_reloading = False
-        self.maxBullets = 10
-        self.bullets = self.maxBullets
         self.windCap = self.windStrength * 6
         self.lanterns = 0
         self.lanternPrice = 20
+
+
+        self.maxHp = 100
+        self.hp = self.maxHp
+
+        self.reload_start = 0
+        self.start_reloading = False
+        self.pistolMaxBullets = 10
+        self.arMaxBullets = 30
+        self.pistolShootingSpeed = 0.5
+        self.pistolReloadSpeed = 3
+        self.arShootingSpeed = 0.2
+        self.arReloadSpeed = 3
+        self.pistolDamage = 22
+        self.arDamage = 12
+
+        self.currentWeapon = 'pistol'
+        self.currentMaxBullets = self.pistolMaxBullets
+        self.bullets = self.currentMaxBullets
+        self.currentShootingSpeed = self.pistolShootingSpeed
+        self.currentReloadSpeed = self.pistolReloadSpeed
+        self.currentDamage = self.pistolDamage
+        self.weapons = 1
+        self.weaponPrice = 1
+
 
         self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
 
@@ -77,6 +94,12 @@ class Player:
                 self.money -= self.lanternPrice
                 self.lanternPrice *= 2
 
+            elif event.key == pygame.K_3 and self.money >= self.weaponPrice and self.weapons == 1:
+                self.weapons += 1
+                self.money -= self.weaponPrice
+                self.weaponPrice *= 2
+                self.currentWeapon = 'ar'
+
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
                 self.reload_start = time.time()
@@ -92,13 +115,29 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = False
 
+        elif event.type == pygame.MOUSEWHEEL:
+            print(event.x, event.y)
+
+
+
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0 and self.start_reloading == False:
                 self.shoot()
             else:
-                if time.time() - self.reload_start > self.reloadSpeed:
+                if time.time() - self.reload_start > self.currentReloadSpeed:
                     self.reload_start = time.time()
                     self.start_reloading = True
+        if self.currentWeapon == 'pistol':
+            self.currentMaxBullets = self.pistolMaxBullets
+            self.currentShootingSpeed = self.pistolShootingSpeed
+            self.currentReloadSpeed = self.pistolReloadSpeed
+            self.currentDamage = self.pistolDamage
+
+        elif self.currentWeapon == 'ar':
+            self.currentMaxBullets = self.arMaxBullets
+            self.currentShootingSpeed = self.arShootingSpeed
+            self.currentReloadSpeed = self.arReloadSpeed
+            self.currentDamage = self.arDamage
 
     def shoot(self):
         if self.bullets > 0:
@@ -107,11 +146,11 @@ class Player:
 
     def reload_upadate_checker(self):
         if self.start_reloading:
-            if time.time() - self.reload_start > self.reloadSpeed:
+            if time.time() - self.reload_start > self.currentReloadSpeed:
                 self.reload()
                 self.start_reloading = False
     def reload(self):
-        self.bullets = self.maxBullets
+        self.bullets = self.currentMaxBullets
 
 
     def movement(self):

@@ -143,6 +143,7 @@ class game_display(basic_display):
             self.current_weapon = 'img/handgun.png'
         elif self.player.currentWeapon == 'ar':
             self.current_weapon = 'img/ar.png'
+        print(self.current_weapon)
         if time.time() - self.time >= 3:
             if self.game.phase == 0:
                 for x in range(random.randint(1, 1)):

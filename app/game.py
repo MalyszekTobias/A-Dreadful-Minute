@@ -59,6 +59,7 @@ class Game:
         self.trueTime = 0
         self.timeLeft = 5
         self.phase = 0
+        self.roundCounter = 0
 
         self.run = True
         killCount = 0
@@ -239,6 +240,7 @@ class Game:
             if self.current_display == self.displays['game_display']:
                 self.current_display.makeCoins = killCount
             killCount = 0
+            self.roundCounter += 1
 
             print('storm ends')
             player.getPhase(self.phase)
