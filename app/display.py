@@ -164,7 +164,8 @@ class game_display(basic_display):
         self.time_left.update_text(f'{self.game.timeLeft}')
         self.money.update_text(f"X {self.player.money}")
     def thunder(self):
-        pygame.mixer.Sound.play(self.game.thunder_sound)
+        # pygame.mixer.Sound.play(self.game.thunder_sound)
+        pygame.mixer.Channel(4).play(pygame.mixer.Sound(self.game.thunder_sound))
         # pygame.mixer.music.stop()
 
 
