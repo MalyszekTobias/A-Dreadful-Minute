@@ -163,6 +163,7 @@ class game_display(basic_display):
         self.phase_info.update_text(f'{self.game.get_event()}')
         self.time_left.update_text(f'{self.game.timeLeft}')
         self.money.update_text(f"X {self.player.money}")
+        self.bulbs.update_text(f"X {self.player.lanterns}")
     def thunder(self):
         # pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.Channel(4).play(pygame.mixer.Sound(self.game.thunder_sound))

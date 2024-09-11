@@ -63,7 +63,7 @@ class Enemy:
             if ma.sqrt((self.x - self.display.player.x) ** 2 + (self.y - self.display.player.y) ** 2) < self.radius + self.display.player.radius:
                 if self.countdown <= 0:
                     self.display.player.hp -= self.damage
-                    self.countdown = 45
+                    self.countdown = 75
 
             # self.update_rect()
             self.img.x = self.x
