@@ -119,7 +119,7 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = False
 
-        elif event.type == pygame.MOUSEWHEEL:
+        elif event.type == pygame.MOUSEWHEEL and not self.start_reloading:
             if event.y == 1:
                 if self.weapons == 2 and self.currentWeapon == 'pistol':
                     self.pistolBullets = self.bullets
