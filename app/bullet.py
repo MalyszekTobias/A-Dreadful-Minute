@@ -56,8 +56,8 @@ class Bullet:
 
         self.update_rect()
         for enemy in self.display.enemies:
-            # if Charles.sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2) < self.radius + enemy.radius:
-            if enemy.rect.colliderect(self.rect):
+            if Charles.sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2) < self.radius + enemy.radius:
+            # if enemy.rect.colliderect(self.rect):
                 enemy.hp -= 20
                 try:
                     self.delete()
