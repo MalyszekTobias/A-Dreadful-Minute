@@ -126,7 +126,7 @@ class game_display(basic_display):
 
 
         self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
-                                             50, f"X {self.player.bulbs}",
+                                             50, f"X {self.player.lanterns}",
                                              text_color=(0, 0, 255), append=False, system=True)
         self.bulbs_image = custom_images.Custom_image(self, 'img/bulb.png', 370, self.game.height - 115, 50, 50,
                                                       append=False)
@@ -137,7 +137,7 @@ class game_display(basic_display):
         #     self.player.start_reloading = True
         #     self.player.reload_start = time.time()
         self.player.reload_upadate_checker()
-        self.fog_image = f'img/{self.player.bulbs}.png'
+        self.fog_image = f'img/{self.player.lanterns}.png'
         if time.time() - self.time >= 3:
             if self.game.phase == 0:
                 for x in range(random.randint(1, 1)):
