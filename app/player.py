@@ -52,6 +52,8 @@ class Player:
         self.currentWeapon = 'pistol'
         self.currentMaxBullets = self.pistolMaxBullets
         self.bullets = self.currentMaxBullets
+        self.pistolBullets = self.bullets
+        self.arBullets = self.arMaxBullets
         self.currentShootingSpeed = self.pistolShootingSpeed
         self.currentReloadSpeed = self.pistolReloadSpeed
         self.currentDamage = self.pistolDamage
@@ -99,6 +101,8 @@ class Player:
                 self.money -= self.weaponPrice
                 self.weaponPrice *= 2
                 self.currentWeapon = 'ar'
+                self.pistolBullets = self.bullets
+                self.bullets = self.arMaxBullets
 
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
@@ -116,7 +120,16 @@ class Player:
                 self.down = False
 
         elif event.type == pygame.MOUSEWHEEL:
-            print(event.x, event.y)
+            if event.y == 1:
+                if self.weapons == 2 and self.currentWeapon == 'pistol':
+                    self.pistolBullets = self.bullets
+                    self.bullets = self.arBullets
+                    self.currentWeapon = 'ar'
+            elif event.y == -1:
+                if self.weapons == 2 and self.currentWeapon == 'ar':
+                    self.arBullets = self.bullets
+                    self.bullets = self.pistolBullets
+                    self.currentWeapon = 'pistol'
 
 
 
