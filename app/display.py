@@ -94,10 +94,11 @@ class game_display(basic_display):
         # =========================================================================================================
         self.time = time.time()
         # =========================================================================================================
-
+        print("test")
 
         self.player = player.Player(self)
-        self.fog_of_storm = custom_images.Custom_image(self, 'img/fog_of_storm.png', self.player.x, self.player.y, 2000,
+        self.fog_image = 'img/0.png'
+        self.fog_of_storm = custom_images.Custom_image(self, f'{self.fog_image}', self.player.x, self.player.y, 2000,
                                                        2000, append=False)
         self.enemies = []
         self.coins = []
@@ -114,6 +115,7 @@ class game_display(basic_display):
         self.phase_info = custom_text.Custom_text(self, 800, self.game.height - 115, self.game.font, 35,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
+
         self.time_left = custom_text.Custom_text(self, 800, self.game.height - 65,"Comic Sans", 50,
                                                          f'{self.game.timeLeft}',
                                                          text_color=(255, 255, 255), append=False, system=True)
@@ -121,6 +123,13 @@ class game_display(basic_display):
                                              50, f"X {self.player.money}",
                                              text_color=(255, 255, 0), append=False, system=True)
         self.money_image = custom_images.Custom_image(self, 'img/zlotowka.png', 220, self.game.height - 115, 50, 50, append=False)
+
+
+        self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
+                                             50, f"X {self.player.bulbs}",
+                                             text_color=(0, 0, 255), append=False, system=True)
+        self.bulbs_image = custom_images.Custom_image(self, 'img/bulb.png', 370, self.game.height - 115, 50, 50,
+                                                      append=False)
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
@@ -128,6 +137,7 @@ class game_display(basic_display):
         #     self.player.start_reloading = True
         #     self.player.reload_start = time.time()
         self.player.reload_upadate_checker()
+        self.fog_image = f'img/{self.player.bulbs}.png'
         if time.time() - self.time >= 3:
             if self.game.phase == 0:
                 for x in range(random.randint(1, 1)):
@@ -204,6 +214,8 @@ class game_display(basic_display):
         self.bullets_left_image.render()
         self.money.render()
         self.money_image.render()
+        self.bulbs.render()
+        self.bulbs_image.render()
 
         self.handgun.render()
         if self.player.start_reloading:

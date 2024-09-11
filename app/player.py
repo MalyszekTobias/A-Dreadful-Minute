@@ -32,6 +32,7 @@ class Player:
         self.hp = self.maxHp
         self.green = (30, 200, 30)
         self.money = 0
+        self.bulbs = 0
         self.shootingSpeed = 0.3
         self.reloadSpeed = 3
         self.reload_start = 0
