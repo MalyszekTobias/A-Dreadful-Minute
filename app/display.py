@@ -108,7 +108,8 @@ class game_display(basic_display):
         self.makeCoins = 0
         self.fog = False
         # self.rect = pygame.Rect(0, 750, 150, 150)
-        self.handgun = Custom_image(self, "img/handgun.png", 100, 915, 150, 150, append=False)
+        self.current_weapon = 'img/handgun.png'
+        self.handgun = Custom_image(self, f"{self.current_weapon}", 100, 915, 150, 150, append=False)
         self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 220, self.game.height - 55, 50, 50, append=False)
         self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 50, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
         self.reloading_text = custom_text.Custom_text(self, 115, self.game.height - 190, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
@@ -138,6 +139,10 @@ class game_display(basic_display):
         #     self.player.reload_start = time.time()
         self.player.reload_upadate_checker()
         self.fog_image = f'img/{self.player.lanterns}.png'
+        if self.player.currentWeapon == 'pistol':
+            self.current_weapon = 'img/handgun.png'
+        elif self.player.currentWeapon == 'ar':
+            self.current_weapon = 'img/ar.png'
         if time.time() - self.time >= 3:
             if self.game.phase == 0:
                 for x in range(random.randint(1, 1)):
@@ -218,7 +223,7 @@ class game_display(basic_display):
         self.money_image.render()
         self.bulbs.render()
         self.bulbs_image.render()
-
+        self.handgun.update_rect()
         self.handgun.render()
         if self.player.start_reloading:
             self.reloading_text.render()
