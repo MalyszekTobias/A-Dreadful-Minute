@@ -39,6 +39,8 @@ class Player:
         self.maxBullets = 10
         self.bullets = self.maxBullets
         self.windCap = self.windStrength * 6
+        self.lanterns = 0
+        self.lanternPrice = 20
 
         self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
 
@@ -70,8 +72,10 @@ class Player:
                 self.money -= 30
                 self.hp = self.maxHp
 
-            elif event.key == pygame.K_2 and self.money >= 100:
-                self.maxHp *= 1.1
+            elif event.key == pygame.K_2 and self.money >= self.lanternPrice and self.lanterns <= 4:
+                self.lanterns += 1
+                self.money -= self.lanternPrice
+                self.lanternPrice *= 2
 
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
