@@ -32,7 +32,7 @@ class Player:
         self.green = (30, 200, 30)
         self.money = 0
         self.windCap = self.windStrength * 6
-        self.lanterns = 1
+        self.lanterns = 0
         self.lanternPrice = 20
 
 
@@ -331,8 +331,8 @@ class Player:
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, 2 * self.radius, 2 * self.radius)
-        self.display.fog_of_storms[self.lanterns - 1].x = self.x
-        self.display.fog_of_storms[self.lanterns - 1].y = self.y
+        self.display.fog_of_storms[self.lanterns].x = self.x
+        self.display.fog_of_storms[self.lanterns].y = self.y
 
 def getPhase(fase):
     global direction

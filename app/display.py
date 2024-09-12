@@ -100,7 +100,7 @@ class game_display(basic_display):
 
         self.player = player.Player(self)
 
-        self.fog_of_storms = [custom_images.Custom_image(self, f'img/{x}.png', self.player.x, self.player.y, 2400, 2400, append=False, loaded=False) for x in range(1, 6)]
+        self.fog_of_storms = [custom_images.Custom_image(self, f'img/{x}.png', self.player.x, self.player.y, 2400, 2400, append=False, loaded=False) for x in range(0, 6)]
         self.enemies = []
         self.coins = []
         self.coin = coin.Coin(self)
@@ -211,11 +211,11 @@ class game_display(basic_display):
             obj.render()
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
         if self.fog:
-            if self.fog_of_storms[self.player.lanterns - 1].loaded != True:
-                self.fog_of_storms[self.player.lanterns - 1].load()
-                self.fog_of_storms[self.player.lanterns - 1].loaded = True
-            self.fog_of_storms[self.player.lanterns - 1].update_rect()
-            self.fog_of_storms[self.player.lanterns - 1].render()
+            if self.fog_of_storms[self.player.lanterns].loaded != True:
+                self.fog_of_storms[self.player.lanterns].load()
+                self.fog_of_storms[self.player.lanterns].loaded = True
+            self.fog_of_storms[self.player.lanterns].update_rect()
+            self.fog_of_storms[self.player.lanterns].render()
 
         pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
         pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
