@@ -2,7 +2,7 @@ import pygame
 import math as Lolus
 
 class Custom_image:  # A class to easier render images
-    def __init__(self, display, path, x, y, w, h, append=True):
+    def __init__(self, display, path, x, y, w, h, append=True, loaded=True):
         self.display = display
 
         self.x = x  # center x of the image
@@ -12,11 +12,10 @@ class Custom_image:  # A class to easier render images
 
         self.path = path  # path to the images
 
-        self.original_image = pygame.image.load(self.path).convert_alpha()  # loading the original image
-        self.original_image = pygame.transform.scale(self.original_image,
-                                                     (self.w, self.h))  # rescaling the original image
-        self.image = self.original_image  # the current image, which will be rotated
-        self.rect = self.image.get_rect(center=(self.x, self.y))  # Initial rect at the center
+        self.loaded = loaded
+
+        if loaded:
+            self.load()
 
         if append:
             self.display.objects.append(self)
@@ -45,3 +44,10 @@ class Custom_image:  # A class to easier render images
 
     def update_rect(self):
         self.rect = self.image.get_rect(center=(self.x, self.y))
+
+    def load(self):
+        self.original_image = pygame.image.load(self.path).convert_alpha()  # loading the original image
+        self.original_image = pygame.transform.scale(self.original_image,
+                                                     (self.w, self.h))  # rescaling the original image
+        self.image = self.original_image  # the current image, which will be rotated
+        self.rect = self.image.get_rect(center=(self.x, self.y))  # Initial rect at the center

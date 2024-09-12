@@ -100,7 +100,7 @@ class game_display(basic_display):
 
         self.player = player.Player(self)
 
-        self.fog_of_storms = [custom_images.Custom_image(self, f'img/{x}.png', self.player.x, self.player.y, 2400, 2400, append=False) for x in range(1, 6)]
+        self.fog_of_storms = [custom_images.Custom_image(self, f'img/{x}.png', self.player.x, self.player.y, 2400, 2400, append=False, loaded=False) for x in range(1, 6)]
         self.enemies = []
         self.coins = []
         self.coin = coin.Coin(self)
@@ -151,6 +151,7 @@ class game_display(basic_display):
                 for x in range(random.randint(minEnemies, maxEnemies)):
                     self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
+        print(minEnemies, maxEnemies)
 
         for ene in self.enemies:
             ene.move()
@@ -210,6 +211,9 @@ class game_display(basic_display):
             obj.render()
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
         if self.fog:
+            if self.fog_of_storms[self.player.lanterns - 1].loaded != True:
+                self.fog_of_storms[self.player.lanterns - 1].load()
+                self.fog_of_storms[self.player.lanterns - 1].loaded = True
             self.fog_of_storms[self.player.lanterns - 1].update_rect()
             self.fog_of_storms[self.player.lanterns - 1].render()
 
