@@ -29,7 +29,7 @@ class Player:
         self.confusion = False
         self.green = (30, 200, 30)
         self.money = 0
-        self.recoil = 20
+        self.recoil = 5
         self.windCap = self.windStrength * 6
         self.lanterns = 0
         self.lanternPrice = 20
@@ -42,14 +42,23 @@ class Player:
         self.start_reloading = False
         self.pistolMaxBullets = 10
         self.arMaxBullets = 30
+        self.miniMaxBullets = 100
         self.pistolShootingSpeed = 0.4
-        self.pistolReloadSpeed = 3
-        self.ShootingTimer = 0
         self.arShootingSpeed = 0.25
+        self.miniShootingSpeed = 0.05
+        self.pistolReloadSpeed = 3
         self.arReloadSpeed = 3
-        self.shotSpeedModifier = 1
+        self.miniReloadSpeed = 3
         self.pistolDamage = 22
         self.arDamage = 25
+        self.miniDamage = 8
+        self.pistolRecoil = 6
+        self.arRecoil = 4
+        self.miniRecoil = 3
+
+
+        self.ShootingTimer = 0
+        self.shotSpeedModifier = 1
 
         self.currentWeapon = 'pistol'
         self.currentMaxBullets = self.pistolMaxBullets
@@ -115,6 +124,7 @@ class Player:
                     self.currentWeapon = 'ar'
                     self.pistolBullets = self.bullets
                     self.bullets = self.arMaxBullets
+                    self.recoil = self.arRecoil
 
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
@@ -167,12 +177,14 @@ class Player:
             self.currentShootingSpeed = self.pistolShootingSpeed * self.shotSpeedModifier
             self.currentReloadSpeed = self.pistolReloadSpeed * self.shotSpeedModifier
             self.currentDamage = self.pistolDamage
+            self.recoil = self.pistolRecoil
 
         elif self.currentWeapon == 'ar':
             self.currentMaxBullets = self.arMaxBullets
             self.currentShootingSpeed = self.arShootingSpeed * self.shotSpeedModifier
             self.currentReloadSpeed = self.arReloadSpeed * self.shotSpeedModifier
             self.currentDamage = self.arDamage
+            self.recoil = self.arRecoil
 
     def shoot(self):
         if self.bullets > 0:
