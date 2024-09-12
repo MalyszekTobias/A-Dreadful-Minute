@@ -44,6 +44,8 @@ class Player:
         self.arMaxBullets = 30
         self.pistolShootingSpeed = 0.5
         self.pistolReloadSpeed = 3
+        self.pistolShootingTimer = 0
+        self.arShootingTimer = 0
         self.arShootingSpeed = 0.2
         self.arReloadSpeed = 3
         self.pistolDamage = 22
@@ -135,7 +137,12 @@ class Player:
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0 and self.start_reloading == False:
-                self.shoot()
+                if self.currentWeapon == 'pistol' and time.time() - self.pistolShootingTimer > self.pistolShootingSpeed:
+                    self.shoot()
+                    self.pistolShootingTimer = time.time()
+                elif self.currentWeapon == 'ar' and time.time() - self.arShootingTimer > self.arShootingSpeed:
+                    self.shoot()
+                    self.arShootingTimer = time.time()
             else:
                 if time.time() - self.reload_start > self.currentReloadSpeed:
                     self.reload_start = time.time()
