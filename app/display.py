@@ -116,11 +116,11 @@ class game_display(basic_display):
         self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 220, self.game.height - 55, 50, 50, append=False)
         self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 50, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
         self.reloading_text = custom_text.Custom_text(self, 115, self.game.height - 190, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
-        self.phase_info = custom_text.Custom_text(self, 800, self.game.height - 115, self.game.font, 35,
+        self.phase_info = custom_text.Custom_text(self, self.game.width - 200, self.game.height - 115, self.game.font, 35,
                                                          f'{self.game.get_event()}',
                                                          text_color=(255, 255, 255), append=False)
 
-        self.time_left = custom_text.Custom_text(self, 800, self.game.height - 65,"Comic Sans", 50,
+        self.time_left = custom_text.Custom_text(self, self.game.width - 200, self.game.height - 65,"Comic Sans", 50,
                                                          f'{self.game.timeLeft}',
                                                          text_color=(255, 255, 255), append=False, system=True)
         self.money = custom_text.Custom_text(self, 285, self.game.height - 115, self.game.font,

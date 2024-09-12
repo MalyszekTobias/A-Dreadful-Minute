@@ -13,7 +13,7 @@ class Enemy:
         if random.randint(0, 1):
             self.x = -30
         else:
-            self.x = 1030
+            self.x = self.display.game.width + 30
 
         self.y = random.randint(50, 950)
         self.radius = 25
