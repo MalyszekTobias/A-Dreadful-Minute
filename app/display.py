@@ -99,13 +99,8 @@ class game_display(basic_display):
         print("test")
 
         self.player = player.Player(self)
-        self.fog_image = 'img/0.png'
-        self.fog_of_storm_0 = custom_images.Custom_image(self, f'{self.fog_image}', self.player.x, self.player.y, 2000,
-                                                       2000, append=False)
-        self.fog_of_storm_1 = custom_images.Custom_image(self, f'img/1.png', self.player.x, self.player.y, 2400,
-                                                       2400, append=False)
-        self.fog_of_storm_2 = custom_images.Custom_image(self, f'img/2.png', self.player.x, self.player.y, 2400,
-                                                         2400, append=False)
+
+        self.fog_of_storms = [custom_images.Custom_image(self, f'img/{x}.png', self.player.x, self.player.y, 2400, 2400, append=False) for x in range(1, 6)]
         self.enemies = []
         self.coins = []
         self.coin = coin.Coin(self)
@@ -147,7 +142,6 @@ class game_display(basic_display):
         #     self.player.start_reloading = True
         #     self.player.reload_start = time.time()
         self.player.reload_upadate_checker()
-        self.fog_image = f'img/{self.player.lanterns}.png'
 
         if time.time() - self.time >= 3:
             if self.game.phase == 0:
@@ -217,15 +211,9 @@ class game_display(basic_display):
             obj.render()
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
         if self.fog:
-            if self.player.lanterns == 0:
-                self.fog_of_storm_0.update_rect()
-                self.fog_of_storm_0.render()
-            elif self.player.lanterns == 1:
-                self.fog_of_storm_1.update_rect()
-                self.fog_of_storm_1.render()
-            elif self.player.lanterns >= 2:
-                self.fog_of_storm_2.update_rect()
-                self.fog_of_storm_2.render()
+            self.fog_of_storms[self.player.lanterns - 1].update_rect()
+            self.fog_of_storms[self.player.lanterns - 1].render()
+
         pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
         pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
         self.phase_info.render()

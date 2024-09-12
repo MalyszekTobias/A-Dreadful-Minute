@@ -29,9 +29,9 @@ class Player:
         self.windStrength = 1.3
         self.confusion = False
         self.green = (30, 200, 30)
-        self.money = 0
+        self.money = 20000
         self.windCap = self.windStrength * 6
-        self.lanterns = 0
+        self.lanterns = 1
         self.lanternPrice = 20
 
 
@@ -44,8 +44,7 @@ class Player:
         self.arMaxBullets = 30
         self.pistolShootingSpeed = 0.5
         self.pistolReloadSpeed = 3
-        self.pistolShootingTimer = 0
-        self.arShootingTimer = 0
+        self.ShootingTimer = 0
         self.arShootingSpeed = 0.2
         self.arReloadSpeed = 3
         self.shotSpeedModifier = 1
@@ -138,12 +137,12 @@ class Player:
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0 and self.start_reloading == False:
-                if self.currentWeapon == 'pistol' and time.time() - self.pistolShootingTimer > self.pistolShootingSpeed:
+                if self.currentWeapon == 'pistol' and time.time() - self.ShootingTimer > self.pistolShootingSpeed:
                     self.shoot()
-                    self.pistolShootingTimer = time.time()
-                elif self.currentWeapon == 'ar' and time.time() - self.arShootingTimer > self.arShootingSpeed:
+                    self.ShootingTimer = time.time()
+                elif self.currentWeapon == 'ar' and time.time() - self.ShootingTimer > self.arShootingSpeed:
                     self.shoot()
-                    self.arShootingTimer = time.time()
+                    self.ShootingTimer = time.time()
             else:
                 if time.time() - self.reload_start > self.currentReloadSpeed:
                     self.reload_start = time.time()
@@ -318,14 +317,8 @@ class Player:
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, 2 * self.radius, 2 * self.radius)
-        self.display.fog_of_storm_0.x = self.x
-        self.display.fog_of_storm_0.y = self.y
-
-        self.display.fog_of_storm_1.x = self.x
-        self.display.fog_of_storm_1.y = self.y
-
-        self.display.fog_of_storm_2.x = self.x
-        self.display.fog_of_storm_2.y = self.y
+        self.display.fog_of_storms[self.lanterns - 1].x = self.x
+        self.display.fog_of_storms[self.lanterns - 1].y = self.y
 
 def getPhase(fase):
     global direction
