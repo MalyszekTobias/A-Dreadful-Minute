@@ -48,6 +48,7 @@ class Player:
         self.arShootingTimer = 0
         self.arShootingSpeed = 0.2
         self.arReloadSpeed = 3
+        self.shotSpeedModifier = 1
         self.pistolDamage = 22
         self.arDamage = 12
 
@@ -149,14 +150,14 @@ class Player:
                     self.start_reloading = True
         if self.currentWeapon == 'pistol':
             self.currentMaxBullets = self.pistolMaxBullets
-            self.currentShootingSpeed = self.pistolShootingSpeed
-            self.currentReloadSpeed = self.pistolReloadSpeed
+            self.currentShootingSpeed = self.pistolShootingSpeed * self.shotSpeedModifier
+            self.currentReloadSpeed = self.pistolReloadSpeed * self.shotSpeedModifier
             self.currentDamage = self.pistolDamage
 
         elif self.currentWeapon == 'ar':
             self.currentMaxBullets = self.arMaxBullets
-            self.currentShootingSpeed = self.arShootingSpeed
-            self.currentReloadSpeed = self.arReloadSpeed
+            self.currentShootingSpeed = self.arShootingSpeed * self.shotSpeedModifier
+            self.currentReloadSpeed = self.arReloadSpeed * self.shotSpeedModifier
             self.currentDamage = self.arDamage
 
     def shoot(self):
@@ -278,12 +279,16 @@ class Player:
             self.control = 1
             self.confusion = False
             self.wind = 0
+            self.shotSpeedModifier = 1
         elif phase == 1:
             self.control = 0.15
+        elif phase == 2:
+            self.shotSpeedModifier = 2
         elif phase == 4:
             self.confusion = True
         elif phase == 5:
             self.wind = direction
+        else:
 
         self.img.x = self.x
         self.img.y = self.y
