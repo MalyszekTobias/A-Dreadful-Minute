@@ -58,12 +58,12 @@ class Bullet:
             if self.recoil:
                 if (self.x_2 < self.shooter.x and self.y_2 > self.shooter.y) or (
                         self.x_2 > self.shooter.x and self.y_2 < self.shooter.y):
-                    self.shooter.x = ((self.ratio_x * self.shooter.recoil) / self.denominator) + self.shooter.x
-                    self.shooter.y = ((self.ratio_y * self.shooter.recoil) / self.denominator) + self.shooter.y
+                    self.shooter.velRight = ((self.ratio_x * self.shooter.recoil) / self.denominator)
+                    self.shooter.velUp = -((self.ratio_y * self.shooter.recoil) / self.denominator)
                 else:
 
-                    self.shooter.x = -((self.ratio_x * self.shooter.recoil) / self.denominator) + self.shooter.x
-                    self.shooter.y = -((self.ratio_y * self.shooter.recoil) / self.denominator) + self.shooter.y
+                    self.shooter.velRight = -((self.ratio_x * self.shooter.recoil) / self.denominator)
+                    self.shooter.velUp = ((self.ratio_y * self.shooter.recoil) / self.denominator)
 
                 self.shooter.update_rect()
                 self.recoil = False
@@ -72,7 +72,7 @@ class Bullet:
         for enemy in self.display.enemies:
             if Charles.sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2) < self.radius + enemy.radius:
             # if enemy.rect.colliderect(self.rect):
-                enemy.hp -= 20
+                enemy.hp -= self.shooter.currentDamage
                 try:
                     self.delete()
                 except:
