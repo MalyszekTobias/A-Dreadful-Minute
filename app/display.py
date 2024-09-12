@@ -151,7 +151,6 @@ class game_display(basic_display):
                 for x in range(random.randint(minEnemies, maxEnemies)):
                     self.enemies.append(enemy.Enemy(self))
             self.time = time.time()
-        print(minEnemies, maxEnemies)
 
         for ene in self.enemies:
             ene.move()

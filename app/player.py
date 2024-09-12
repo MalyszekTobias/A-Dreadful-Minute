@@ -19,6 +19,7 @@ class Player:
         self.down = False
         self.left = False
         self.right = False
+        self.clicked = False
         self.velUp = 0
         self.velRight = 0
         self.maxSpeed = 6
@@ -29,7 +30,7 @@ class Player:
         self.windStrength = 1.3
         self.confusion = False
         self.green = (30, 200, 30)
-        self.money = 20000
+        self.money = 0
         self.windCap = self.windStrength * 6
         self.lanterns = 1
         self.lanternPrice = 20
@@ -75,7 +76,15 @@ class Player:
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
-
+        if self.clicked and self.currentWeapon != 'pistol':
+            if self.bullets > 0 and self.start_reloading == False:
+                if time.time() - self.arShootingTimer > self.arShootingSpeed:
+                    self.shoot()
+                    self.arShootingTimer = time.time()
+            else:
+                if time.time() - self.reload_start > self.currentReloadSpeed:
+                    self.reload_start = time.time()
+                    self.start_reloading = True
 
     def events(self, event):
         #player movement capture
@@ -136,6 +145,14 @@ class Player:
 
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            self.clicked = True
+            pass
+
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            self.clicked = False
+
+
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0 and self.start_reloading == False:
                 if self.currentWeapon == 'pistol' and time.time() - self.ShootingTimer > self.pistolShootingSpeed:
                     self.shoot()

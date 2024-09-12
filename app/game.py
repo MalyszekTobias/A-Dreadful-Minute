@@ -274,7 +274,6 @@ class Game:
             if trueTime == self.calmTime:
                 self.timeLeft = self.stormTime
                 if (trueTimeArchive - 5) % (self.stormTime + self.calmTime) != 0:
-                    print(trueTimeArchive)
                     self.timeLeft = self.stormTime - trueTime
             if trueTime == self.stormTime:
                 return 'storm end'
