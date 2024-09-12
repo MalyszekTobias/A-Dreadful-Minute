@@ -34,21 +34,21 @@ class Player:
         self.lanternPrice = 20
 
 
-        self.maxHp = 100
+        self.maxHp = 150
         self.hp = self.maxHp
 
         self.reload_start = 0
         self.start_reloading = False
         self.pistolMaxBullets = 10
         self.arMaxBullets = 30
-        self.pistolShootingSpeed = 0.5
+        self.pistolShootingSpeed = 0.4
         self.pistolReloadSpeed = 3
         self.ShootingTimer = 0
         self.arShootingSpeed = 0.25
         self.arReloadSpeed = 3
         self.shotSpeedModifier = 1
         self.pistolDamage = 22
-        self.arDamage = 12
+        self.arDamage = 25
 
         self.currentWeapon = 'pistol'
         self.currentMaxBullets = self.pistolMaxBullets
