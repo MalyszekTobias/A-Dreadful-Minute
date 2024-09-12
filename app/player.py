@@ -340,8 +340,14 @@ class Player:
 
     def update_rect(self):
         self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, 2 * self.radius, 2 * self.radius)
-        self.display.fog_of_storm.x = self.x
-        self.display.fog_of_storm.y = self.y
+        self.display.fog_of_storm_0.x = self.x
+        self.display.fog_of_storm_0.y = self.y
+
+        self.display.fog_of_storm_1.x = self.x
+        self.display.fog_of_storm_1.y = self.y
+
+        self.display.fog_of_storm_2.x = self.x
+        self.display.fog_of_storm_2.y = self.y
 
 def getPhase(fase):
     global direction
