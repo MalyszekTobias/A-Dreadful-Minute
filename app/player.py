@@ -288,7 +288,6 @@ class Player:
             self.confusion = True
         elif phase == 5:
             self.wind = direction
-        else:
 
         self.img.x = self.x
         self.img.y = self.y
