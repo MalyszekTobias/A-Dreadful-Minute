@@ -24,8 +24,6 @@ class Player:
         self.velRight = 0
         self.maxSpeed = 6
         self.control = 0.90
-        if phase == 1:
-            self.control = 0.15
         self.wind = 0
         self.windStrength = 1.3
         self.confusion = False
@@ -98,22 +96,24 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = True
 
-            elif event.key == pygame.K_1 and self.money >= 30 and self.hp < self.maxHp:
-                self.money -= 30
-                self.hp = self.maxHp
+            elif phase == 0:
 
-            elif event.key == pygame.K_2 and self.money >= self.lanternPrice and self.lanterns <= 4:
-                self.lanterns += 1
-                self.money -= self.lanternPrice
-                self.lanternPrice *= 2
+                if event.key == pygame.K_1 and self.money >= 30 and self.hp < self.maxHp:
+                    self.money -= 30
+                    self.hp = self.maxHp
 
-            elif event.key == pygame.K_3 and self.money >= self.weaponPrice and self.weapons == 1:
-                self.weapons += 1
-                self.money -= self.weaponPrice
-                self.weaponPrice *= 2
-                self.currentWeapon = 'ar'
-                self.pistolBullets = self.bullets
-                self.bullets = self.arMaxBullets
+                elif event.key == pygame.K_2 and self.money >= self.lanternPrice and self.lanterns <= 4:
+                    self.lanterns += 1
+                    self.money -= self.lanternPrice
+                    self.lanternPrice *= 2
+
+                elif event.key == pygame.K_3 and self.money >= self.weaponPrice and self.weapons == 1:
+                    self.weapons += 1
+                    self.money -= self.weaponPrice
+                    self.weaponPrice *= 2
+                    self.currentWeapon = 'ar'
+                    self.pistolBullets = self.bullets
+                    self.bullets = self.arMaxBullets
 
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
