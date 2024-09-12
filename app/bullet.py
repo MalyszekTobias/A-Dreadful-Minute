@@ -16,6 +16,7 @@ class Bullet:
         self.y_2 = mousepos[1]
 
         self.x, self.y = pos
+        self.recoil = True
 
         self.calculate_linear_function()
         self.get_ratio()
@@ -53,6 +54,19 @@ class Bullet:
 
             self.x_1 = self.x
             self.y_1 = self.y
+
+            if self.recoil:
+                if (self.x_2 < self.shooter.x and self.y_2 > self.shooter.y) or (
+                        self.x_2 > self.shooter.x and self.y_2 < self.shooter.y):
+                    self.shooter.x = ((self.ratio_x * self.shooter.recoil) / self.denominator) + self.shooter.x
+                    self.shooter.y = ((self.ratio_y * self.shooter.recoil) / self.denominator) + self.shooter.y
+                else:
+
+                    self.shooter.x = -((self.ratio_x * self.shooter.recoil) / self.denominator) + self.shooter.x
+                    self.shooter.y = -((self.ratio_y * self.shooter.recoil) / self.denominator) + self.shooter.y
+
+                self.shooter.update_rect()
+                self.recoil = False
 
         self.update_rect()
         for enemy in self.display.enemies:

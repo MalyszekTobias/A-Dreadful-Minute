@@ -29,6 +29,7 @@ class Player:
         self.confusion = False
         self.green = (30, 200, 30)
         self.money = 0
+        self.recoil = 20
         self.windCap = self.windStrength * 6
         self.lanterns = 0
         self.lanternPrice = 20
