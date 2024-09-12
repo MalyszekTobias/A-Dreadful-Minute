@@ -46,7 +46,7 @@ class Player:
         self.pistolShootingSpeed = 0.5
         self.pistolReloadSpeed = 3
         self.ShootingTimer = 0
-        self.arShootingSpeed = 0.2
+        self.arShootingSpeed = 0.25
         self.arReloadSpeed = 3
         self.shotSpeedModifier = 1
         self.pistolDamage = 22
@@ -78,9 +78,9 @@ class Player:
         self.img.render()
         if self.clicked and self.currentWeapon != 'pistol':
             if self.bullets > 0 and self.start_reloading == False:
-                if time.time() - self.arShootingTimer > self.arShootingSpeed:
+                if time.time() - self.ShootingTimer > self.currentShootingSpeed:
                     self.shoot()
-                    self.arShootingTimer = time.time()
+                    self.ShootingTimer = time.time()
             else:
                 if time.time() - self.reload_start > self.currentReloadSpeed:
                     self.reload_start = time.time()
@@ -154,10 +154,7 @@ class Player:
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0 and self.start_reloading == False:
-                if self.currentWeapon == 'pistol' and time.time() - self.ShootingTimer > self.pistolShootingSpeed:
-                    self.shoot()
-                    self.ShootingTimer = time.time()
-                elif self.currentWeapon == 'ar' and time.time() - self.ShootingTimer > self.arShootingSpeed:
+                if time.time() - self.ShootingTimer > self.currentShootingSpeed:
                     self.shoot()
                     self.ShootingTimer = time.time()
             else:
