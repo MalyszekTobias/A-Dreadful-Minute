@@ -19,6 +19,7 @@ class Player:
         self.down = False
         self.left = False
         self.right = False
+        self.clicked = False
         self.velUp = 0
         self.velRight = 0
         self.maxSpeed = 6
@@ -46,7 +47,7 @@ class Player:
         self.pistolReloadSpeed = 3
         self.pistolShootingTimer = 0
         self.arShootingTimer = 0
-        self.arShootingSpeed = 0.2
+        self.arShootingSpeed = 0.25
         self.arReloadSpeed = 3
         self.shotSpeedModifier = 1
         self.pistolDamage = 22
@@ -76,7 +77,15 @@ class Player:
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
-
+        if self.clicked and self.currentWeapon != 'pistol':
+            if self.bullets > 0 and self.start_reloading == False:
+                if time.time() - self.arShootingTimer > self.arShootingSpeed:
+                    self.shoot()
+                    self.arShootingTimer = time.time()
+            else:
+                if time.time() - self.reload_start > self.currentReloadSpeed:
+                    self.reload_start = time.time()
+                    self.start_reloading = True
 
     def events(self, event):
         #player movement capture
@@ -137,8 +146,16 @@ class Player:
 
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            self.clicked = True
+            pass
+
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            self.clicked = False
+
+
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.bullets > 0 and self.start_reloading == False:
-                if self.currentWeapon == 'pistol' and time.time() - self.pistolShootingTimer > self.pistolShootingSpeed:
+                if time.time() - self.pistolShootingTimer > self.pistolShootingSpeed:
                     self.shoot()
                     self.pistolShootingTimer = time.time()
                 elif self.currentWeapon == 'ar' and time.time() - self.arShootingTimer > self.arShootingSpeed:
@@ -148,6 +165,11 @@ class Player:
                 if time.time() - self.reload_start > self.currentReloadSpeed:
                     self.reload_start = time.time()
                     self.start_reloading = True
+
+
+
+
+
         if self.currentWeapon == 'pistol':
             self.currentMaxBullets = self.pistolMaxBullets
             self.currentShootingSpeed = self.pistolShootingSpeed * self.shotSpeedModifier
