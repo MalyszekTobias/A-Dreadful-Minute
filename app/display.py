@@ -1,6 +1,8 @@
 from random import random
 import random
 
+from pygame.examples.scrap_clipboard import screen
+
 import app.game
 import pygame.time
 import time
@@ -200,7 +202,6 @@ class game_display(basic_display):
 
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
             self.fog = not self.fog
-
         else:
             for obj in self.objects:
                 obj.events(event)
