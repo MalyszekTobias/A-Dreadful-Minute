@@ -3,11 +3,12 @@ import math as Charles
 
 
 class Bullet:
-    def __init__(self, display, shooter, pos, mousepos):
+    def __init__(self, display, shooter, pos, mousepos, radius, boom, speed):
         self.display = display
         self.shooter = shooter
         self.x_1 = pos[0]
         self.y_1 = pos[1]
+        self.boom = boom
         self.display.game.LastShot += 1
         if self.display.game.LastShot >= 4:
             self.display.game.LastShot = 1
@@ -22,9 +23,12 @@ class Bullet:
         self.get_ratio()
 
         self.damage = 12
-        self.speed = 20
+        self.speed = speed
+        self.color = (245, 245, 51)
+        if self.boom:
+            self.color = (245, 145, 51)
 
-        self.radius = 5
+        self.radius = radius
 
         self.update_rect()
 
@@ -43,7 +47,11 @@ class Bullet:
 
     def render(self):
         # pygame.draw.line(self.display.game.screen, (255, 255, 255), (self.x_1, self.y_1), (self.x_2, self.y_2))
-        pygame.draw.circle(self.display.game.screen, (245, 245, 51), (self.x, self.y), self.radius)
+        pygame.draw.circle(self.display.game.screen, self.color, (self.x, self.y), self.radius)
+        if self.boom and self.radius < 200:
+            self.radius += 15
+        elif self.boom and self.radius >= 200:
+            self.delete()
 
     def move(self):
         if self.out_of_bounds():
@@ -78,6 +86,11 @@ class Bullet:
                 except:
                     print("already deleted")
             # self.update_rect()
+
+    def collideCheck(self):
+        for enemy in self.display.enemies:
+            if Charles.sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2) < self.radius + enemy.radius:
+                enemy.hp = 0
 
     def events(self, event):
         pass

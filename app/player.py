@@ -33,28 +33,34 @@ class Player:
         self.windCap = self.windStrength * 6
         self.lanterns = 0
         self.lanternPrice = 20
+        self.bombs = 0
 
 
         self.maxHp = 150
         self.hp = self.maxHp
-
         self.reload_start = 0
         self.start_reloading = False
+
         self.pistolMaxBullets = 10
         self.arMaxBullets = 30
         self.miniMaxBullets = 100
+        self.flameMaxBullets = 70
         self.pistolShootingSpeed = 0.4
         self.arShootingSpeed = 0.25
         self.miniShootingSpeed = 0.05
+        self.flameShootingSpeed = 0.1
         self.pistolReloadSpeed = 3
         self.arReloadSpeed = 3
         self.miniReloadSpeed = 3
+        self.flameReloadSpeed = 3
         self.pistolDamage = 22
         self.arDamage = 25
         self.miniDamage = 8
+        self.flameDamage = 4
         self.pistolRecoil = 6
         self.arRecoil = 4
         self.miniRecoil = 3
+        self.flameRecoil = 1
 
 
         self.ShootingTimer = 0
@@ -106,6 +112,10 @@ class Player:
             elif event.key == pygame.K_s:
                 self.down = True
 
+            elif event.key == pygame.K_e and self.bombs > 0:
+                bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 5, True, 0)
+                self.bombs -= 1
+
             elif phase == 0:
 
                 if event.key == pygame.K_1 and self.money >= 30 and self.hp < self.maxHp:
@@ -117,14 +127,32 @@ class Player:
                     self.money -= self.lanternPrice
                     self.lanternPrice *= 2
 
-                elif event.key == pygame.K_3 and self.money >= self.weaponPrice and self.weapons == 1:
-                    self.weapons += 1
-                    self.money -= self.weaponPrice
-                    self.weaponPrice *= 2
-                    self.currentWeapon = 'ar'
-                    self.pistolBullets = self.bullets
-                    self.bullets = self.arMaxBullets
-                    self.recoil = self.arRecoil
+                elif event.key == pygame.K_3 and self.money >= self.weaponPrice:
+                    if self.weapons == 1:
+                        self.weapons += 1
+                        self.money -= self.weaponPrice
+                        self.weaponPrice *= 2
+                        self.currentWeapon = 'ar'
+                        self.pistolBullets = self.bullets
+                        self.bullets = self.arMaxBullets
+                        self.recoil = self.arRecoil
+
+                    elif self.weapons == 2:
+                        self.weapons += 1
+                        self.money -= self.weaponPrice
+                        self.weaponPrice *= 2
+                        if self.currentWeapon == 'pistol':
+                            self.pistolBullets = self.bullets
+                        elif self.currentWeapon == 'ar':
+                            self.arBullets = self.bullets
+                        self.bullets = self.miniMaxBullets
+                        self.recoil = self.miniRecoil
+                        self.currentWeapon = 'mini'
+
+
+                elif event.key == pygame.K_4 and self.money >= 0:
+                    self.bombs += 1
+                    self.money -= 0
 
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
@@ -186,10 +214,24 @@ class Player:
             self.currentDamage = self.arDamage
             self.recoil = self.arRecoil
 
+        elif self.currentWeapon == 'miniGun':
+            self.currentMaxBullets = self.miniMaxBullets
+            self.currentShootingSpeed = self.miniShootingSpeed * self.shotSpeedModifier
+            self.currentReloadSpeed = self.miniReloadSpeed * self.shotSpeedModifier
+            self.currentDamage = self.miniDamage
+            self.recoil = self.miniRecoil
+
+        elif self.currentWeapon == 'flameThrower':
+            self.currentMaxBullets = self.flameMaxBullets
+            self.currentShootingSpeed = self.flameShootingSpeed * self.shotSpeedModifier
+            self.currentReloadSpeed = self.flameReloadSpeed * self.shotSpeedModifier
+            self.currentDamage = self.flameDamage
+            self.recoil = self.flameRecoil
+
     def shoot(self):
         if self.bullets > 0:
             self.bullets -= 1
-            bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos())
+            bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 5, False, 20)
 
     def reload_upadate_checker(self):
         if self.start_reloading:
