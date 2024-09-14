@@ -7,11 +7,9 @@ clearOrder = False
 class Coin:
     def __init__(self, display):
         self.x = random.randint(30, 970)
-        self.y = random.randint(50, 970)
+        self.y = random.randint(70, 970)
         self.radius = 12
         self.display = display
-        self.yellow1 = (245, 245, 51)
-        self.yellow2 = (245, 190, 60)
         self.display.objects.append(self)
 
         self.img = custom_images.Custom_image(self.display, 'img/zlotowka.png', self.x, self.y, self.radius*2, self.radius*2)
@@ -20,8 +18,6 @@ class Coin:
 
 
     def render(self):
-        # pygame.draw.circle(self.display.screen, self.yellow2, (self.x, self.y), self.radius)
-        # pygame.draw.circle(self.display.screen, self.yellow1, (self.x, self.y), self.radius - 4)
         self.img.update_rect()
         self.img.render()
         if Kutt.sqrt((self.x - self.display.player.x) ** 2 + (self.y - self.display.player.y) ** 2) < self.radius + self.display.player.radius:
