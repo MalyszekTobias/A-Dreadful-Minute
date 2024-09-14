@@ -35,7 +35,6 @@ class Player:
         self.lanternPrice = 10
         self.bombs = 0
 
-
         self.maxHp = 150
         self.hp = self.maxHp
         self.reload_start = 0
@@ -81,6 +80,9 @@ class Player:
         self.bombPrice = 20
         self.mediKits = 1
         self.mediKitPrice = 30
+        self.pasthp = self.hp
+        self.hit = False
+        self.cooldown = 0
 
 
         self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
@@ -92,6 +94,14 @@ class Player:
 
 
     def render(self):
+        if self.hp < self.pasthp:
+            self.pasthp = self.hp
+            self.cooldown = 45
+        if self.hit:
+            self.cooldown -= 1
+            if self.cooldown <= 0:
+                self.hit = False
+
         print(self.currentWeapon)
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
