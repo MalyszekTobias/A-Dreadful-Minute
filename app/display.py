@@ -102,8 +102,10 @@ class game_display(basic_display):
 
         self.player = player.Player(self)
 
+
         self.fog_of_storms = [custom_images.Custom_image(self, f'img/{x}.png', self.player.x, self.player.y, 2400, 2400, append=False, loaded=False) for x in range(0, 6)]
         self.enemies = []
+        self.spawnDelay = 3
         self.coins = []
         self.coin = coin.Coin(self)
         self.bullets = []
@@ -186,8 +188,12 @@ class game_display(basic_display):
         #     self.player.start_reloading = True
         #     self.player.reload_start = time.time()
         self.player.reload_upadate_checker()
+        if self.game.phase == 3:
+            self.spawnDelay = 2
+        else:
+            self.spawnDelay = 3
 
-        if time.time() - self.time >= 3:
+        if time.time() - self.time >= self.spawnDelay:
             if self.game.phase == 0:
                 for x in range(random.randint(1, 1)):
                     self.enemies.append(enemy.Enemy(self))

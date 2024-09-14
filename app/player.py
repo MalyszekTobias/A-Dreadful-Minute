@@ -172,7 +172,7 @@ class Player:
                     self.bombs += 1
                     self.money -= self.bombPrice
 
-            elif event.key == pygame.K_r and not self.start_reloading:
+            if event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
                 self.reload_start = time.time()
 
