@@ -14,8 +14,6 @@ class Bullet:
             self.display.game.LastShot = 1
         if not self.display.player.currentWeapon == "flameThrower":
             pygame.mixer.Channel(self.display.game.LastShot).play(self.display.game.bang)
-        else:
-            pygame.mixer.Channel(6).play(self.display.game.thunder_sound)
         self.x_2 = mousepos[0]
         self.y_2 = mousepos[1]
 

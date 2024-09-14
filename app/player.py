@@ -23,22 +23,48 @@ class Player:
         self.velUp = 0
         self.velRight = 0
         self.maxSpeed = 6
-        self.control = 0.90
         self.wind = 0
-        self.windStrength = 1.3
         self.confusion = False
         self.green = (30, 200, 30)
         self.money = 0
-        self.recoil = 5
-        self.windCap = self.windStrength * 6
         self.lanterns = 0
-        self.lanternPrice = 10
         self.bombs = 0
-
         self.maxHp = 150
         self.hp = self.maxHp
         self.reload_start = 0
         self.start_reloading = False
+        self.ShootingTimer = 0
+        self.shotSpeedModifier = 1
+        self.easy = True
+
+
+
+        if self.easy:
+            self.control = 1
+            self.windControl = 0.20
+            self.windStrength = 1.3
+            self.windCap = self.windStrength * 6
+            self.lanternPrice = 12
+            self.weaponPrice = 0
+            self.bombPrice = 20
+            self.mediKits = 1
+            self.mediKitPrice = 20
+        else:
+            self.control = 0.8
+            self.windControl = 0.15
+            self.windStrength = 1.4
+            self.windCap = self.windStrength * 5
+            self.lanternPrice = 16
+            self.weaponPrice = 50
+            self.bombPrice = 30
+            self.mediKits = 0
+            self.mediKitPrice = 30
+
+
+        self.recoil = 5
+
+
+
 
         self.pistolMaxBullets = 10
         self.arMaxBullets = 30
@@ -48,8 +74,8 @@ class Player:
         self.arShootingSpeed = 0.25
         self.miniShootingSpeed = 0.05
         self.flameShootingSpeed = 0.015
-        self.pistolReloadSpeed = 2.5
-        self.arReloadSpeed = 3
+        self.pistolReloadSpeed = 2.2
+        self.arReloadSpeed = 3.5
         self.miniReloadSpeed = 3
         self.flameReloadSpeed = 3
         self.pistolDamage = 22
@@ -62,8 +88,6 @@ class Player:
         self.flameRecoil = 0
 
 
-        self.ShootingTimer = 0
-        self.shotSpeedModifier = 1
 
         self.currentWeapon = 'pistol'
         self.currentMaxBullets = self.pistolMaxBullets
@@ -76,10 +100,6 @@ class Player:
         self.currentReloadSpeed = self.pistolReloadSpeed
         self.currentDamage = self.pistolDamage
         self.weapons = 1
-        self.weaponPrice = 0
-        self.bombPrice = 20
-        self.mediKits = 1
-        self.mediKitPrice = 30
         self.pasthp = self.hp
         self.hit = False
         self.cooldown = 0
@@ -96,7 +116,7 @@ class Player:
     def render(self):
         if self.hp < self.pasthp:
             self.pasthp = self.hp
-            self.cooldown = 45
+            self.cooldown = 25
         if self.hit:
             self.cooldown -= 1
             if self.cooldown <= 0:
@@ -104,7 +124,6 @@ class Player:
 
         print(self.currentWeapon)
         self.movement()
-        # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
         if self.clicked and self.currentWeapon != 'pistol':
             if self.bullets > 0 and self.start_reloading == False:
