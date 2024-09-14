@@ -225,9 +225,9 @@ class game_display(basic_display):
             self.player.img.rotate_toward(pygame.mouse.get_pos())
             for Enemy in self.enemies:
                 Enemy.img.rotate_toward((self.player.x, self.player.y))
-            if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
-                self.player.start_reloading = True
-                self.player.reload_start = time.time()
+            # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
+            #     self.player.start_reloading = True
+            #     self.player.reload_start = time.time()
             self.player.reload_upadate_checker()
             if self.game.phase == 3:
                 self.spawnDelay = 2
@@ -292,8 +292,8 @@ class game_display(basic_display):
             self.game.ready = True
             self.game.current_display = self.game.displays['pause_display']
 
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
-            self.fog = not self.fog
+        # elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
+        #     self.fog = not self.fog
         else:
             for obj in self.objects:
                 obj.events(event)
