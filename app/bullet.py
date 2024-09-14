@@ -12,7 +12,8 @@ class Bullet:
         self.display.game.LastShot += 1
         if self.display.game.LastShot >= 4:
             self.display.game.LastShot = 1
-        pygame.mixer.Channel(self.display.game.LastShot).play(self.display.game.bang)
+        if not self.display.player.currentWeapon == "flameThrower":
+            pygame.mixer.Channel(self.display.game.LastShot).play(self.display.game.bang)
         self.x_2 = mousepos[0]
         self.y_2 = mousepos[1]
 
