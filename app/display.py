@@ -1,7 +1,7 @@
 from random import random
 import random
 
-from pygame.examples.scrap_clipboard import screen
+# from pygame.examples.scrap_clipboard import screen
 
 import app.game
 import pygame.time
