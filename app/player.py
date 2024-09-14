@@ -300,7 +300,7 @@ class Player:
         if self.bullets > 0:
             self.bullets -= 1
             if self.currentWeapon == 'flameThrower':
-                bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 20, False, 15)
+                bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 22, False, 13)
 
             else:
                 bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 5, False, 20)
