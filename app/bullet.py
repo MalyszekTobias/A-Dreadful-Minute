@@ -23,7 +23,7 @@ class Bullet:
         self.get_ratio()
 
         self.radius = radius
-        self.lifetime = 20
+        self.lifetime = 21
 
 
         self.damage = 12
@@ -60,9 +60,9 @@ class Bullet:
             except:
                 print("already deleted")
 
-        if self.boom and self.radius < 200:
+        if self.boom and self.radius < 230:
             self.radius += 15
-        elif self.boom and self.radius >= 200:
+        elif self.boom and self.radius >= 230:
             self.delete()
 
     def move(self):

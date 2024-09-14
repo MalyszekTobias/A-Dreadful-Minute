@@ -48,7 +48,7 @@ class Player:
         self.pistolShootingSpeed = 0.4
         self.arShootingSpeed = 0.25
         self.miniShootingSpeed = 0.05
-        self.flameShootingSpeed = 0.02
+        self.flameShootingSpeed = 0.015
         self.pistolReloadSpeed = 2.5
         self.arReloadSpeed = 3
         self.miniReloadSpeed = 3
@@ -59,7 +59,7 @@ class Player:
         self.flameDamage = 0.7
         self.pistolRecoil = 6
         self.arRecoil = 4
-        self.miniRecoil = 3
+        self.miniRecoil = 2
         self.flameRecoil = 0
 
 
