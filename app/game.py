@@ -73,7 +73,7 @@ class Game:
             pygame.display.toggle_fullscreen()
         pygame.display.set_caption(f"{self.title} (v {self.version})")
 
-        self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'settings_screen': display.settings_screen(self), 'game_display': display.game_display(self), 'pause_display': display.pause_display(self), 'settings_screen_v2': display.settings_screen_v2(self)}
+        self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'game_display': display.game_display(self), 'pause_display': display.pause_display(self)}
         self.current_display = self.displays['start_screen']
 
         self.pointing_at = []
@@ -111,7 +111,6 @@ class Game:
 
     # def end(self):
     #     if ended:
-
     def pause(self):
         # pygame.mixer.music.pause()
         self.paused_flash = pygame.time.get_ticks() - self.start_time_flash
