@@ -169,10 +169,10 @@ class game_display(basic_display):
         #                                     text_color=(0, 0, 0), append=False, system=True)
         # self.price6 = custom_text.Custom_text(self, (self.game.width / 4) + 440, 235, "Comic Sans", 30, f"n/a",
         #                                    text_color=(0, 0, 0), append=False, system=True)
-        self.zlotowka1 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 90 + 100, 235, 30, 30, append=False)
-        self.zlotowka2 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 180 + 100, 235, 30, 30, append=False)
-        self.zlotowka3 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 270 + 100, 235, 30, 30, append=False)
-        self.zlotowka4 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 360 + 100, 235, 30, 30, append=False)
+        self.zlotowka1 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 100 + 100, 235, 30, 30, append=False)
+        self.zlotowka2 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 190 + 100, 235, 30, 30, append=False)
+        self.zlotowka3 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 280 + 100, 235, 30, 30, append=False)
+        self.zlotowka4 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 370 + 100, 235, 30, 30, append=False)
         # self.zlotowka5 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 395, 235, 30, 30, append=False)
         # self.zlotowka6 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 475, 235, 30, 30, append=False)
 
