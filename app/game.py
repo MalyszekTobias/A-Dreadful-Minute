@@ -230,6 +230,7 @@ class Game:
             except:
                 self.phases = [1, 2, 3, 4, 5]
         elif self.findPhase() == 'storm end':
+            pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.ogg'))
             app.coin.clearOrder = False
             self.phase = 0
             global killCount
@@ -270,7 +271,7 @@ class Game:
             self.timeLeft = self.stormTime - trueTime
             if trueTime == self.calmTime:
                 self.timeLeft = self.stormTime
-                if (trueTimeArchive - 5) % (self.stormTime + self.calmTime) != 0:
+                if (trueTimeArchive - self.calmTime) % (self.stormTime + self.calmTime) != 0:
                     self.timeLeft = self.stormTime - trueTime
             if trueTime == self.stormTime:
                 return 'storm end'

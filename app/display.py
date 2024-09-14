@@ -165,47 +165,44 @@ class game_display(basic_display):
         # self.sold_bulb = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 220, 160, 50, 50, append=False)
         # self.sold_weapon = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 300, 160, 50, 50, append=False)
 
-        self.one = custom_text.Custom_text(self, (self.game.width / 4) + 150, 85, "Comic Sans",50, "1", text_color=(0, 0, 0), append=False, system=True)
-        self.two = custom_text.Custom_text(self, (self.game.width / 4) + 230, 85, "Comic Sans",50, "2", text_color=(0, 0, 0), append=False, system=True)
-        self.three = custom_text.Custom_text(self, (self.game.width / 4) + 310, 85, "Comic Sans",50, "3", text_color=(0, 0, 0), append=False, system=True)
-        self.four = custom_text.Custom_text(self, (self.game.width / 4) + 390, 85, "Comic Sans",50, "4", text_color=(0, 0, 0), append=False, system=True)
+        self.one = custom_text.Custom_text(self, (self.game.width / 4) + 70 + 100, 85, "Comic Sans",50, "1", text_color=(0, 0, 0), append=False, system=True)
+        self.two = custom_text.Custom_text(self, (self.game.width / 4) + 160 + 100, 85, "Comic Sans",50, "2", text_color=(0, 0, 0), append=False, system=True)
+        self.three = custom_text.Custom_text(self, (self.game.width / 4) + 250 + 100, 85, "Comic Sans",50, "3", text_color=(0, 0, 0), append=False, system=True)
+        self.four = custom_text.Custom_text(self, (self.game.width / 4) + 340 + 100, 85, "Comic Sans",50, "4", text_color=(0, 0, 0), append=False, system=True)
         # self.five = custom_text.Custom_text(self, (self.game.width / 4) + 370, 85, "Comic Sans",50, "5", text_color=(0, 0, 0), append=False, system=True)
         # self.six = custom_text.Custom_text(self, (self.game.width / 4) + 450, 85, "Comic Sans",50, "6", text_color=(0, 0, 0), append=False, system=True)
 
-        try:
-            self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 140, 235, "Comic Sans", 30, f"30",
-                                               text_color=(0, 0, 0), append=False, system=True)
-            self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 220, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
-                                               text_color=(0, 0, 0), append=False, system=True)
-            self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 300, 235, "Comic Sans", 30, f"{self.player.weaponPrice}",
-                                                 text_color=(0, 0, 0), append=False, system=True)
-            self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 380, 235, "Comic Sans", 30, f"{self.player.bombPrice}",
+        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 55 + 100, 235, "Comic Sans", 30, f"30",
+                                           text_color=(0, 0, 0), append=False, system=True)
+        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 145 + 100, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
+                                           text_color=(0, 0, 0), append=False, system=True)
+        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 235 + 100, 235, "Comic Sans", 30, f"{self.player.weaponPrice}",
+                                             text_color=(0, 0, 0), append=False, system=True)
+        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 325 + 100, 235, "Comic Sans", 30, f"{self.player.bombPrice}",
                                             text_color=(0, 0, 0), append=False, system=True)
-        except:
-            pass
         # self.price5 = custom_text.Custom_text(self, (self.game.width / 4) + 360, 235, "Comic Sans", 30, f"n/a",
         #                                     text_color=(0, 0, 0), append=False, system=True)
         # self.price6 = custom_text.Custom_text(self, (self.game.width / 4) + 440, 235, "Comic Sans", 30, f"n/a",
         #                                    text_color=(0, 0, 0), append=False, system=True)
-        self.zlotowka1 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 175, 235, 30, 30, append=False)
-        self.zlotowka2 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 255, 235, 30, 30, append=False)
-        self.zlotowka3 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 335, 235, 30, 30, append=False)
-        self.zlotowka4 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 415, 235, 30, 30, append=False)
+        self.zlotowka1 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 90 + 100, 235, 30, 30, append=False)
+        self.zlotowka2 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 180 + 100, 235, 30, 30, append=False)
+        self.zlotowka3 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 270 + 100, 235, 30, 30, append=False)
+        self.zlotowka4 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 360 + 100, 235, 30, 30, append=False)
         # self.zlotowka5 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 395, 235, 30, 30, append=False)
         # self.zlotowka6 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 475, 235, 30, 30, append=False)
 
 
 
 
-        self.heart_plus = custom_images.Custom_image(self, 'img/medkit.png', (self.game.width / 4) + 150, 160, 50, 50, append=False)
-        self.bulb_plus = custom_images.Custom_image(self, 'img/bulb_plus.png', (self.game.width / 4) + 230, 160, 50, 50, append=False)
-        self.bomb_plus = custom_images.Custom_image(self, 'img/bomb_plus.png', (self.game.width / 4) + 390, 160, 50, 50,
+        self.heart_plus = custom_images.Custom_image(self, 'img/medkit.png', (self.game.width / 4) + 70 + 100, 160, 50, 50, append=False)
+        self.bulb_plus = custom_images.Custom_image(self, 'img/bulb_plus.png', (self.game.width / 4) + 160 + 100, 160, 50, 50, append=False)
+        self.bomb_plus = custom_images.Custom_image(self, 'img/bomb_plus.png', (self.game.width / 4) + 340 + 100, 160, 50, 50,
                                                     append=False)
-        self.ar_plus = custom_images.Custom_image(self, 'img/ar.png', (self.game.width / 4) + 310, 160, 50, 50, append=False)
-        self.mini_plus = custom_images.Custom_image(self, 'img/minigun.png', (self.game.width / 4) + 310, 160, 50, 50, append=False)
-        self.flame_plus = custom_images.Custom_image(self, 'img/flamethrower.png', (self.game.width / 4) + 310, 160, 50, 50, append=False)
-        self.sold_bulb = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 230, 160, 50, 50, append=False)
-        self.sold_weapon = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 310, 160, 50, 50, append=False)
+        self.ar_plus = custom_images.Custom_image(self, 'img/ar.png', (self.game.width / 4) + 250 + 100, 160, 50, 50, append=False)
+        self.mini_plus = custom_images.Custom_image(self, 'img/minigun.png', (self.game.width / 4) + 250 + 100, 160, 50, 50, append=False)
+        self.flame_plus = custom_images.Custom_image(self, 'img/flamethrower.png', (self.game.width / 4) + 250 + 100, 160, 50, 50, append=False)
+        self.sold_bulb = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 160 + 100, 160, 50, 50, append=False)
+        self.sold_weapon = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 250 + 100, 160, 50, 50, append=False)
 
         self.ice = custom_images.Custom_image(self, 'img/ice.png', self.game.width - 75, 100, 75, 75, append=False)
         self.slowness = custom_images.Custom_image(self, 'img/speed.png', self.game.width - 75, 100, 75, 75, append=False)
@@ -321,20 +318,27 @@ class game_display(basic_display):
             self.two.render()
             if self.player.lanterns >= 5:
                 self.sold_bulb.render()
+                self.price2.update_text("-")
             else:
                 self.bulb_plus.render()
+                self.price2.update_text(f"{self.player.lanternPrice}")
+
 
             self.three.render()
             self.four.render()
             if self.player.weapons == 1:
                 self.ar_plus.render()
+                self.price3.update_text(f'{self.player.weaponPrice}')
             elif self.player.weapons == 2:
                 self.mini_plus.render()
+                self.price3.update_text(f'{self.player.weaponPrice}')
             elif self.player.weapons == 3:
                 self.flame_plus.render()
+                self.price3.update_text(f'{self.player.weaponPrice}')
             else:
                 print(self.player.weapons)
                 self.sold_weapon.render()
+                self.price3.update_text(f'-')
 
             # self.five.render()
             # self.six.render()
