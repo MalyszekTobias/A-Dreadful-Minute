@@ -26,7 +26,7 @@ class Player:
         self.wind = 0
         self.confusion = False
         self.green = (30, 200, 30)
-        self.money = 1000000
+        self.money = 000000
         self.lanterns = 0
         self.bombs = 0
         self.maxHp = 150

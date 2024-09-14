@@ -5,4 +5,7 @@ import asyncio
 QX = Game()
 
 if __name__ == '__main__':
-    asyncio.run(QX.mainloop())
+    try:
+        asyncio.run(QX.mainloop())
+    except:
+        pass

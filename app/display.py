@@ -6,7 +6,7 @@ import random
 import app.game
 import pygame.time
 import time
-from app import custom_text, custom_images, button, player, enemy, coin, game
+from app import custom_text, custom_images, button, player, enemy, coin, game, rain
 from app.custom_images import Custom_image
 import img
 import math, itertools
@@ -197,6 +197,7 @@ class game_display(basic_display):
 
 
         # self.enemies.append(enemy.Enemy(self))
+        self.rain = rain.Rain(self, 100)
 
     def update_diff(self):
         self.player.update_diff()
@@ -224,6 +225,9 @@ class game_display(basic_display):
     def mainloop(self):
         global minEnemies
         global maxEnemies
+
+        self.rain.move()
+
         if self.player.hp <= 0:
             self.game.totalKills += app.game.killCount
 
@@ -369,6 +373,7 @@ class game_display(basic_display):
 
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
         if self.game.phase != 0:
+            self.rain.render()
             if self.fog_of_storms[self.player.lanterns].loaded != True:
                 self.fog_of_storms[self.player.lanterns].load()
                 self.fog_of_storms[self.player.lanterns].loaded = True
