@@ -33,8 +33,8 @@ class Custom_image:  # A class to easier render images
             pass
         del self
 
-    def rotate_toward_mouse(self, mouse_pos):
-        rel_x, rel_y = mouse_pos[0] - self.x, mouse_pos[1] - self.y
+    def rotate_toward(self, pos):
+        rel_x, rel_y = pos[0] - self.x, pos[1] - self.y
 
         angle = Lolus.degrees(Lolus.atan2(-rel_y, rel_x)) - 90
 

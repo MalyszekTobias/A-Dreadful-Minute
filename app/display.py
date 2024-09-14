@@ -161,7 +161,9 @@ class game_display(basic_display):
     def mainloop(self):
         global minEnemies
         global maxEnemies
-        self.player.img.rotate_toward_mouse(pygame.mouse.get_pos())
+        self.player.img.rotate_toward(pygame.mouse.get_pos())
+        for Enemy in self.enemies:
+            Enemy.img.rotate_toward((self.player.x, self.player.y))
         # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
         #     self.player.start_reloading = True
         #     self.player.reload_start = time.time()
