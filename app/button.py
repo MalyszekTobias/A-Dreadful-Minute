@@ -55,6 +55,26 @@ class Button:  # A button class
                 self.display.game.current_display = self.display.game.displays['pause_display']
             elif self.action == 'kill':
                 self.display.game.run = False
+
+            elif self.action == 'difficulty_selector':
+                self.display.game.current_display = self.display.game.displays['difficulty_selector']
+
+            elif self.action == 'easy':
+                app.game.orderUnpause = True
+                print("unpause")
+                self.display.game.current_display = self.display.game.displays['game_display']
+                self.display.game.current_display.player.easy = True
+                print(self.display.game.current_display.player.easy )
+
+
+            elif self.action == 'hard':
+                app.game.orderUnpause = True
+                print("unpause")
+                self.display.game.current_display = self.display.game.displays['game_display']
+                self.display.game.current_display.player.easy = False
+                print(self.display.game.current_display.player.easy )
+
+
             else:
                 print('No action assigned to this button')
 

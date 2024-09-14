@@ -45,7 +45,7 @@ class start_screen(basic_display):
         basic_display.__init__(self, game)
         self.colors_for_title_text = itertools.cycle(color_cycle())
         self.title_text = custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'A Dreadful Minute', text_color='Green')
-        button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
+        button.Button(self, 'difficulty_selector', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
         button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75,
                       (0, 0, 0), outline_color='white', text='Quit', text_color='white')
 
@@ -168,8 +168,9 @@ class game_display(basic_display):
     def mainloop(self):
         global minEnemies
         global maxEnemies
-
         if self.player.hp <= 0:
+            self.game.totalKills += app.game.killCount
+
             self.game.current_display = self.game.displays['game_over']
 
         else:
@@ -371,3 +372,17 @@ class game_over(basic_display):
         basic_display.__init__(self, game)
         custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Game over!', text_color='red')
         button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='white', text=' Quit', text_color='white')
+        self.a = custom_text.Custom_text(self, self.game.width / 2, self.game.height - 450, None, 100, f'Kills {self.game.totalKills}', text_color='red')
+
+    def render(self):
+        for obje in self.objects:
+            obje.render()
+        self.a.update_text(f'Kills {self.game.totalKills}')
+
+
+class difficulty_selector(basic_display):
+    def __init__(self, game):
+        basic_display.__init__(self, game)
+        custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Select difficulty', text_color='white')
+        button.Button(self, 'easy', self.game.width / 2 - 320, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='green', text=' Easy', text_color='Green')
+        button.Button(self, 'hard', self.game.width / 2 + 20, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='red', text=' Hard', text_color='red')
