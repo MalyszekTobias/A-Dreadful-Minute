@@ -32,7 +32,7 @@ class Player:
         self.recoil = 5
         self.windCap = self.windStrength * 6
         self.lanterns = 0
-        self.lanternPrice = 20
+        self.lanternPrice = 10
         self.bombs = 0
 
 
@@ -49,7 +49,7 @@ class Player:
         self.arShootingSpeed = 0.25
         self.miniShootingSpeed = 0.05
         self.flameShootingSpeed = 0.1
-        self.pistolReloadSpeed = 3
+        self.pistolReloadSpeed = 2.5
         self.arReloadSpeed = 3
         self.miniReloadSpeed = 3
         self.flameReloadSpeed = 3
@@ -75,7 +75,7 @@ class Player:
         self.currentReloadSpeed = self.pistolReloadSpeed
         self.currentDamage = self.pistolDamage
         self.weapons = 1
-        self.weaponPrice = 1
+        self.weaponPrice = 25
 
 
         self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
@@ -349,7 +349,7 @@ class Player:
             self.wind = 0
             self.shotSpeedModifier = 1
         elif phase == 1:
-            self.control = 0.15
+            self.control = 0.25
         elif phase == 2:
             self.shotSpeedModifier = 2
         elif phase == 4:

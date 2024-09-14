@@ -53,8 +53,8 @@ class Game:
         self.isPaused = True
         self.ready = True
         self.ready_u = False
-        self.calmTime = 5
-        self.stormTime = 10
+        self.calmTime = 15
+        self.stormTime = 45
         self.totalKills = 0
         self.trueTime = 0
         self.timeLeft = 5
