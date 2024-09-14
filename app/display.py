@@ -157,6 +157,13 @@ class game_display(basic_display):
         self.sold_bulb = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 220, 160, 50, 50, append=False)
         self.sold_weapon = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 300, 160, 50, 50, append=False)
 
+        self.ice = custom_images.Custom_image(self, 'img/ice.png', self.game.width - 75, 75, 75, 75, append=False)
+        self.slowness = custom_images.Custom_image(self, 'img/speed.png', self.game.width - 75, 75, 75, 75, append=False)
+        self.spawnrate = custom_images.Custom_image(self, 'img/zombie.png', self.game.width - 75, 75, 75, 75, append=False)
+        self.confusion = custom_images.Custom_image(self, 'img/question.png', self.game.width - 75, 75, 75, 75, append=False)
+        self.wind = custom_images.Custom_image(self, 'img/wind.png', self.game.width - 75, 75, 75, 75, append=False)
+
+
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
         global minEnemies
@@ -278,6 +285,17 @@ class game_display(basic_display):
 
         for obj in self.objects:
             obj.render()
+
+        if self.game.phase == 1:
+            self.ice.render()
+        elif self.game.phase == 2:
+            self.slowness.render()
+        elif self.game.phase == 3:
+            self.spawnrate.render()
+        elif self.game.phase == 4:
+            self.confusion.render()
+        elif self.game.phase == 5:
+            self.wind.render()
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
         if self.fog:
             if self.fog_of_storms[self.player.lanterns].loaded != True:
