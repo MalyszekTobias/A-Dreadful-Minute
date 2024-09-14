@@ -281,28 +281,22 @@ class game_display(basic_display):
             # self.zlotowka5.render()
             # self.price6.render()
             # self.zlotowka6.render()
+            self.price2.update_text(f"{self.player.lanternPrice}")
 
 
         for obj in self.objects:
             obj.render()
 
-        if self.game.phase == 1:
-            self.ice.render()
-        elif self.game.phase == 2:
-            self.slowness.render()
-        elif self.game.phase == 3:
-            self.spawnrate.render()
-        elif self.game.phase == 4:
-            self.confusion.render()
-        elif self.game.phase == 5:
-            self.wind.render()
+
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
-        if self.fog:
+        if self.fog and self.game.phase != 0:
             if self.fog_of_storms[self.player.lanterns].loaded != True:
                 self.fog_of_storms[self.player.lanterns].load()
                 self.fog_of_storms[self.player.lanterns].loaded = True
             self.fog_of_storms[self.player.lanterns].update_rect()
             self.fog_of_storms[self.player.lanterns].render()
+
+
 
         pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
         pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
@@ -330,6 +324,17 @@ class game_display(basic_display):
             self.reloading_text.render()
         pygame.draw.rect(self.screen, (0, 255, 0),
                          (0, 0, (self.game.width * self.player.hp / self.player.maxHp), self.player.hpHeight))
+
+        if self.game.phase == 1:
+            self.ice.render()
+        elif self.game.phase == 2:
+            self.slowness.render()
+        elif self.game.phase == 3:
+            self.spawnrate.render()
+        elif self.game.phase == 4:
+            self.confusion.render()
+        elif self.game.phase == 5:
+            self.wind.render()
 
 
 
