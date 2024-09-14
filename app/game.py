@@ -1,6 +1,6 @@
 import random
 import time
-
+import asyncio
 import app.coin
 import pygame
 from app import config, display, custom_text, player
@@ -73,7 +73,7 @@ class Game:
             pygame.display.toggle_fullscreen()
         pygame.display.set_caption(f"{self.title} (v {self.version})")
 
-        self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'game_display': display.game_display(self), 'pause_display': display.pause_display(self)}
+        self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'game_display': display.game_display(self), 'pause_display': display.pause_display(self), 'game_over': display.game_over(self)}
         self.current_display = self.displays['start_screen']
 
         self.pointing_at = []
@@ -95,8 +95,6 @@ class Game:
 
         for debug_item in self.debug_items:
             debug_item.hidden = True
-        self.mainloop()
-
     def check_pause(self):
         if self.isPaused and self.ready:
             self.ready = False
@@ -145,7 +143,7 @@ class Game:
 
             self.events()
             self.render()
-            self.update()
+            asyncio.run(self.update())
             self.clock.tick(self.fps)
             # self.thunderstorm()
             self.check_pause()
@@ -314,7 +312,7 @@ class Game:
         self.crosshair.update_rect()
         self.crosshair.render()
 
-    def update(self):
+    async def update(self):
         if self.debug:
 
             for obj in self.current_display.objects:
@@ -342,3 +340,4 @@ class Game:
 
         pygame.display.update()
         pygame.display.flip()
+        await asyncio.sleep(0)

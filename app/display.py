@@ -168,46 +168,51 @@ class game_display(basic_display):
     def mainloop(self):
         global minEnemies
         global maxEnemies
-        self.player.img.rotate_toward(pygame.mouse.get_pos())
-        for Enemy in self.enemies:
-            Enemy.img.rotate_toward((self.player.x, self.player.y))
-        # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
-        #     self.player.start_reloading = True
-        #     self.player.reload_start = time.time()
-        self.player.reload_upadate_checker()
-        if self.game.phase == 3:
-            self.spawnDelay = 2
+
+        if self.player.hp <= 0:
+            self.game.current_display = self.game.displays['game_over']
+
         else:
-            self.spawnDelay = 3
-
-        if time.time() - self.time >= self.spawnDelay:
-            if self.game.phase == 0:
-                for x in range(random.randint(1, 1)):
-                    self.enemies.append(enemy.Enemy(self))
+            self.player.img.rotate_toward(pygame.mouse.get_pos())
+            for Enemy in self.enemies:
+                Enemy.img.rotate_toward((self.player.x, self.player.y))
+            # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
+            #     self.player.start_reloading = True
+            #     self.player.reload_start = time.time()
+            self.player.reload_upadate_checker()
+            if self.game.phase == 3:
+                self.spawnDelay = 2
             else:
-                for x in range(random.randint(minEnemies, maxEnemies)):
-                    self.enemies.append(enemy.Enemy(self))
-            self.time = time.time()
+                self.spawnDelay = 3
 
-        for ene in self.enemies:
-            ene.move()
-        if self.makeCoins > 0:
-            for i in range(self.makeCoins):
-                self.coins.append(coin.Coin(self))
-            self.makeCoins = 0
+            if time.time() - self.time >= self.spawnDelay:
+                if self.game.phase == 0:
+                    for x in range(random.randint(1, 1)):
+                        self.enemies.append(enemy.Enemy(self))
+                else:
+                    for x in range(random.randint(minEnemies, maxEnemies)):
+                        self.enemies.append(enemy.Enemy(self))
+                self.time = time.time()
+
+            for ene in self.enemies:
+                ene.move()
+            if self.makeCoins > 0:
+                for i in range(self.makeCoins):
+                    self.coins.append(coin.Coin(self))
+                self.makeCoins = 0
 
 
-        for bullet in self.bullets:
-            if bullet.boom == True:
-                bullet.collideCheck()
-            else:
-                bullet.move()
+            for bullet in self.bullets:
+                if bullet.boom == True:
+                    bullet.collideCheck()
+                else:
+                    bullet.move()
 
-        self.bullets_left_text.update_text(f'X {self.player.bullets}')
-        self.phase_info.update_text(f'{self.game.get_event()}')
-        self.time_left.update_text(f'{self.game.timeLeft}')
-        self.money.update_text(f"X {self.player.money}")
-        self.bulbs.update_text(f"X {self.player.lanterns}")
+            self.bullets_left_text.update_text(f'X {self.player.bullets}')
+            self.phase_info.update_text(f'{self.game.get_event()}')
+            self.time_left.update_text(f'{self.game.timeLeft}')
+            self.money.update_text(f"X {self.player.money}")
+            self.bulbs.update_text(f"X {self.player.lanterns}")
     def thunder(self):
         # pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.Channel(4).play(pygame.mixer.Sound(self.game.thunder_sound))
@@ -359,3 +364,10 @@ class pause_display(basic_display):
         else:
             for obj in self.objects:
                 obj.events(event)
+
+
+class game_over(basic_display):
+    def __init__(self, game):
+        basic_display.__init__(self, game)
+        custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Game over!', text_color='red')
+        button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='white', text=' Quit', text_color='white')
