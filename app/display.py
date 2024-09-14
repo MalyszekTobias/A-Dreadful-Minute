@@ -372,12 +372,13 @@ class game_over(basic_display):
         basic_display.__init__(self, game)
         custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Game over!', text_color='red')
         button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='white', text=' Quit', text_color='white')
-        self.a = custom_text.Custom_text(self, self.game.width / 2, self.game.height - 450, None, 100, f'Kills {self.game.totalKills}', text_color='red')
+        custom_text.Custom_text(self, self.game.width/2, self.game.height - 450, None, 50, 'Total Kills: ', text_color='White')
+        self.a = custom_text.Custom_text(self, self.game.width / 2 + 125, self.game.height - 450, None, 50, f'{self.game.totalKills}', text_color='Red')
 
     def render(self):
         for obje in self.objects:
             obje.render()
-        self.a.update_text(f'Kills {self.game.totalKills}')
+        self.a.update_text(f'{self.game.totalKills}')
 
 
 class difficulty_selector(basic_display):
