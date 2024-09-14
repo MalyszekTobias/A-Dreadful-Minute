@@ -26,7 +26,7 @@ class Player:
         self.wind = 0
         self.confusion = False
         self.green = (30, 200, 30)
-        self.money = 000000
+        self.money = 0
         self.lanterns = 0
         self.bombs = 0
         self.maxHp = 150
@@ -57,7 +57,7 @@ class Player:
         self.flameReloadSpeed = 3
         self.pistolDamage = 22
         self.arDamage = 25
-        self.miniDamage = 8
+        self.miniDamage = 9
         self.flameDamage = 0.7
         self.pistolRecoil = 6
         self.arRecoil = 4
@@ -123,6 +123,7 @@ class Player:
             self.bombPrice = 20
             self.mediKits = 1
             self.mediKitPrice = 20
+            self.bombs = 1
         else:
             self.control = 0.8
             self.windControl = 0.15
@@ -304,7 +305,7 @@ class Player:
             self.currentMaxBullets = self.miniMaxBullets
             self.currentShootingSpeed = self.miniShootingSpeed * self.shotSpeedModifier
             self.currentReloadSpeed = self.miniReloadSpeed * self.shotSpeedModifier
-            self.currentDamage = self.miniDamage
+            self.currentDamage = self.miniDamage + random.randint(0, 1)
             self.recoil = self.miniRecoil
 
         elif self.currentWeapon == 'flameThrower':

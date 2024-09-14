@@ -3,7 +3,7 @@ class Rain:
     def __init__(self, display, amount):
         self.display = display
         self.amount = amount
-        self.speed = 10
+        self.speed = 20
 
         self.drops = [Drop(self) for x in range(self.amount)]
 
@@ -28,7 +28,6 @@ class Drop:
         self.cloud = cloud
         self.w = 3
         self.h = 30
-
         self.color = (random.randint(10, 50), random.randint(87, 127), random.randint(150, 190))
 
     def render(self):
