@@ -33,7 +33,7 @@ class Game:
         self.thunder_sound = pygame.mixer.Sound("sounds/thunder.ogg")
         self.bang = pygame.mixer.Sound("sounds/bang.ogg")
         # pygame.mixer.Channel(0).load('sounds/light-rain-109591.wav')
-        pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.wav'))
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.ogg'))
         self.enable_debug = int(self.cfg['enable_debug'])
         self.started = False
         self.clock = pygame.time.Clock()
