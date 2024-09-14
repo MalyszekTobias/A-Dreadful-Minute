@@ -138,43 +138,44 @@ class game_display(basic_display):
         self.bulbs_image = custom_images.Custom_image(self, 'img/bulb.png', 370, self.game.height - 115, 50, 50,
                                                       append=False)
 
-        self.one = custom_text.Custom_text(self, (self.game.width / 4) + 50, 85, "Comic Sans",50, "1", text_color=(0, 0, 0), append=False, system=True)
-        self.two = custom_text.Custom_text(self, (self.game.width / 4) + 130, 85, "Comic Sans",50, "2", text_color=(0, 0, 0), append=False, system=True)
-        self.three = custom_text.Custom_text(self, (self.game.width / 4) + 210, 85, "Comic Sans",50, "3", text_color=(0, 0, 0), append=False, system=True)
-        self.four = custom_text.Custom_text(self, (self.game.width / 4) + 290, 85, "Comic Sans",50, "4", text_color=(0, 0, 0), append=False, system=True)
-        self.five = custom_text.Custom_text(self, (self.game.width / 4) + 370, 85, "Comic Sans",50, "5", text_color=(0, 0, 0), append=False, system=True)
-        self.six = custom_text.Custom_text(self, (self.game.width / 4) + 450, 85, "Comic Sans",50, "6", text_color=(0, 0, 0), append=False, system=True)
+        self.one = custom_text.Custom_text(self, (self.game.width / 4) + 140, 85, "Comic Sans",50, "1", text_color=(0, 0, 0), append=False, system=True)
+        self.two = custom_text.Custom_text(self, (self.game.width / 4) + 220, 85, "Comic Sans",50, "2", text_color=(0, 0, 0), append=False, system=True)
+        self.three = custom_text.Custom_text(self, (self.game.width / 4) + 300, 85, "Comic Sans",50, "3", text_color=(0, 0, 0), append=False, system=True)
+        self.four = custom_text.Custom_text(self, (self.game.width / 4) + 380, 85, "Comic Sans",50, "4", text_color=(0, 0, 0), append=False, system=True)
+        # self.five = custom_text.Custom_text(self, (self.game.width / 4) + 370, 85, "Comic Sans",50, "5", text_color=(0, 0, 0), append=False, system=True)
+        # self.six = custom_text.Custom_text(self, (self.game.width / 4) + 450, 85, "Comic Sans",50, "6", text_color=(0, 0, 0), append=False, system=True)
 
-        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 40, 235, "Comic Sans", 30, f"30",
+        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 130, 235, "Comic Sans", 30, f"30",
                                            text_color=(0, 0, 0), append=False, system=True)
-        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 120, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
+        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 210, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
                                            text_color=(0, 0, 0), append=False, system=True)
-        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 200, 235, "Comic Sans", 30, f"n/a",
+        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 290, 235, "Comic Sans", 30, f"{self.player.weaponPrice}",
                                              text_color=(0, 0, 0), append=False, system=True)
-        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 280, 235, "Comic Sans", 30, f"n/a",
+        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 370, 235, "Comic Sans", 30, f"{self.player.bombPrice}",
                                             text_color=(0, 0, 0), append=False, system=True)
-        self.price5 = custom_text.Custom_text(self, (self.game.width / 4) + 360, 235, "Comic Sans", 30, f"n/a",
-                                            text_color=(0, 0, 0), append=False, system=True)
-        self.price6 = custom_text.Custom_text(self, (self.game.width / 4) + 440, 235, "Comic Sans", 30, f"n/a",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.zlotowka1 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 75, 235, 30, 30, append=False)
-        self.zlotowka2 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 155, 235, 30, 30, append=False)
-        self.zlotowka3 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 235, 235, 30, 30, append=False)
-        self.zlotowka4 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 315, 235, 30, 30, append=False)
-        self.zlotowka5 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 395, 235, 30, 30, append=False)
-        self.zlotowka6 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 475, 235, 30, 30, append=False)
+        # self.price5 = custom_text.Custom_text(self, (self.game.width / 4) + 360, 235, "Comic Sans", 30, f"n/a",
+        #                                     text_color=(0, 0, 0), append=False, system=True)
+        # self.price6 = custom_text.Custom_text(self, (self.game.width / 4) + 440, 235, "Comic Sans", 30, f"n/a",
+        #                                    text_color=(0, 0, 0), append=False, system=True)
+        self.zlotowka1 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 165, 235, 30, 30, append=False)
+        self.zlotowka2 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 245, 235, 30, 30, append=False)
+        self.zlotowka3 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 325, 235, 30, 30, append=False)
+        self.zlotowka4 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 405, 235, 30, 30, append=False)
+        # self.zlotowka5 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 395, 235, 30, 30, append=False)
+        # self.zlotowka6 = custom_images.Custom_image(self, 'img/zlotowka.png', (self.game.width / 4) + 475, 235, 30, 30, append=False)
 
 
 
 
-        self.heart_plus = custom_images.Custom_image(self, 'img/heart_plus.png', (self.game.width / 4) + 50, 160, 50, 50, append=False)
-        self.bulb_plus = custom_images.Custom_image(self, 'img/bulb_plus.png', (self.game.width / 4) + 130, 160, 50, 50, append=False)
-        self.bomb_plus = custom_images.Custom_image(self, 'img/bomb_plus.png', (self.game.width / 4) + 210, 160, 50, 50,
+        self.heart_plus = custom_images.Custom_image(self, 'img/heart_plus.png', (self.game.width / 4) + 140, 160, 50, 50, append=False)
+        self.bulb_plus = custom_images.Custom_image(self, 'img/bulb_plus.png', (self.game.width / 4) + 220, 160, 50, 50, append=False)
+        self.bomb_plus = custom_images.Custom_image(self, 'img/bomb_plus.png', (self.game.width / 4) + 380, 160, 50, 50,
                                                     append=False)
-        self.ar_plus = custom_images.Custom_image(self, 'img/ar.png', (self.game.width / 4) + 290, 160, 50, 50, append=False)
-        self.mini_plus = custom_images.Custom_image(self, 'img/minigun.png', (self.game.width / 4) + 370, 160, 50, 50, append=False)
-        self.flame_plus = custom_images.Custom_image(self, 'img/flamethrower.png', (self.game.width / 4) + 450, 160, 50, 50, append=False)
-
+        self.ar_plus = custom_images.Custom_image(self, 'img/ar.png', (self.game.width / 4) + 300, 160, 50, 50, append=False)
+        self.mini_plus = custom_images.Custom_image(self, 'img/minigun.png', (self.game.width / 4) + 300, 160, 50, 50, append=False)
+        self.flame_plus = custom_images.Custom_image(self, 'img/flamethrower.png', (self.game.width / 4) + 300, 160, 50, 50, append=False)
+        self.sold_bulb = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 220, 160, 50, 50, append=False)
+        self.sold_weapon = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 300, 160, 50, 50, append=False)
 
         # self.enemies.append(enemy.Enemy(self))
     def mainloop(self):
@@ -264,20 +265,30 @@ class game_display(basic_display):
         pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
         pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
         if self.game.phase == 0:
-            pygame.draw.rect(self.game.screen, (219, 173, 114), (self.game.width / 4, 50, self.game.width / 2, 225), border_radius=15)
+            pygame.draw.rect(self.game.screen, (166, 162, 157), (self.game.width / 4 + 100, 50, self.game.width / 3, 225), border_radius=15)
             self.one.render()
             self.heart_plus.render()
             self.two.render()
-            self.bulb_plus.render()
-            self.three.render()
-            self.ar_plus.render()
-            self.four.render()
-            self.mini_plus.render()
-            self.five.render()
-            self.flame_plus.render()
-            self.six.render()
-            self.bomb_plus.render()
+            if self.player.lanterns >= 5:
+                self.sold_bulb.render()
+            else:
+                self.bulb_plus.render()
 
+            self.three.render()
+            self.four.render()
+            if self.player.weapons == 1:
+                self.ar_plus.render()
+            elif self.player.weapons == 2:
+                self.mini_plus.render()
+            elif self.player.weapons == 3:
+                self.flame_plus.render()
+            else:
+                print(self.player.weapons)
+                self.sold_weapon.render()
+
+            # self.five.render()
+            # self.six.render()
+            self.bomb_plus.render()
             self.price1.render()
             self.zlotowka1.render()
             self.price2.render()
@@ -286,10 +297,10 @@ class game_display(basic_display):
             self.zlotowka3.render()
             self.price4.render()
             self.zlotowka4.render()
-            self.price5.render()
-            self.zlotowka5.render()
-            self.price6.render()
-            self.zlotowka6.render()
+            # self.price5.render()
+            # self.zlotowka5.render()
+            # self.price6.render()
+            # self.zlotowka6.render()
 
 
 
@@ -305,7 +316,7 @@ class game_display(basic_display):
             self.handgun.render()
         elif self.player.currentWeapon == 'ar':
             self.ar.render()
-        elif self.player.currentWeapon == 'mini':
+        elif self.player.currentWeapon == 'miniGun':
             self.minigun.render()
         elif self.player.currentWeapon == 'flameThrower':
             self.flameThrower.render()
