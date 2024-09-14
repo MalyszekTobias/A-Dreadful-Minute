@@ -113,15 +113,15 @@ class game_display(basic_display):
         self.money_image = custom_images.Custom_image(self, 'img/zlotowka.png', 220, self.game.height - 115, 50, 50, append=False)
 
 
-        self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
-                                             50, f"{self.player.lanterns}",
-                                             text_color=(0, 0, 255), append=False, system=True)
-        self.medkit = custom_text.Custom_text(self, 425, self.game.height - 57, self.game.font,
-                                             50, f"{self.player.mediKits}",
-                                             text_color=(0, 255, 0), append=False, system=True)
-        self.bombs = custom_text.Custom_text(self, 550, self.game.height - 115, self.game.font,
-                                              50, f"{self.player.bombs}",
-                                              text_color=(255, 0, 0), append=False, system=True)
+        # self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
+        #                                      50, f"{self.player.lanterns}",
+        #                                      text_color=(0, 0, 255), append=False, system=True)
+        # self.medkit = custom_text.Custom_text(self, 425, self.game.height - 57, self.game.font,
+        #                                      50, f"{self.player.mediKits}",
+        #                                      text_color=(0, 255, 0), append=False, system=True)
+        # self.bombs = custom_text.Custom_text(self, 550, self.game.height - 115, self.game.font,
+        #                                       50, f"{self.player.bombs}",
+        #                                       text_color=(255, 0, 0), append=False, system=True)
         self.bulbs_image = custom_images.Custom_image(self, 'img/bulb.png', 370, self.game.height - 115, 50, 50,
                                                       append=False)
         self.medkit_image = custom_images.Custom_image(self, 'img/medkit.png', 370, self.game.height - 57, 50, 50,
@@ -172,14 +172,7 @@ class game_display(basic_display):
         # self.five = custom_text.Custom_text(self, (self.game.width / 4) + 370, 85, "Comic Sans",50, "5", text_color=(0, 0, 0), append=False, system=True)
         # self.six = custom_text.Custom_text(self, (self.game.width / 4) + 450, 85, "Comic Sans",50, "6", text_color=(0, 0, 0), append=False, system=True)
 
-        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 55 + 100, 235, "Comic Sans", 30, f"30",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 145 + 100, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 235 + 100, 235, "Comic Sans", 30, f"{self.player.weaponPrice}",
-                                             text_color=(0, 0, 0), append=False, system=True)
-        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 325 + 100, 235, "Comic Sans", 30, f"{self.player.bombPrice}",
-                                            text_color=(0, 0, 0), append=False, system=True)
+
         # self.price5 = custom_text.Custom_text(self, (self.game.width / 4) + 360, 235, "Comic Sans", 30, f"n/a",
         #                                     text_color=(0, 0, 0), append=False, system=True)
         # self.price6 = custom_text.Custom_text(self, (self.game.width / 4) + 440, 235, "Comic Sans", 30, f"n/a",
@@ -212,6 +205,20 @@ class game_display(basic_display):
 
 
         # self.enemies.append(enemy.Enemy(self))
+
+    def update_diff(self):
+        self.player.update_diff()
+        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 55 + 100, 235, "Comic Sans", 30, f"30",
+                                              text_color=(0, 0, 0), append=False, system=True)
+        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 145 + 100, 235, "Comic Sans", 30,
+                                              f"{self.player.lanternPrice}",
+                                              text_color=(0, 0, 0), append=False, system=True)
+        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 235 + 100, 235, "Comic Sans", 30,
+                                              f"{self.player.weaponPrice}",
+                                              text_color=(0, 0, 0), append=False, system=True)
+        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 325 + 100, 235, "Comic Sans", 30,
+                                              f"{self.player.bombPrice}",
+                                              text_color=(0, 0, 0), append=False, system=True)
     def mainloop(self):
         global minEnemies
         global maxEnemies
@@ -256,13 +263,14 @@ class game_display(basic_display):
                     bullet.collideCheck()
                 else:
                     bullet.move()
-
-            self.bullets_left_text.update_text(f'{self.player.bullets}')
-            self.phase_info.update_text(f'{self.game.get_event()}')
-            self.time_left.update_text(f'{self.game.timeLeft}')
-            self.money.update_text(f"{self.player.money}")
-            self.bulbs.update_text(f"{self.player.lanterns}")
-            self.bombs.update_text(f"{self.player.bombs}")
+            try:
+                self.bullets_left_text.update_text(f'{self.player.bullets}')
+                self.phase_info.update_text(f'{self.game.get_event()}')
+                self.time_left.update_text(f'{self.game.timeLeft}')
+                self.money.update_text(f"{self.player.money}")
+                self.bulbs.update_text(f"{self.player.lanterns}")
+            except:
+                pass
     def thunder(self):
         # pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.Channel(4).play(pygame.mixer.Sound(self.game.thunder_sound))
@@ -330,19 +338,25 @@ class game_display(basic_display):
 
             # self.five.render()
             # self.six.render()
-            self.bomb_plus.render()
-            self.price1.render()
-            self.zlotowka1.render()
-            self.price2.render()
-            self.zlotowka2.render()
-            self.price3.render()
-            self.zlotowka3.render()
-            self.price4.render()
-            self.zlotowka4.render()
+            try:
+                self.bomb_plus.render()
+                self.price1.render()
+                self.zlotowka1.render()
+                self.price2.render()
+                self.zlotowka2.render()
+                self.price3.render()
+                self.zlotowka3.render()
+                self.price4.render()
+                self.zlotowka4.render()
+
             # self.price5.render()
             # self.zlotowka5.render()
             # self.price6.render()
             # self.zlotowka6.render()
+                self.price2.update_text(f"{self.player.lanternPrice}")
+                self.price3.update_text(f'{self.player.weaponPrice}')
+            except:
+                pass
 
 
         for obj in self.objects:
@@ -368,13 +382,16 @@ class game_display(basic_display):
         self.bullets_left_text.render()
         self.bullets_left_image.render()
         self.money.render()
-        self.money_image.render()
-        self.bulbs.render()
-        self.bulbs_image.render()
-        self.medkit.render()
-        self.medkit_image.render()
-        self.bombs.render()
-        self.bombs_image.render()
+        try:
+            self.money_image.render()
+            self.bulbs.render()
+            self.bulbs_image.render()
+            self.medkit.render()
+            self.medkit_image.render()
+            self.bombs.render()
+            self.bombs_image.render()
+        except:
+            pass
         if self.player.currentWeapon == 'pistol':
             self.handgun.render()
         elif self.player.currentWeapon == 'ar':
