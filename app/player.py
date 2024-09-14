@@ -8,7 +8,7 @@ phase = 0
 direction = 0
 class Player:
     def __init__(self, display):
-        self.hpHeight = 30
+        self.hpHeight = 50
         self.gameWidth = int(config.read_config()['width'])
         self.gameHeight = int(config.read_config()['height'])
         self.display = display

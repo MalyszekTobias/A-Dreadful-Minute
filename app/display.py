@@ -92,6 +92,7 @@ class game_display(basic_display):
         self.fog = False
         # self.rect = pygame.Rect(0, 750, 150, 150)
         # self.current_weapon = 'img/handgun.png'
+        self.hpBar = Custom_image(self, f"img/hpbar.png", 600, 25, 1200, 50, append=False)
         self.handgun = Custom_image(self, f"img/handgun.png", 100, 915, 150, 150, append=False)
         self.ar = Custom_image(self, f"img/ar.png", 105, 915, 150, 150, append=False)
         self.minigun = Custom_image(self, f"img/minigun.png", 105, 915, 150, 150, append=False)
@@ -328,7 +329,9 @@ class game_display(basic_display):
         if self.player.start_reloading:
             self.reloading_text.render()
         pygame.draw.rect(self.screen, (0, 255, 0),
-                         (0, 0, (self.game.width * self.player.hp / self.player.maxHp), self.player.hpHeight))
+                         (55, 0, ((self.game.width - 55) * self.player.hp / self.player.maxHp), self.player.hpHeight))
+        self.hpBar.render()
+
 
         if self.game.phase == 1:
             self.ice.render()
