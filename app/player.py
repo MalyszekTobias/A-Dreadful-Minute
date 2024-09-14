@@ -79,6 +79,8 @@ class Player:
         self.weapons = 1
         self.weaponPrice = 0
         self.bombPrice = 20
+        self.mediKits = 1
+        self.mediKitPrice = 30
 
 
         self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
@@ -120,11 +122,15 @@ class Player:
                 bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 5, True, 0)
                 self.bombs -= 1
 
+            elif event.key == pygame.K_q and self.mediKits > 0 and self.hp < self.maxHp:
+                self.hp = self.maxHp
+                self.mediKits -= 1
+
             elif phase == 0:
 
-                if event.key == pygame.K_1 and self.money >= 30 and self.hp < self.maxHp:
-                    self.money -= 30
-                    self.hp = self.maxHp
+                if event.key == pygame.K_1 and self.money >= 30:
+                    self.money -= self.mediKitPrice
+                    self.mediKits += 1
 
                 elif event.key == pygame.K_2 and self.money >= self.lanternPrice and self.lanterns <= 4:
                     self.lanterns += 1
