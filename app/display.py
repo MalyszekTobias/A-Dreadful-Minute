@@ -118,7 +118,7 @@ class game_display(basic_display):
                                              text_color=(0, 0, 255), append=False, system=True)
         self.medkit = custom_text.Custom_text(self, 425, self.game.height - 57, self.game.font,
                                              50, f"X {self.player.mediKits}",
-                                             text_color=(255, 255, 0), append=False, system=True)
+                                             text_color=(0, 255, 0), append=False, system=True)
         self.bombs = custom_text.Custom_text(self, 550, self.game.height - 115, self.game.font,
                                               50, f"X {self.player.bombs}",
                                               text_color=(255, 0, 0), append=False, system=True)
@@ -204,11 +204,11 @@ class game_display(basic_display):
         self.sold_bulb = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 230, 160, 50, 50, append=False)
         self.sold_weapon = custom_images.Custom_image(self, 'img/sold_out.png', (self.game.width / 4) + 310, 160, 50, 50, append=False)
 
-        self.ice = custom_images.Custom_image(self, 'img/ice.png', self.game.width - 75, 75, 75, 75, append=False)
-        self.slowness = custom_images.Custom_image(self, 'img/speed.png', self.game.width - 75, 75, 75, 75, append=False)
-        self.spawnrate = custom_images.Custom_image(self, 'img/zombie.png', self.game.width - 75, 75, 75, 75, append=False)
-        self.confusion = custom_images.Custom_image(self, 'img/question.png', self.game.width - 75, 75, 75, 75, append=False)
-        self.wind = custom_images.Custom_image(self, 'img/wind.png', self.game.width - 75, 75, 75, 75, append=False)
+        self.ice = custom_images.Custom_image(self, 'img/ice.png', self.game.width - 75, 100, 75, 75, append=False)
+        self.slowness = custom_images.Custom_image(self, 'img/speed.png', self.game.width - 75, 100, 75, 75, append=False)
+        self.spawnrate = custom_images.Custom_image(self, 'img/zombie.png', self.game.width - 75, 100, 75, 75, append=False)
+        self.confusion = custom_images.Custom_image(self, 'img/question.png', self.game.width - 75, 100, 75, 75, append=False)
+        self.wind = custom_images.Custom_image(self, 'img/wind.png', self.game.width - 75, 100, 75, 75, append=False)
 
 
         # self.enemies.append(enemy.Enemy(self))
