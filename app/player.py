@@ -35,30 +35,7 @@ class Player:
         self.start_reloading = False
         self.ShootingTimer = 0
         self.shotSpeedModifier = 1
-        self.easy = True
-
-
-
-        if self.easy:
-            self.control = 1
-            self.windControl = 0.20
-            self.windStrength = 1.3
-            self.windCap = self.windStrength * 6
-            self.lanternPrice = 12
-            self.weaponPrice = 0
-            self.bombPrice = 20
-            self.mediKits = 1
-            self.mediKitPrice = 20
-        else:
-            self.control = 0.8
-            self.windControl = 0.15
-            self.windStrength = 1.4
-            self.windCap = self.windStrength * 5
-            self.lanternPrice = 16
-            self.weaponPrice = 50
-            self.bombPrice = 30
-            self.mediKits = 0
-            self.mediKitPrice = 30
+        self.easy = None
 
 
         self.recoil = 5
@@ -134,6 +111,28 @@ class Player:
                 if time.time() - self.reload_start > self.currentReloadSpeed:
                     self.reload_start = time.time()
                     self.start_reloading = True
+
+    def update_diff(self):
+        if self.easy:
+            self.control = 1
+            self.windControl = 0.20
+            self.windStrength = 1.3
+            self.windCap = self.windStrength * 6
+            self.lanternPrice = 12
+            self.weaponPrice = 0
+            self.bombPrice = 20
+            self.mediKits = 1
+            self.mediKitPrice = 20
+        else:
+            self.control = 0.8
+            self.windControl = 0.15
+            self.windStrength = 1.4
+            self.windCap = self.windStrength * 5
+            self.lanternPrice = 16
+            self.weaponPrice = 50
+            self.bombPrice = 30
+            self.mediKits = 0
+            self.mediKitPrice = 30
 
     def events(self, event):
         #player movement capture
