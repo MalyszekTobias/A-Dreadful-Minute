@@ -205,10 +205,8 @@ class game_display(basic_display):
 
         for bullet in self.bullets:
             if bullet.boom == True:
-                print(4321)
                 bullet.collideCheck()
             else:
-                print(1234)
                 bullet.move()
 
         self.bullets_left_text.update_text(f'X {self.player.bullets}')

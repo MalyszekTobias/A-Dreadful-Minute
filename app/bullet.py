@@ -22,13 +22,17 @@ class Bullet:
         self.calculate_linear_function()
         self.get_ratio()
 
+        self.radius = radius
+        self.lifetime = 20
+
+
         self.damage = 12
         self.speed = speed
         self.color = (245, 245, 51)
-        if self.boom:
+        if self.boom or self.radius > 5:
             self.color = (245, 145, 51)
+            self.recoil = False
 
-        self.radius = radius
 
         self.update_rect()
 
@@ -48,6 +52,14 @@ class Bullet:
     def render(self):
         # pygame.draw.line(self.display.game.screen, (255, 255, 255), (self.x_1, self.y_1), (self.x_2, self.y_2))
         pygame.draw.circle(self.display.game.screen, self.color, (self.x, self.y), self.radius)
+        if self.radius > 5:
+            self.lifetime -= 1
+        if self.lifetime < 0:
+            try:
+                self.delete()
+            except:
+                print("already deleted")
+
         if self.boom and self.radius < 200:
             self.radius += 15
         elif self.boom and self.radius >= 200:
@@ -81,10 +93,11 @@ class Bullet:
             if Charles.sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2) < self.radius + enemy.radius:
             # if enemy.rect.colliderect(self.rect):
                 enemy.hp -= self.shooter.currentDamage
-                try:
-                    self.delete()
-                except:
-                    print("already deleted")
+                if self.radius == 5:
+                    try:
+                        self.delete()
+                    except:
+                        print("already deleted")
             # self.update_rect()
 
     def collideCheck(self):

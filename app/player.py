@@ -44,11 +44,11 @@ class Player:
         self.pistolMaxBullets = 10
         self.arMaxBullets = 30
         self.miniMaxBullets = 100
-        self.flameMaxBullets = 70
+        self.flameMaxBullets = 150
         self.pistolShootingSpeed = 0.4
         self.arShootingSpeed = 0.25
         self.miniShootingSpeed = 0.05
-        self.flameShootingSpeed = 0.1
+        self.flameShootingSpeed = 0.02
         self.pistolReloadSpeed = 2.5
         self.arReloadSpeed = 3
         self.miniReloadSpeed = 3
@@ -56,11 +56,11 @@ class Player:
         self.pistolDamage = 22
         self.arDamage = 25
         self.miniDamage = 8
-        self.flameDamage = 4
+        self.flameDamage = 0.7
         self.pistolRecoil = 6
         self.arRecoil = 4
         self.miniRecoil = 3
-        self.flameRecoil = 1
+        self.flameRecoil = 0
 
 
         self.ShootingTimer = 0
@@ -71,11 +71,14 @@ class Player:
         self.bullets = self.currentMaxBullets
         self.pistolBullets = self.bullets
         self.arBullets = self.arMaxBullets
+        self.miniBullets = self.miniMaxBullets
+        self.flameBullets = self.flameMaxBullets
         self.currentShootingSpeed = self.pistolShootingSpeed
         self.currentReloadSpeed = self.pistolReloadSpeed
         self.currentDamage = self.pistolDamage
         self.weapons = 1
-        self.weaponPrice = 25
+        self.weaponPrice = 0
+        self.bombPrice = 20
 
 
         self.img = custom_images.Custom_image(self.display, 'img/player/player_default.png', self.x, self.y, self.radius* 2, self.radius * 2, append=False)
@@ -87,6 +90,7 @@ class Player:
 
 
     def render(self):
+        print(self.currentWeapon)
         self.movement()
         # pygame.draw.rect(self.display.screen, (255, 0, 255), self.rect)
         self.img.render()
@@ -147,12 +151,26 @@ class Player:
                             self.arBullets = self.bullets
                         self.bullets = self.miniMaxBullets
                         self.recoil = self.miniRecoil
-                        self.currentWeapon = 'mini'
+                        self.currentWeapon = 'miniGun'
+
+                    elif self.weapons == 3:
+                        self.weapons += 1
+                        self.money -= self.weaponPrice
+                        self.weaponPrice *= 2
+                        if self.currentWeapon == 'pistol':
+                            self.pistolBullets = self.bullets
+                        elif self.currentWeapon == 'ar':
+                            self.arBullets = self.bullets
+                        elif self.currentWeapon == 'miniGun':
+                            self.miniBullets = self.bullets
+                        self.bullets = self.flameBullets
+                        self.recoil = self.flameRecoil
+                        self.currentWeapon = 'flameThrower'
 
 
-                elif event.key == pygame.K_4 and self.money >= 0:
+                elif event.key == pygame.K_4 and self.money >= self.bombPrice:
                     self.bombs += 1
-                    self.money -= 0
+                    self.money -= self.bombPrice
 
             elif event.key == pygame.K_r and not self.start_reloading:
                 self.start_reloading = True
@@ -175,11 +193,45 @@ class Player:
                     self.pistolBullets = self.bullets
                     self.bullets = self.arBullets
                     self.currentWeapon = 'ar'
+
+                elif self.weapons == 3:
+                    if self.currentWeapon == 'pistol':
+                        self.pistolBullets = self.bullets
+                        self.bullets = self.arBullets
+                        self.currentWeapon = 'ar'
+                    elif self.currentWeapon == 'ar':
+                        self.arBullets = self.bullets
+                        self.bullets = self.miniBullets
+                        self.currentWeapon = 'miniGun'
+
+                elif self.weapons == 4:
+                    if self.currentWeapon == 'pistol':
+                        self.pistolBullets = self.bullets
+                        self.bullets = self.arBullets
+                        self.currentWeapon = 'ar'
+                    elif self.currentWeapon == 'ar':
+                        self.arBullets = self.bullets
+                        self.bullets = self.miniBullets
+                        self.currentWeapon = 'miniGun'
+                    elif self.currentWeapon == 'miniGun':
+                        self.miniBullets = self.bullets
+                        self.bullets = self.flameBullets
+                        self.currentWeapon = 'flameThrower'
             elif event.y == -1:
-                if self.weapons == 2 and self.currentWeapon == 'ar':
+                if self.currentWeapon == 'ar':
                     self.arBullets = self.bullets
                     self.bullets = self.pistolBullets
                     self.currentWeapon = 'pistol'
+
+                elif self.currentWeapon == 'miniGun':
+                    self.miniBullets = self.bullets
+                    self.bullets = self.arBullets
+                    self.currentWeapon = 'ar'
+
+                elif self.currentWeapon == 'flameThrower':
+                    self.flameBullets = self.bullets
+                    self.bullets = self.miniBullets
+                    self.currentWeapon = 'miniGun'
 
 
 
@@ -223,15 +275,19 @@ class Player:
 
         elif self.currentWeapon == 'flameThrower':
             self.currentMaxBullets = self.flameMaxBullets
-            self.currentShootingSpeed = self.flameShootingSpeed * self.shotSpeedModifier
+            self.currentShootingSpeed = self.flameShootingSpeed
             self.currentReloadSpeed = self.flameReloadSpeed * self.shotSpeedModifier
-            self.currentDamage = self.flameDamage
+            self.currentDamage = self.flameDamage / self.shotSpeedModifier
             self.recoil = self.flameRecoil
 
     def shoot(self):
         if self.bullets > 0:
             self.bullets -= 1
-            bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 5, False, 20)
+            if self.currentWeapon == 'flameThrower':
+                bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 20, False, 15)
+
+            else:
+                bullet.Bullet(self.display, self, (self.x, self.y), pygame.mouse.get_pos(), 5, False, 20)
 
     def reload_upadate_checker(self):
         if self.start_reloading:
