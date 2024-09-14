@@ -64,7 +64,8 @@ class Button:  # A button class
                 print("unpause")
                 self.display.game.current_display = self.display.game.displays['game_display']
                 self.display.game.current_display.player.easy = True
-                print(self.display.game.current_display.player.easy )
+                self.display.game.current_display.update_diff()
+
 
 
             elif self.action == 'hard':
@@ -72,7 +73,8 @@ class Button:  # A button class
                 print("unpause")
                 self.display.game.current_display = self.display.game.displays['game_display']
                 self.display.game.current_display.player.easy = False
-                print(self.display.game.current_display.player.easy )
+                self.display.game.current_display.update_diff()
+
 
 
             else:
