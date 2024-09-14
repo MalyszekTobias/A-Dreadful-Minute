@@ -172,14 +172,7 @@ class game_display(basic_display):
         # self.five = custom_text.Custom_text(self, (self.game.width / 4) + 370, 85, "Comic Sans",50, "5", text_color=(0, 0, 0), append=False, system=True)
         # self.six = custom_text.Custom_text(self, (self.game.width / 4) + 450, 85, "Comic Sans",50, "6", text_color=(0, 0, 0), append=False, system=True)
 
-        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 55 + 100, 235, "Comic Sans", 30, f"30",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 145 + 100, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 235 + 100, 235, "Comic Sans", 30, f"{self.player.weaponPrice}",
-                                             text_color=(0, 0, 0), append=False, system=True)
-        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 325 + 100, 235, "Comic Sans", 30, f"{self.player.bombPrice}",
-                                            text_color=(0, 0, 0), append=False, system=True)
+
         # self.price5 = custom_text.Custom_text(self, (self.game.width / 4) + 360, 235, "Comic Sans", 30, f"n/a",
         #                                     text_color=(0, 0, 0), append=False, system=True)
         # self.price6 = custom_text.Custom_text(self, (self.game.width / 4) + 440, 235, "Comic Sans", 30, f"n/a",
@@ -215,14 +208,17 @@ class game_display(basic_display):
 
     def update_diff(self):
         self.player.update_diff()
-        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 140, 235, "Comic Sans", 30, f"30",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 220, 235, "Comic Sans", 30, f"{self.player.lanternPrice}",
-                                           text_color=(0, 0, 0), append=False, system=True)
-        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 300, 235, "Comic Sans", 30, f"{self.player.weaponPrice}",
-                                             text_color=(0, 0, 0), append=False, system=True)
-        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 380, 235, "Comic Sans", 30, f"{self.player.bombPrice}",
-                                            text_color=(0, 0, 0), append=False, system=True)
+        self.price1 = custom_text.Custom_text(self, (self.game.width / 4) + 55 + 100, 235, "Comic Sans", 30, f"30",
+                                              text_color=(0, 0, 0), append=False, system=True)
+        self.price2 = custom_text.Custom_text(self, (self.game.width / 4) + 145 + 100, 235, "Comic Sans", 30,
+                                              f"{self.player.lanternPrice}",
+                                              text_color=(0, 0, 0), append=False, system=True)
+        self.price3 = custom_text.Custom_text(self, (self.game.width / 4) + 235 + 100, 235, "Comic Sans", 30,
+                                              f"{self.player.weaponPrice}",
+                                              text_color=(0, 0, 0), append=False, system=True)
+        self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 325 + 100, 235, "Comic Sans", 30,
+                                              f"{self.player.bombPrice}",
+                                              text_color=(0, 0, 0), append=False, system=True)
     def mainloop(self):
         global minEnemies
         global maxEnemies
