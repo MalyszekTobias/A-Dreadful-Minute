@@ -98,7 +98,7 @@ class game_display(basic_display):
         self.minigun = Custom_image(self, f"img/minigun.png", 105, 915, 150, 150, append=False)
         self.flameThrower = Custom_image(self, f"img/flamethrower.png", 105, 915, 150, 150, append=False)
         self.bullets_left_image = custom_images.Custom_image(self, 'img/bullet_icon.png', 220, self.game.height - 55, 50, 50, append=False)
-        self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 50, self.game.font, 50, f'X {self.player.bullets}', text_color=(255, 255, 255), append=False)
+        self.bullets_left_text = custom_text.Custom_text(self,  285, self.game.height - 50, self.game.font, 50, f' {self.player.bullets}', text_color=(255, 255, 255), append=False)
         self.reloading_text = custom_text.Custom_text(self, 115, self.game.height - 190, self.game.font, 50, f'Reloading...', text_color=(255, 255, 255), append=False)
         self.phase_info = custom_text.Custom_text(self, self.game.width - 200, self.game.height - 115, self.game.font, 35,
                                                          f'{self.game.get_event()}',
@@ -108,19 +108,19 @@ class game_display(basic_display):
                                                          f'{self.game.timeLeft}',
                                                          text_color=(255, 255, 255), append=False, system=True)
         self.money = custom_text.Custom_text(self, 285, self.game.height - 115, self.game.font,
-                                             50, f"X {self.player.money}",
+                                             50, f"{self.player.money}",
                                              text_color=(255, 255, 0), append=False, system=True)
         self.money_image = custom_images.Custom_image(self, 'img/zlotowka.png', 220, self.game.height - 115, 50, 50, append=False)
 
 
         self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
-                                             50, f"X {self.player.lanterns}",
+                                             50, f"{self.player.lanterns}",
                                              text_color=(0, 0, 255), append=False, system=True)
         self.medkit = custom_text.Custom_text(self, 425, self.game.height - 57, self.game.font,
-                                             50, f"X {self.player.mediKits}",
+                                             50, f"{self.player.mediKits}",
                                              text_color=(0, 255, 0), append=False, system=True)
         self.bombs = custom_text.Custom_text(self, 550, self.game.height - 115, self.game.font,
-                                              50, f"X {self.player.bombs}",
+                                              50, f"{self.player.bombs}",
                                               text_color=(255, 0, 0), append=False, system=True)
         self.bulbs_image = custom_images.Custom_image(self, 'img/bulb.png', 370, self.game.height - 115, 50, 50,
                                                       append=False)
@@ -256,11 +256,11 @@ class game_display(basic_display):
                 else:
                     bullet.move()
 
-            self.bullets_left_text.update_text(f'X {self.player.bullets}')
+            self.bullets_left_text.update_text(f'{self.player.bullets}')
             self.phase_info.update_text(f'{self.game.get_event()}')
             self.time_left.update_text(f'{self.game.timeLeft}')
-            self.money.update_text(f"X {self.player.money}")
-            self.bulbs.update_text(f"X {self.player.lanterns}")
+            self.money.update_text(f"{self.player.money}")
+            self.bulbs.update_text(f"{self.player.lanterns}")
     def thunder(self):
         # pygame.mixer.Sound.play(self.game.thunder_sound)
         pygame.mixer.Channel(4).play(pygame.mixer.Sound(self.game.thunder_sound))
@@ -426,8 +426,8 @@ class game_over(basic_display):
         basic_display.__init__(self, game)
         custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Game over!', text_color='red')
         button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='white', text=' Quit', text_color='white')
-        custom_text.Custom_text(self, self.game.width/2, self.game.height - 450, None, 50, 'Total Kills: ', text_color='White')
-        self.a = custom_text.Custom_text(self, self.game.width / 2 + 125, self.game.height - 450, None, 50, f'{self.game.totalKills}', text_color='Red')
+        custom_text.Custom_text(self, self.game.width/2 - 45, self.game.height - 450, None, 50, 'Total Kills: ', text_color='White')
+        self.a = custom_text.Custom_text(self, self.game.width / 2 + 110, self.game.height - 450, None, 50, f'{self.game.totalKills}', text_color='Red')
 
     def render(self):
         for obje in self.objects:
