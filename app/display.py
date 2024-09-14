@@ -113,15 +113,7 @@ class game_display(basic_display):
         self.money_image = custom_images.Custom_image(self, 'img/zlotowka.png', 220, self.game.height - 115, 50, 50, append=False)
 
 
-        # self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
-        #                                      50, f"{self.player.lanterns}",
-        #                                      text_color=(0, 0, 255), append=False, system=True)
-        # self.medkit = custom_text.Custom_text(self, 425, self.game.height - 57, self.game.font,
-        #                                      50, f"{self.player.mediKits}",
-        #                                      text_color=(0, 255, 0), append=False, system=True)
-        # self.bombs = custom_text.Custom_text(self, 550, self.game.height - 115, self.game.font,
-        #                                       50, f"{self.player.bombs}",
-        #                                       text_color=(255, 0, 0), append=False, system=True)
+
         self.bulbs_image = custom_images.Custom_image(self, 'img/bulb.png', 370, self.game.height - 115, 50, 50,
                                                       append=False)
         self.medkit_image = custom_images.Custom_image(self, 'img/medkit.png', 370, self.game.height - 57, 50, 50,
@@ -219,6 +211,16 @@ class game_display(basic_display):
         self.price4 = custom_text.Custom_text(self, (self.game.width / 4) + 325 + 100, 235, "Comic Sans", 30,
                                               f"{self.player.bombPrice}",
                                               text_color=(0, 0, 0), append=False, system=True)
+
+        self.bulbs = custom_text.Custom_text(self, 425, self.game.height - 115, self.game.font,
+                                             50, f"{self.player.lanterns}",
+                                             text_color=(0, 0, 255), append=False, system=True)
+        self.medkit = custom_text.Custom_text(self, 425, self.game.height - 57, self.game.font,
+                                              50, f"{self.player.mediKits}",
+                                              text_color=(0, 255, 0), append=False, system=True)
+        self.bombs = custom_text.Custom_text(self, 550, self.game.height - 115, self.game.font,
+                                             50, f"{self.player.bombs}",
+                                             text_color=(255, 0, 0), append=False, system=True)
     def mainloop(self):
         global minEnemies
         global maxEnemies
