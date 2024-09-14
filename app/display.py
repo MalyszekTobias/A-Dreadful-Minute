@@ -258,18 +258,6 @@ class game_display(basic_display):
                 obj.events(event)
 
     def render(self):
-        for obj in self.objects:
-            obj.render()
-        # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
-        if self.fog:
-            if self.fog_of_storms[self.player.lanterns].loaded != True:
-                self.fog_of_storms[self.player.lanterns].load()
-                self.fog_of_storms[self.player.lanterns].loaded = True
-            self.fog_of_storms[self.player.lanterns].update_rect()
-            self.fog_of_storms[self.player.lanterns].render()
-
-        pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
-        pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
         if self.game.phase == 0:
             pygame.draw.rect(self.game.screen, (166, 162, 157), (self.game.width / 4 + 100, 50, self.game.width / 3, 225), border_radius=15)
             self.one.render()
@@ -308,6 +296,19 @@ class game_display(basic_display):
             # self.price6.render()
             # self.zlotowka6.render()
 
+
+        for obj in self.objects:
+            obj.render()
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
+        if self.fog:
+            if self.fog_of_storms[self.player.lanterns].loaded != True:
+                self.fog_of_storms[self.player.lanterns].load()
+                self.fog_of_storms[self.player.lanterns].loaded = True
+            self.fog_of_storms[self.player.lanterns].update_rect()
+            self.fog_of_storms[self.player.lanterns].render()
+
+        pygame.draw.rect(self.game.screen, (26, 26, 26), (20, 840, self.game.width - 40, 140), border_radius=5)
+        pygame.draw.rect(self.game.screen, (40, 40, 40), (30, 850, 150, 120), border_radius=5)
 
 
         self.phase_info.render()
