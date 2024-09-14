@@ -26,7 +26,7 @@ class Player:
         self.wind = 0
         self.confusion = False
         self.green = (30, 200, 30)
-        self.money = 0
+        self.money = 1000000
         self.lanterns = 0
         self.bombs = 0
         self.maxHp = 150
@@ -119,7 +119,7 @@ class Player:
             self.windStrength = 1.3
             self.windCap = self.windStrength * 6
             self.lanternPrice = 12
-            self.weaponPrice = 0
+            self.weaponPrice = 40
             self.bombPrice = 20
             self.mediKits = 1
             self.mediKitPrice = 20
