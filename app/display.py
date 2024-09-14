@@ -89,7 +89,7 @@ class game_display(basic_display):
         self.bullets = []
         self.time = time.time()
         self.makeCoins = 0
-        self.fog = False
+        # self.fog = False
         # self.rect = pygame.Rect(0, 750, 150, 150)
         # self.current_weapon = 'img/handgun.png'
         self.hpBar = Custom_image(self, f"img/hpbar.png", 600, 25, 1200, 50, append=False)
@@ -219,14 +219,15 @@ class game_display(basic_display):
             self.game.totalKills += app.game.killCount
 
             self.game.current_display = self.game.displays['game_over']
+            pass
 
         else:
             self.player.img.rotate_toward(pygame.mouse.get_pos())
             for Enemy in self.enemies:
                 Enemy.img.rotate_toward((self.player.x, self.player.y))
-            # if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
-            #     self.player.start_reloading = True
-            #     self.player.reload_start = time.time()
+            if self.player.bullets == 0 and time.time() - self.player.reload_start > self.player.reloadSpeed:
+                self.player.start_reloading = True
+                self.player.reload_start = time.time()
             self.player.reload_upadate_checker()
             if self.game.phase == 3:
                 self.spawnDelay = 2
@@ -349,7 +350,7 @@ class game_display(basic_display):
 
 
         # pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
-        if self.fog and self.game.phase != 0:
+        if self.game.phase != 0:
             if self.fog_of_storms[self.player.lanterns].loaded != True:
                 self.fog_of_storms[self.player.lanterns].load()
                 self.fog_of_storms[self.player.lanterns].loaded = True
