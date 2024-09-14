@@ -271,6 +271,8 @@ class game_display(basic_display):
                 self.time_left.update_text(f'{self.game.timeLeft}')
                 self.money.update_text(f"{self.player.money}")
                 self.bulbs.update_text(f"{self.player.lanterns}")
+                self.bombs.update_text(f'{self.player.bombs}')
+                self.medkit.update_text(f'{self.player.mediKits}')
             except:
                 pass
     def thunder(self):
