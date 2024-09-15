@@ -93,3 +93,7 @@ class Button:  # A button class
             return tuple(color + 30 for color in self.color)
         else:
             return tuple(color - 30 if color >= 30 else 0 for color in self.color)
+
+    def update_color(self, color):
+        self.outline_color = color
+        self.text.update_color(color, None)

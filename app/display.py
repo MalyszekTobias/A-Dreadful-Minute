@@ -45,13 +45,14 @@ class start_screen(basic_display):
         basic_display.__init__(self, game)
         self.colors_for_title_text = itertools.cycle(color_cycle())
         self.title_text = custom_text.Custom_text(self, self.game.width/2, self.game.height/3, None, 100, 'A Dreadful Minute', text_color='Green')
-        button.Button(self, 'difficulty_selector', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Start', text_color='white')
-        button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75,
-                      (0, 0, 0), outline_color='white', text='Quit', text_color='white')
+        self.b = button.Button(self, 'difficulty_selector', self.game.width / 2 - 200, self.game.height * 0.45 + 200, 400, 100, (0, 0, 0), outline_color='white', text='Start', text_color='white')
+        # button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75,
+        #               (0, 0, 0), outline_color='white', text='Quit', text_color='white')
 
     def mainloop(self):
         color = next(self.colors_for_title_text)
         self.title_text.update_color(color, None)
+        self.b.update_color(color)
 
 
 
@@ -442,7 +443,7 @@ class pause_display(basic_display):
 
         custom_text.Custom_text(self, self.game.width / 2, self.game.height / 3, None, 100, 'Paused', text_color='White')
         button.Button(self, 'game_display', self.game.width / 2 - 150, self.game.height * 0.45 + 100, 300, 75, (0, 0, 0), outline_color='white', text='Resume', text_color='white')
-        button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='white', text=' Quit', text_color='white')
+        # button.Button(self, 'kill', self.game.width / 2 - 150, self.game.height * 0.45 + 200, 300, 75, (0, 0, 0), outline_color='white', text=' Quit', text_color='white')
 
     def events(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
