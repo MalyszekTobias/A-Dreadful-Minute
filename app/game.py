@@ -31,7 +31,7 @@ class Game:
         self.title = self.cfg['title']
         self.fullscreen = int(self.cfg['full-screen'])
         self.thunder_sound = pygame.mixer.Sound("sounds/thunder.ogg")
-        self.bang = pygame.mixer.Sound("sounds/bang.ogg")
+        self.bang = pygame.mixer.Sound("sounds/Bang.ogg")
         # pygame.mixer.Channel(0).load('sounds/light-rain-109591.wav')
         pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/light-rain-109591.ogg'))
         self.enable_debug = int(self.cfg['enable_debug'])
@@ -65,6 +65,8 @@ class Game:
         killCount = 0
         pygame.mouse.set_visible(False)
 
+        self.icon = pygame.image.load("favicon.png")
+
 
         self.objects = []
         self.background = pygame.image.load('img/background.png')
@@ -72,6 +74,7 @@ class Game:
         if self.fullscreen:
             pygame.display.toggle_fullscreen()
         pygame.display.set_caption(f"{self.title} (v {self.version})")
+
 
         self.displays = {'template_display': display.basic_display(self), 'start_screen': display.start_screen(self), 'game_display': display.game_display(self), 'pause_display': display.pause_display(self), 'game_over': display.game_over(self), 'difficulty_selector': display.difficulty_selector(self)}
         self.current_display = self.displays['start_screen']
@@ -95,6 +98,7 @@ class Game:
 
         for debug_item in self.debug_items:
             debug_item.hidden = True
+        pygame.display.set_icon(self.icon)
     def check_pause(self):
         if self.isPaused and self.ready:
             self.ready = False
@@ -125,7 +129,7 @@ class Game:
         self.time_thunder -= self.paused_thunder
         self.paused = False
 
-    def mainloop(self):
+    async def mainloop(self):
         killCount = 0
         while self.run:
 
@@ -143,7 +147,7 @@ class Game:
 
             self.events()
             self.render()
-            asyncio.run(self.update())
+            self.update()
             self.clock.tick(self.fps)
             # self.thunderstorm()
             self.check_pause()
@@ -199,7 +203,7 @@ class Game:
                 # except:
                 #     pass
 
-
+            await asyncio.sleep(0)
 
 
     def pausePhase(self):
@@ -313,7 +317,7 @@ class Game:
         self.crosshair.update_rect()
         self.crosshair.render()
 
-    async def update(self):
+    def update(self):
         if self.debug:
 
             for obj in self.current_display.objects:
@@ -341,4 +345,4 @@ class Game:
 
         pygame.display.update()
         pygame.display.flip()
-        await asyncio.sleep(0)
+
